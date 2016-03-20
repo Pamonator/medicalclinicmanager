@@ -24,6 +24,7 @@ public class Paciente {
 
     private Paciente(Builder builder) {
         this.prontuarioPaciente = builder.prontuarioPaciente;
+        this.pessoa = builder.pessoa;
         this.estadoCivilPaciente = builder.estadoCivilPaciente;
         this.escolaridadePaciente = builder.escolaridadePaciente;
         this.profissaoPaciente = builder.profissaoPaciente;

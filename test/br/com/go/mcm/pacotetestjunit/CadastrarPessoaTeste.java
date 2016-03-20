@@ -10,6 +10,8 @@ import br.com.go.mcm.dbconnection.RestaurarBackupMYSQL;
 import br.com.go.mcm.model.Pessoa;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -37,15 +39,18 @@ public class CadastrarPessoaTeste {
     
     @Test
     public void cadastrarPessoa() throws SQLException {
+        Calendar calendar = new GregorianCalendar(1990, 9, 10);
+
+        Date dataNascimentoPessoa = new Date(calendar.getTimeInMillis());
+        
         Pessoa pessoa;
         pessoa = new Pessoa.Builder()
                 .nomePessoa("Johnny Hill Billy")
                 .sexoPessoa('M')
-                .RGPessoa("16789345-0")
-                .dataEmissaoRGPessoa(new Date(100, 10, 10))
+                .rgPessoa("16789345-0")
                 .orgaoEmissorRGPessoa("SSP-SP")
-                .CPFPessoa("111222333-44")
-                .dataNacimentoPessoa(new Date(90, 10, 10))
+                .cpfPessoa("111222333-44")
+                .dataNacimentoPessoa(dataNascimentoPessoa)
                 .contruir();
         
         Assert.assertTrue(SistemaControle.pessoaControle().cadastrarPessoa(pessoa));

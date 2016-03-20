@@ -6,6 +6,7 @@
 package br.com.go.mcm.control;
 
 import br.com.go.mcm.model.Email;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
@@ -14,12 +15,20 @@ import java.sql.SQLException;
  */
 public class EmailControle extends QueryHelper {
     
+    public String gerarQueryCadastrarEmail(Email email) throws SQLException {
+        this.query = "INSERT INTO email VALUES (" + email.getIdPessoa()
+                + ", '" +email.getEnderecoEmail() + "'); ";     
+        
+        return this.query;
+    }    
+    
     public boolean cadastrarEmail(Email email) throws SQLException {
-        this.query = "INSERT INTO email (enderecoEmail) VALUES (?)";
+        this.query = "INSERT INTO email VALUES (?, ?)";
         
         this.prepStatement = this.mySqlControle.getConnection().prepareStatement(this.query);
         
-        this.prepStatement.setString(1, email.getEnderecoEmail());
+        this.prepStatement.setInt(1, email.getIdPessoa());
+        this.prepStatement.setString(2, email.getEnderecoEmail());
         
         return this.executeUpdate();
     }
@@ -28,5 +37,4 @@ public class EmailControle extends QueryHelper {
         
         return this.executeUpdate();
     }
-    
 }

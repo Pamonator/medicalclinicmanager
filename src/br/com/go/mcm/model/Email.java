@@ -10,28 +10,24 @@ package br.com.go.mcm.model;
  * @author gilca
  */
 public class Email {
-    
-    private int idEmail;
+
+    private int idPessoa;
     private String enderecoEmail;
 
     public Email() {
     }
 
-    public Email(String enderecoEmail) {
+    public Email(int idPessoa, String enderecoEmail) {
+        this.idPessoa = idPessoa;
         this.enderecoEmail = enderecoEmail;
     }
 
-    public Email(int idEmail, String enderecoEmail) {
-        this.idEmail = idEmail;
-        this.enderecoEmail = enderecoEmail;
+    public int getIdPessoa() {
+        return idPessoa;
     }
 
-    public int getIdEmail() {
-        return idEmail;
-    }
-
-    public void setIdEmail(int idEmail) {
-        this.idEmail = idEmail;
+    public void setIdPessoa(int idPessoa) {
+        this.idPessoa = idPessoa;
     }
 
     public String getEnderecoEmail() {
@@ -41,9 +37,9 @@ public class Email {
     public void setEnderecoEmail(String enderecoEmail) {
         this.enderecoEmail = enderecoEmail;
     }
-    
+
     public boolean isEmailValid() {
-        
+
         return false;
     }
 }

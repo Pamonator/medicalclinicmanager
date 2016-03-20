@@ -11,30 +11,32 @@ package br.com.go.mcm.model;
  */
 public class Endereco {
 
-    private int idEndereco;
+    private int idPessoa;
     private String logradouroEndereco;
     private String numeroEndereco;
     private String complementoEndereco;
     private String bairroEndereco;
     private String cidadeEndereco;
+    private String estadoEndereco;
     private String CEPEndereco;
 
     private Endereco(Builder builder) {
-        this.idEndereco = builder.idEndereco;
-        this.logradouroEndereco = builder.logradouroEndPaciente;
-        this.numeroEndereco = builder.numeroEndPaciente;
-        this.complementoEndereco = builder.complementoEndPaciente;
-        this.bairroEndereco = builder.bairroEndPaciente;
-        this.cidadeEndereco = builder.cidadeEndPaciente;
-        this.CEPEndereco = builder.CEPEndPaciente;
+        this.idPessoa = builder.idPessoa;
+        this.logradouroEndereco = builder.logradouroEndereco;
+        this.numeroEndereco = builder.numeroEndereco;
+        this.complementoEndereco = builder.complementoEndereco;
+        this.bairroEndereco = builder.bairroEndereco;
+        this.cidadeEndereco = builder.cidadeEndereco;
+        this.estadoEndereco = builder.estadoEndereco;
+        this.CEPEndereco = builder.CEPEndereco;
     }
 
-    public int getIdEndereco() {
-        return idEndereco;
+    public int getIdPessoa() {
+        return idPessoa;
     }
 
-    public void setIdEndereco(int idEndereco) {
-        this.idEndereco = idEndereco;
+    public void setIdPessoa(int idPessoa) {
+        this.idPessoa = idPessoa;
     }
 
     public String getLogradouroEndereco() {
@@ -77,6 +79,14 @@ public class Endereco {
         this.cidadeEndereco = cidadeEndereco;
     }
 
+    public String getEstadoEndereco() {
+        return estadoEndereco;
+    }
+
+    public void setEstadoEndereco(String estadoEndereco) {
+        this.estadoEndereco = estadoEndereco;
+    }
+
     public String getCEPEndereco() {
         return CEPEndereco;
     }
@@ -87,49 +97,55 @@ public class Endereco {
 
     public static class Builder {
 
-        private int idEndereco;
-        private String logradouroEndPaciente;
-        private String numeroEndPaciente;
-        private String complementoEndPaciente;
-        private String bairroEndPaciente;
-        private String cidadeEndPaciente;
-        private String CEPEndPaciente;
-        
-        public Builder idEndereco(int idEndereco) {
-            this.idEndereco = idEndereco;
+        private int idPessoa;
+        private String logradouroEndereco;
+        private String numeroEndereco;
+        private String complementoEndereco;
+        private String bairroEndereco;
+        private String cidadeEndereco;
+        private String estadoEndereco;
+        private String CEPEndereco;
+
+        public Builder idPessoa(int idPessoa) {
+            this.idPessoa = idPessoa;
+            return this;
+        }
+
+        public Builder logradouroEndereco(String logradouroEndereco) {
+            this.logradouroEndereco = logradouroEndereco;
+            return this;
+        }
+
+        public Builder numeroEndereco(String numeroEndereco) {
+            this.numeroEndereco = numeroEndereco;
+            return this;
+        }
+
+        public Builder complementoEndereco(String complementoEndereco) {
+            this.complementoEndereco = complementoEndereco;
+            return this;
+        }
+
+        public Builder bairroEndereco(String bairroEndereco) {
+            this.bairroEndereco = bairroEndereco;
+            return this;
+        }
+
+        public Builder cidadeEndereco(String cidadeEndereco) {
+            this.cidadeEndereco = cidadeEndereco;
             return this;
         }
         
-        public Builder logradouroEndPaciente(String logradouroEndPaciente) {
-            this.logradouroEndPaciente = logradouroEndPaciente;
+        public Builder estadoEndereco(String estadoEndereco) {
+            this.estadoEndereco = estadoEndereco;
             return this;
         }
-        
-        public Builder numeroEndPaciente(String numeroEndPaciente) {
-            this.numeroEndPaciente = numeroEndPaciente;
+
+        public Builder CEPEndereco(String CEPEndereco) {
+            this.CEPEndereco = CEPEndereco;
             return this;
         }
-        
-        public Builder complementoEndPaciente(String complementoEndPaciente) {
-            this.complementoEndPaciente = complementoEndPaciente;
-            return this;
-        }
-        
-        public Builder bairroEndPaciente(String bairroEndPaciente) {
-            this.bairroEndPaciente = bairroEndPaciente;
-            return this;
-        }
-        
-        public Builder cidadeEndPaciente(String cidadeEndPaciente) {
-            this.cidadeEndPaciente = cidadeEndPaciente;
-            return this;
-        }
-        
-        public Builder CEPEndPaciente(String CEPEndPaciente) {
-            this.CEPEndPaciente = CEPEndPaciente;
-            return this;
-        }      
-        
+
         public Endereco construir() {
             return new Endereco(this);
         }

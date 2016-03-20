@@ -42,7 +42,9 @@ public class CadastrarTelefoneTeste {
 
     @Test
     public void inserirTelefone() throws SQLException {
-        Telefone telefone = new Telefone("12-3883-0890", null, "(12)98888-7777");
+        int idPessoa = SistemaControle.pessoaControle().getUltimoIdCadastrado("pessoa", "idPessoa");
+        
+        Telefone telefone = new Telefone(idPessoa, "12-3883-0890", null, "(12)98888-7777");
 
         assertTrue(SistemaControle.telefoneControle().cadastrarTelefone(telefone));
     }

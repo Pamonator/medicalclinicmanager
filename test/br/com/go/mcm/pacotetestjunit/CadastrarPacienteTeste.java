@@ -11,10 +11,14 @@ import br.com.go.mcm.model.Endereco;
 import br.com.go.mcm.model.Paciente;
 import br.com.go.mcm.model.Pessoa;
 import br.com.go.mcm.model.Telefone;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
 
 /**
  *
@@ -22,6 +26,7 @@ import static org.junit.Assert.*;
  */
 public class CadastrarPacienteTeste {
 
+    private Pessoa pessoa;
     private Paciente paciente;
     private Endereco endereco;
     private Telefone telefone;
@@ -30,38 +35,66 @@ public class CadastrarPacienteTeste {
     public CadastrarPacienteTeste() {
     }
 
+    @Before
+    public void setUp() {
+
+        endereco = new Endereco.Builder().construir();
+        telefone = new Telefone();
+        email = new Email();
+    }
+
     @Test
     public void inserirPaciente() throws SQLException {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(2000, 10, 10);
+        Calendar calendar = new GregorianCalendar(1990, 9, 10);
 
-        endereco.setIdEndereco(SistemaControle
-                .enderecoControle()
-                .getUltimoIdCadastrado("endereco", "idEndereco")
+        Date dataNascimentoPessoa = new Date(calendar.getTimeInMillis());
+
+        pessoa = new Pessoa.Builder()
+                .nomePessoa("Gil")
+                .sexoPessoa('M')
+                .rgPessoa("123456789")
+                .orgaoEmissorRGPessoa("SSP-SP")
+                .cpfPessoa("12345678907")
+                .dataNacimentoPessoa(dataNascimentoPessoa)
+                .contruir();
+
+        boolean cadastrarPessoa = SistemaControle.pessoaControle().cadastrarPessoa(pessoa);
+
+        pessoa.setIdPessoa(SistemaControle
+                .pessoaControle()
+                .getUltimoIdCadastrado("pessoa", "idPessoa")
         );
+        
+        endereco = new Endereco.Builder()
+                .idPessoa(pessoa.getIdPessoa())
+                .logradouroEndereco("rua sem nome")
+                .numeroEndereco("0")
+                .complementoEndereco("recanto ana")
+                .bairroEndereco("centro")
+                .cidadeEndereco("caragua")
+                .estadoEndereco("SP")
+                .CEPEndereco("11660-000")
+                .construir();
 
-        telefone.setIdTelefone(SistemaControle
-                .telefoneControle()
-                .getUltimoIdCadastrado("telefone", "idTelefone")
-        );
-
-        email.setIdEmail(SistemaControle
-                .emailControle()
-                .getUltimoIdCadastrado("email", "idEmail")
-        );
-
+        telefone = new Telefone(pessoa.getIdPessoa(), "3882-1798", "3882-1798", "98888-8888");
+        
+        email = new Email(pessoa.getIdPessoa(), "gmcarelli@gmail.com");
+        
         paciente = new Paciente.Builder()
                 .prontuarioPaciente(001)
-                .pessoa(new Pessoa.Builder().contruir())
+                .pessoa(pessoa)
                 .estadoCivilPaciente("casado")
                 .profissaoPaciente("aspone")
                 .escolaridadePaciente("Ensino Médio Completo")
                 .contruir();
+        
+        ArrayList<String> queryList = new ArrayList<>();
+        
+        queryList.add(SistemaControle.enderecoControle().gerarQueryCadastrarEndereco(endereco));
+        queryList.add(SistemaControle.telefoneControle().gerarQuerycadastrarTelefone(telefone));
+        queryList.add(SistemaControle.emailControle().gerarQueryCadastrarEmail(email));
+        queryList.add(SistemaControle.pacienteControle().gerarQuerycadastrarPaciente(paciente));
 
-        paciente.getPessoa().setIdPessoa(SistemaControle
-                .pessoaControle()
-                .getUltimoIdCadastrado("pessoa", "idPessoa")
-        );
-        assertTrue(SistemaControle.pacienteControle().cadastrarPaciente(paciente));
+        assertTrue(SistemaControle.pacienteControle().excuteTransaction(queryList));
     }
 }

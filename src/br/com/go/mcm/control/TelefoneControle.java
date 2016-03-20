@@ -6,6 +6,7 @@
 package br.com.go.mcm.control;
 
 import br.com.go.mcm.model.Telefone;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
@@ -14,15 +15,25 @@ import java.sql.SQLException;
  */
 public class TelefoneControle extends QueryHelper {
     
+    public String gerarQuerycadastrarTelefone(Telefone telefone) throws SQLException {
+        this.query = "INSERT INTO telefone VALUES ("
+                + telefone.getIdPessoa() + ", "
+                + "'" + telefone.getTelefoneResidencial() + "', "
+                + "'" + telefone.getTelefoneComercial()+ "', "
+                + "'" + telefone.getTelefoneCelular()+ "'); ";     
+        
+        return this.query;
+    }
+    
     public boolean cadastrarTelefone(Telefone telefone) throws SQLException {
-        this.query = "INSERT INTO telefone (telefoneResidencial, telefoneComercial, "
-                + "telefoneCelular) VALUES (?, ?, ?)";
+        this.query = "INSERT INTO telefone VALUES (?, ?, ?, ?)";
 
         this.prepStatement = this.mySqlControle.getConnection().prepareStatement(query);        
         
-        this.prepStatement.setString(1, telefone.getTelefoneResidencial());       
-        this.prepStatement.setString(2, telefone.getTelefoneComercial());       
-        this.prepStatement.setString(3, telefone.getTelefoneCelular());       
+        this.prepStatement.setInt(1, telefone.getIdPessoa());       
+        this.prepStatement.setString(2, telefone.getTelefoneResidencial());       
+        this.prepStatement.setString(3, telefone.getTelefoneComercial());       
+        this.prepStatement.setString(4, telefone.getTelefoneCelular());       
         
         return this.executeUpdate();
     }

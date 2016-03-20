@@ -30,4 +30,5 @@ public class SistemaControle {
     public static EmailControle emailControle() {
         return new EmailControle();
     }
+        
 }

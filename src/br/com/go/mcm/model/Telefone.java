@@ -11,7 +11,7 @@ package br.com.go.mcm.model;
  */
 public class Telefone {
 
-    private int idTelefone;
+    private int idPessoa;
     private String telefoneResidencial;
     private String telefoneComercial;
     private String telefoneCelular;
@@ -32,19 +32,19 @@ public class Telefone {
         this.telefoneCelular = telefoneCelular;
     }
 
-    public Telefone(int idTelefone, String telefoneResidencial, String telefoneComercial, String telefoneCelular) {
-        this.idTelefone = idTelefone;
+    public Telefone(int idPessoa, String telefoneResidencial, String telefoneComercial, String telefoneCelular) {
+        this.idPessoa = idPessoa;
         this.telefoneResidencial = telefoneResidencial;
         this.telefoneComercial = telefoneComercial;
         this.telefoneCelular = telefoneCelular;
     }
     
-    public int getIdTelefone() {
-        return idTelefone;
+    public int getIdPessoa() {
+        return idPessoa;
     }
 
-    public void setIdTelefone(int idTelefone) {
-        this.idTelefone = idTelefone;
+    public void setIdPessoa(int idPessoa) {
+        this.idPessoa = idPessoa;
     }
 
     public String getTelefoneResidencial() {

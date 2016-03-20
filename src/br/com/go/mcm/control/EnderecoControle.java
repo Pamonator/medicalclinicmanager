@@ -5,8 +5,8 @@
  */
 package br.com.go.mcm.control;
 
-import br.com.go.mcm.dbconnection.MySqlControle;
 import br.com.go.mcm.model.Endereco;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
@@ -15,18 +15,33 @@ import java.sql.SQLException;
  */
 public class EnderecoControle extends QueryHelper {
     
+    public String gerarQueryCadastrarEndereco(Endereco endereco) throws SQLException {
+        this.query = "INSERT INTO endereco VALUES("
+                + endereco.getIdPessoa() + ", "
+                + "'" + endereco.getLogradouroEndereco() + "', "
+                + "'" + endereco.getNumeroEndereco() + "', "
+                + "'" + endereco.getComplementoEndereco() + "', "
+                + "'" + endereco.getBairroEndereco() + "', "
+                + "'" + endereco.getCidadeEndereco() + "', "
+                + "'" + endereco.getEstadoEndereco() + "', "
+                + "'" + endereco.getCEPEndereco() + "'); ";
+        
+        return this.query;
+    }
+    
     public boolean cadastrarEndereco(Endereco endereco) throws SQLException {
-        this.query = "INSERT INTO endereco (logradouroEndereco, numeroEndereco, complementoEndereco, "
-                + "bairroEndereco, cidadeEndereco, CEPEndereco) VALUES(?, ?, ?, ?, ?, ?)";
+        this.query = "INSERT INTO endereco VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
         
         this.prepStatement = this.mySqlControle.getConnection().prepareStatement(query);
         
-        this.prepStatement.setString(1, endereco.getLogradouroEndereco());
-        this.prepStatement.setString(2, endereco.getNumeroEndereco());
-        this.prepStatement.setString(3, endereco.getComplementoEndereco());
-        this.prepStatement.setString(4, endereco.getBairroEndereco());
-        this.prepStatement.setString(5, endereco.getCidadeEndereco());
-        this.prepStatement.setString(6, endereco.getCEPEndereco());
+        this.prepStatement.setInt(1, endereco.getIdPessoa());
+        this.prepStatement.setString(2, endereco.getLogradouroEndereco());
+        this.prepStatement.setString(3, endereco.getNumeroEndereco());
+        this.prepStatement.setString(4, endereco.getComplementoEndereco());
+        this.prepStatement.setString(5, endereco.getBairroEndereco());
+        this.prepStatement.setString(6, endereco.getCidadeEndereco());
+        this.prepStatement.setString(7, endereco.getEstadoEndereco());
+        this.prepStatement.setString(8, endereco.getCEPEndereco());
         
         return this.executeUpdate();
     }

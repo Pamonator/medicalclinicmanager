@@ -6,16 +6,19 @@
 package br.com.go.mcm.control;
 
 import br.com.go.mcm.dbconnection.MySqlControle;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Caraguatá
  */
 public abstract class QueryHelper {
-    
+
     protected MySqlControle mySqlControle;
     protected PreparedStatement prepStatement;
     protected ResultSet resultSet;
@@ -24,11 +27,10 @@ public abstract class QueryHelper {
     public QueryHelper() {
         this.mySqlControle = new MySqlControle();
     }
-    
+
     /**
      *
-     * @return
-     * @throws java.sql.SQLException
+     * @return @throws java.sql.SQLException
      */
     public boolean executeUpdate() throws SQLException {
         int aux;
@@ -39,15 +41,14 @@ public abstract class QueryHelper {
 
     /**
      *
-     * @return
-     * @throws java.sql.SQLException
+     * @return @throws java.sql.SQLException
      */
     public ResultSet executeQuerySelect() throws SQLException {
         return this.prepStatement.executeQuery();
-    }  
+    }
 
     public int getUltimoIdCadastrado(String tabela, String primaryKeyField) throws SQLException {
-        this.query = "SELECT " + primaryKeyField  
+        this.query = "SELECT " + primaryKeyField
                 + " FROM " + tabela
                 + " ORDER BY " + primaryKeyField
                 + " DESC LIMIT 1";
@@ -61,5 +62,25 @@ public abstract class QueryHelper {
         }
 
         return 0;
+    }
+
+    public boolean excuteTransaction(ArrayList<String> queryList) {
+        Connection connection;
+        try {
+            connection = this.mySqlControle.getConnection();
+            connection.setAutoCommit(false);
+
+            for (int i = 0; i < queryList.size(); i++) {
+                this.prepStatement = connection.prepareStatement(queryList.get(i));
+                prepStatement.executeUpdate();
+            }
+
+            connection.commit();
+            connection.close();
+            return true;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            return false;
+        }
     }
 }

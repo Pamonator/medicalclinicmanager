@@ -42,13 +42,17 @@ public class CadastrarEnderecoTeste {
 
     @Test
     public void inserirEndereco() throws SQLException {
+        int idPessoa = SistemaControle.pessoaControle().getUltimoIdCadastrado("pessoa", "idPessoa");
+        
         Endereco endereco = new Endereco.Builder()
-                .logradouroEndPaciente("blabla")
-                .numeroEndPaciente("0B")
-                .complementoEndPaciente("fundos")
-                .bairroEndPaciente("CEntro")
-                .cidadeEndPaciente("Caraguatachuva")
-                .CEPEndPaciente("11660-001")
+                .idPessoa(idPessoa)
+                .logradouroEndereco("blabla")
+                .numeroEndereco("0B")
+                .complementoEndereco(null)
+                .bairroEndereco("CEntro")
+                .cidadeEndereco("Caraguatachuva")
+                .estadoEndereco("SP")
+                .CEPEndereco("11660-001")
                 .construir();
 
         assertTrue(SistemaControle.enderecoControle().cadastrarEndereco(endereco));

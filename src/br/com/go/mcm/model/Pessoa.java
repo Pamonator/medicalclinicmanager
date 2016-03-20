@@ -20,10 +20,9 @@ public class Pessoa {
     private Date dataCadastroPessoa;
     private String nomePessoa;
     private char sexoPessoa;
-    private String RGPessoa;
-    private Date dataEmissaoRGPessoa;
+    private String rgPessoa;
     private String orgaoEmissorRGPessoa;
-    private String CPFPessoa;
+    private String cpfPessoa;
     private Date dataNacimentoPessoa;
 
     private Pessoa(Builder builder) {
@@ -34,10 +33,9 @@ public class Pessoa {
         this.dataCadastroPessoa = builder.dataCadastroPessoa;
         this.nomePessoa = builder.nomePessoa;
         this.sexoPessoa = builder.sexoPessoa;
-        this.RGPessoa = builder.RGPessoa;
-        this.dataEmissaoRGPessoa = builder.dataEmissaoRGPessoa;
+        this.rgPessoa = builder.rgPessoa;
         this.orgaoEmissorRGPessoa = builder.orgaoEmissorRGPessoa;
-        this.CPFPessoa = builder.CPFPessoa;
+        this.cpfPessoa = builder.cpfPessoa;
         this.dataNacimentoPessoa = builder.dataNacimentoPessoa;
     }
 
@@ -97,20 +95,12 @@ public class Pessoa {
         this.sexoPessoa = sexoPessoa;
     }
 
-    public String getRGPessoa() {
-        return RGPessoa;
+    public String getRgPessoa() {
+        return rgPessoa;
     }
 
-    public void setRGPessoa(String RGPessoa) {
-        this.RGPessoa = RGPessoa;
-    }
-
-    public Date getDataEmissaoRGPessoa() {
-        return dataEmissaoRGPessoa;
-    }
-
-    public void setDataEmissaoRGPessoa(Date dataEmissaoRGPessoa) {
-        this.dataEmissaoRGPessoa = dataEmissaoRGPessoa;
+    public void setRgPessoa(String rgPessoa) {
+        this.rgPessoa = rgPessoa;
     }
 
     public String getOrgaoEmissorRGPessoa() {
@@ -121,12 +111,12 @@ public class Pessoa {
         this.orgaoEmissorRGPessoa = orgaoEmissorRGPessoa;
     }
 
-    public String getCPFPessoa() {
-        return CPFPessoa;
+    public String getCpfPessoa() {
+        return cpfPessoa;
     }
 
-    public void setCPFPessoa(String CPFPessoa) {
-        this.CPFPessoa = CPFPessoa;
+    public void setCpfPessoa(String cpfPessoa) {
+        this.cpfPessoa = cpfPessoa;
     }
 
     public Date getDataNacimentoPessoa() {
@@ -147,10 +137,9 @@ public class Pessoa {
         private Date dataCadastroPessoa;
         private String nomePessoa;
         private char sexoPessoa;
-        private String RGPessoa;
-        private Date dataEmissaoRGPessoa;
+        private String rgPessoa;
         private String orgaoEmissorRGPessoa;
-        private String CPFPessoa;
+        private String cpfPessoa;
         private Date dataNacimentoPessoa;
 
         public Builder idPessoa(int idPessoa) {
@@ -183,8 +172,8 @@ public class Pessoa {
             return this;
         }
 
-        public Builder RGPessoa(String RGPessoa) {
-            this.RGPessoa = RGPessoa;
+        public Builder rgPessoa(String rgPessoa) {
+            this.rgPessoa = rgPessoa;
             return this;
         }
 
@@ -193,13 +182,8 @@ public class Pessoa {
             return this;
         }
 
-        public Builder dataEmissaoRGPessoa(Date dataEmissaoRGPessoa) {
-            this.dataEmissaoRGPessoa = dataEmissaoRGPessoa;
-            return this;
-        }
-
-        public Builder CPFPessoa(String CPFPessoa) {
-            this.CPFPessoa = CPFPessoa;
+        public Builder cpfPessoa(String cpfPessoa) {
+            this.cpfPessoa = cpfPessoa;
             return this;
         }
 

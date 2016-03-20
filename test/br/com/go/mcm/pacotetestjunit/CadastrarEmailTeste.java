@@ -42,7 +42,9 @@ public class CadastrarEmailTeste {
 
     @Test
     public void inserirEmail() throws SQLException {
-        Email email = new Email("blablabla@blablabla.com");
+        int idPessoa = SistemaControle.pessoaControle().getUltimoIdCadastrado("pessoa", "idPessoa");
+        
+        Email email = new Email(idPessoa, "blablabla@blablabla.com");
 
         assertTrue(SistemaControle.emailControle().cadastrarEmail(email));
     }
