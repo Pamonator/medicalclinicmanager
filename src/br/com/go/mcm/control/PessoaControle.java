@@ -18,7 +18,7 @@ public class PessoaControle extends QueryHelper {
     public boolean cadastrarPessoa(Pessoa pessoa) throws SQLException {
         this.query = "INSERT INTO pessoa (nomePessoa, sexoPessoa, rgPessoa, "
                 + "dataEmissaoRgPessoa, orgaoEmissorRgPessoa, cpfPessoa, "
-                + "dataNascimentoPessoa VALUES (?, ?, ?, ?, ?, ?, ?)";
+                + "dataNascimentoPessoa) VALUES (?, ?, ?, ?, ?, ?, ?)";
         
         this.prepStatement = this.mySqlControle.getConnection().prepareStatement(this.query);
         

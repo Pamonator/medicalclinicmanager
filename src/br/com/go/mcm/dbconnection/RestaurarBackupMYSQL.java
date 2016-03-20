@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.go.mcm.pacotetestjunit;
+package br.com.go.mcm.dbconnection;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,10 +23,10 @@ public class RestaurarBackupMYSQL {
         try {
             List<String> command = new ArrayList<>();
             command.add("C:\\wamp\\bin\\mysql\\mysql5.6.17\\bin\\mysql");
-            command.add("-uteste");
-            command.add("-pteste");
+            command.add("-uroot");
+            command.add("-p");
             command.add("-e");
-            command.add("source c:\\temp\\inventarioteste.sql");
+            command.add("source c:\\temp\\mcm_a0.11.sql");
 
             ProcessBuilder processBuilder = new ProcessBuilder(command);
             Process process;
@@ -41,9 +41,5 @@ public class RestaurarBackupMYSQL {
             System.out.println(ex.getMessage());
             return false;
         }
-    }
-    
-    public static void main(String args[]) {
-        RestaurarBackupMYSQL.restoreDB();
-    }
+    }   
 }

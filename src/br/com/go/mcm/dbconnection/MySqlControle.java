@@ -25,7 +25,7 @@ public class MySqlControle {
     public Connection getConnection() throws SQLException {
         try {
             Class.forName("org.gjt.mm.mysql.Driver");
-            this.connection = DriverManager.getConnection("jdbc:mysql://localhost/sistemapostoteste", "root", "");
+            this.connection = DriverManager.getConnection("jdbc:mysql://localhost/MedicalClinicManager", "root", "");
             return this.connection;
         } catch (ClassNotFoundException ex) {
             throw new SQLException(ex.getMessage());

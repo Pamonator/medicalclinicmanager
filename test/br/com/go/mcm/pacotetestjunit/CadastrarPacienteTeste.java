@@ -13,10 +13,6 @@ import br.com.go.mcm.model.Pessoa;
 import br.com.go.mcm.model.Telefone;
 import java.sql.SQLException;
 import java.util.Calendar;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

@@ -27,7 +27,18 @@ public class Pessoa {
     private Date dataNacimentoPessoa;
 
     private Pessoa(Builder builder) {
-
+        this.idPessoa = builder.idPessoa;
+        this.enderecoPessoa = builder.enderecoPessoa;
+        this.telefonePessoa = builder.telefonePessoa;
+        this.emailPessoa = builder.emailPessoa;
+        this.dataCadastroPessoa = builder.dataCadastroPessoa;
+        this.nomePessoa = builder.nomePessoa;
+        this.sexoPessoa = builder.sexoPessoa;
+        this.RGPessoa = builder.RGPessoa;
+        this.dataEmissaoRGPessoa = builder.dataEmissaoRGPessoa;
+        this.orgaoEmissorRGPessoa = builder.orgaoEmissorRGPessoa;
+        this.CPFPessoa = builder.CPFPessoa;
+        this.dataNacimentoPessoa = builder.dataNacimentoPessoa;
     }
 
     public int getIdPessoa() {

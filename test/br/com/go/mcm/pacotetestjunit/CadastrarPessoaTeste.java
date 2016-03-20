@@ -5,12 +5,15 @@
  */
 package br.com.go.mcm.pacotetestjunit;
 
-import org.junit.After;
-import org.junit.AfterClass;
+import br.com.go.mcm.control.SistemaControle;
+import br.com.go.mcm.dbconnection.RestaurarBackupMYSQL;
+import br.com.go.mcm.model.Pessoa;
+import java.sql.Date;
+import java.sql.SQLException;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -18,28 +21,33 @@ import static org.junit.Assert.*;
  */
 public class CadastrarPessoaTeste {
     
+    
     public CadastrarPessoaTeste() {
     }
     
     @BeforeClass
     public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
+                
+    }    
     
     @Before
     public void setUp() {
+        //RestaurarBackupMYSQL.restoreDB();
     }
     
-    @After
-    public void tearDown() {
+    @Test
+    public void cadastrarPessoa() throws SQLException {
+        Pessoa pessoa;
+        pessoa = new Pessoa.Builder()
+                .nomePessoa("Johnny Hill Billy")
+                .sexoPessoa('M')
+                .RGPessoa("16789345-0")
+                .dataEmissaoRGPessoa(new Date(100, 10, 10))
+                .orgaoEmissorRGPessoa("SSP-SP")
+                .CPFPessoa("111222333-44")
+                .dataNacimentoPessoa(new Date(90, 10, 10))
+                .contruir();
+        
+        Assert.assertTrue(SistemaControle.pessoaControle().cadastrarPessoa(pessoa));
     }
-
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
 }
