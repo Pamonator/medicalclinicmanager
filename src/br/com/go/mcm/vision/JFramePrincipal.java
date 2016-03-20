@@ -174,12 +174,13 @@ public class JFramePrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jtfLogradouroEndFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jtfNumEndFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel7)
-                        .addComponent(jtfCompEndFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jtfCompEndFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel6)
+                        .addComponent(jtfNumEndFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
@@ -518,18 +519,6 @@ public class JFramePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jtfBairroEndFornecedorActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        CadastrarPessoa cadastrarPessoa = new CadastrarPessoa(this, true);
-        cadastrarPessoa.setVisible(true);
-        
-        CadastrarEndereço cadastrarEndereço = new CadastrarEndereço(this, true);
-        cadastrarEndereço.setVisible(true);
-        
-        CadastrarTelefone cadastrarTelefone = new CadastrarTelefone(this, true);
-        cadastrarTelefone.setVisible(true);
-        
-        CadastrarEmail cadastrarEmail = new CadastrarEmail(this, true);
-        cadastrarEmail.setVisible(true);
-        
         CadastrarPaciente cadastrarPaciente = new CadastrarPaciente(this, true);
         cadastrarPaciente.setVisible(true);                
     }//GEN-LAST:event_jMenuItem1ActionPerformed
