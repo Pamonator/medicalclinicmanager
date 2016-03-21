@@ -31,4 +31,15 @@ public class PessoaControle extends QueryHelper {
         
         return this.executeUpdate();
     }
+    
+    public boolean apagarPessoa(int idPessoa) throws SQLException { 
+        this.query = "DELETE FROM pessoa WHERE idPessoa = ?";
+        
+        this.prepStatement = this.mySqlControle.getConnection().prepareStatement(this.query);
+        
+        this.prepStatement.setInt(1, idPessoa);
+        
+        return  this.executeUpdate();
+                
+    }
 }

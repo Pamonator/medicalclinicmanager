@@ -70,14 +70,15 @@ public abstract class QueryHelper {
             connection = this.mySqlControle.getConnection();
             connection.setAutoCommit(false);
 
+            int executeUpdate = 0;
             for (int i = 0; i < queryList.size(); i++) {
                 this.prepStatement = connection.prepareStatement(queryList.get(i));
-                prepStatement.executeUpdate();
+                executeUpdate = prepStatement.executeUpdate();
             }
 
             connection.commit();
             connection.close();
-            return true;
+            return executeUpdate > 0;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
             return false;

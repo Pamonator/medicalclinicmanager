@@ -14,10 +14,10 @@ import java.util.Date;
 public class Pessoa {
 
     private int idPessoa;
+    private Date dataCadastroPessoa;
     private Endereco enderecoPessoa;
     private Telefone telefonePessoa;
-    private Email emailPessoa;
-    private Date dataCadastroPessoa;
+    private Email emailPessoa;    
     private String nomePessoa;
     private char sexoPessoa;
     private String rgPessoa;
@@ -159,6 +159,11 @@ public class Pessoa {
 
         public Builder telefonePessoa(Telefone telefonePessoa) {
             this.telefonePessoa = telefonePessoa;
+            return this;
+        }
+        
+        public Builder dataCadastroPessoa(Date dataCadastroPessoa) {
+            this.dataCadastroPessoa = dataCadastroPessoa;
             return this;
         }
         
