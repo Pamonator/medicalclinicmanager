@@ -10,6 +10,7 @@ import br.com.go.mcm.model.Endereco;
 import br.com.go.mcm.model.Paciente;
 import br.com.go.mcm.model.Pessoa;
 import br.com.go.mcm.model.Telefone;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -48,9 +49,34 @@ public class PacienteControle extends QueryHelper {
         return this.executeUpdate();
     }
 
-    public boolean atualizarPaciente(Paciente Paciente) throws SQLException {
-
-        return false;
+    public boolean atualizarPaciente(Paciente paciente) throws SQLException {
+        this.query = "UPDATE paciente SET estadoCivilPaciente = ?, "
+                + "profissaoPaciente = ?, escolaridadePaciente = ? "
+                + "WHERE prontuarioPaciente = ?";
+        
+        this.prepStatement = this.mySqlControle.getConnection().prepareStatement(this.query);
+        
+        this.prepStatement.setString(1, paciente.getEstadoCivilPaciente());
+        this.prepStatement.setString(2, paciente.getProfissaoPaciente());
+        this.prepStatement.setString(3, paciente.getEscolaridadePaciente());
+        this.prepStatement.setInt(4, paciente.getProntuarioPaciente());
+        
+        return this.executeUpdate();
+    }
+    
+    public PreparedStatement prepStatmentAtualizarPaciente(Paciente paciente) throws SQLException {
+        this.query = "UPDATE paciente SET estadoCivilPaciente = ?, "
+                + "profissaoPaciente = ?, escolaridadePaciente = ? "
+                + "WHERE prontuarioPaciente = ?";
+        
+        this.prepStatement = this.mySqlControle.getConnection().prepareStatement(this.query);
+        
+        this.prepStatement.setString(1, paciente.getEstadoCivilPaciente());
+        this.prepStatement.setString(2, paciente.getProfissaoPaciente());
+        this.prepStatement.setString(3, paciente.getEscolaridadePaciente());
+        this.prepStatement.setInt(4, paciente.getProntuarioPaciente());
+        
+        return this.prepStatement;
     }
 
     public Paciente buscarPaciente(String expressaoBusca) throws SQLException {

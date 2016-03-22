@@ -84,4 +84,26 @@ public abstract class QueryHelper {
             return false;
         }
     }
+    
+    public boolean executeBatch(ArrayList<PreparedStatement> preparedStatementsList){
+        Connection connection;
+        try {
+            connection = this.mySqlControle.getConnection();
+            
+            connection.setAutoCommit(false);
+
+            int executeUpdate = 0;
+            for (int i = 0; i < preparedStatementsList.size(); i++) {
+                this.prepStatement = preparedStatementsList.get(i);
+                executeUpdate += this.prepStatement.executeUpdate();
+            }
+
+            connection.commit();
+            connection.close();
+            return executeUpdate > 0;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            return false;
+        }
+    }
 }

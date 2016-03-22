@@ -10,6 +10,9 @@ import br.com.go.mcm.model.Endereco;
 import br.com.go.mcm.model.Paciente;
 import br.com.go.mcm.model.Pessoa;
 import br.com.go.mcm.model.Telefone;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -29,7 +32,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
      */
     public JFramePrincipal() {
         initComponents();
-        
+
     }
 
     /**
@@ -61,7 +64,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablePaciente = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
+        jtfPesquisaPaciente = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -92,11 +95,11 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jtfEmissorRgPessoa = new javax.swing.JTextField();
         jtfCpfPessoa = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        jMenuIniciar = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
+        jMenuConfig = new javax.swing.JMenu();
+        jMenuAbout = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -132,11 +135,6 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jLabel9.setText("Bairro:");
 
         jtfBairroEndereco.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jtfBairroEndereco.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfBairroEnderecoActionPerformed(evt);
-            }
-        });
 
         jLabel10.setText("Cidade:");
 
@@ -267,12 +265,22 @@ public class JFramePrincipal extends javax.swing.JFrame {
             jTablePaciente.getColumnModel().getColumn(3).setMaxWidth(0);
         }
 
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField1.setToolTipText("buscar por nome ou prontuário");
+        jtfPesquisaPaciente.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jtfPesquisaPaciente.setToolTipText("buscar por nome ou prontuário");
+        jtfPesquisaPaciente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfPesquisaPacienteKeyReleased(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Editar Paciente");
         jButton1.setBorder(null);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/go/mcm/img/search-7-16.png"))); // NOI18N
 
@@ -285,7 +293,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtfPesquisaPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -299,7 +307,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(jtfPesquisaPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -379,28 +387,13 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jLabel12.setText("Data de Nascimento:");
 
         jtfDataNascimentoPessoa.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jtfDataNascimentoPessoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfDataNascimentoPessoaActionPerformed(evt);
-            }
-        });
 
         jcbSexoPessoa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino" }));
-        jcbSexoPessoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbSexoPessoaActionPerformed(evt);
-            }
-        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("Sexo:");
 
         jtfRgPessoa.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jtfRgPessoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfRgPessoaActionPerformed(evt);
-            }
-        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(15, 15, 15));
@@ -421,11 +414,6 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jLabel19.setText("Profissão:");
 
         jtfProfissaoPaciente.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jtfProfissaoPaciente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfProfissaoPacienteActionPerformed(evt);
-            }
-        });
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel14.setText("Escolaridade:");
@@ -565,7 +553,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jMenu1.setText("Início");
+        jMenuIniciar.setText("Início");
 
         jMenuItem1.setText("Cadastrar Paciente");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -573,7 +561,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenuIniciar.add(jMenuItem1);
 
         jMenuItem2.setText("Sair");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -581,40 +569,24 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 jMenuItem2ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        jMenuIniciar.add(jMenuItem2);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(jMenuIniciar);
 
-        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/go/mcm/img/settings-22-16.png"))); // NOI18N
-        jMenuBar1.add(jMenu2);
+        jMenuConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/go/mcm/img/settings-22-16.png"))); // NOI18N
+        jMenuBar1.add(jMenuConfig);
 
-        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/go/mcm/img/info-2-16.png"))); // NOI18N
+        jMenuAbout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/go/mcm/img/info-2-16.png"))); // NOI18N
 
         jMenuItem3.setText("Sobre");
-        jMenu3.add(jMenuItem3);
+        jMenuAbout.add(jMenuItem3);
 
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(jMenuAbout);
 
         setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jcbSexoPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSexoPessoaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jcbSexoPessoaActionPerformed
-
-    private void jtfDataNascimentoPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfDataNascimentoPessoaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfDataNascimentoPessoaActionPerformed
-
-    private void jtfRgPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfRgPessoaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfRgPessoaActionPerformed
-
-    private void jtfBairroEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfBairroEnderecoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfBairroEnderecoActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         CadastrarPaciente cadastrarPaciente = new CadastrarPaciente(this, true);
@@ -627,9 +599,11 @@ public class JFramePrincipal extends javax.swing.JFrame {
         this.setTitle("Medical Clinic Manager");
         this.preencherTabelaPaciente();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-//        URL url = this.getClass().getResource("nurse-16.png");
-//        Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(url);
-//        this.setIconImage(iconeTitulo);
+        this.jMenuConfig.setVisible(false);
+        this.jMenuAbout.setVisible(false);
+        URL url = this.getClass().getResource("nurse-16.png");
+        Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(url);
+        this.setIconImage(iconeTitulo);
     }//GEN-LAST:event_formWindowOpened
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -641,22 +615,22 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         if (selectedRow > - 1) {
             Paciente paciente = (Paciente) this.jTablePaciente.getValueAt(selectedRow, 3);
-            
+
             Endereco endereco = paciente.getPessoa().getEnderecoPessoa();
-            this.jtfLogradouroEndedereco.setText(endereco.getLogradouroEndereco());            
-            this.jtfNumEndereco.setText(endereco.getNumeroEndereco());            
-            this.jtfCompEndereco.setText(endereco.getComplementoEndereco() + "");            
-            this.jtfBairroEndereco.setText(endereco.getBairroEndereco());            
-            this.jtfCidadeEndereco.setText(endereco.getCidadeEndereco());            
-            this.jtfCepEndereco.setText(endereco.getCEPEndereco());            
+            this.jtfLogradouroEndedereco.setText(endereco.getLogradouroEndereco());
+            this.jtfNumEndereco.setText(endereco.getNumeroEndereco());
+            this.jtfCompEndereco.setText(endereco.getComplementoEndereco() + "");
+            this.jtfBairroEndereco.setText(endereco.getBairroEndereco());
+            this.jtfCidadeEndereco.setText(endereco.getCidadeEndereco());
+            this.jtfCepEndereco.setText(endereco.getCEPEndereco());
             this.jcbEstadoEndereco.setSelectedItem(endereco.getEstadoEndereco());
-            
+
             Telefone telefone = paciente.getPessoa().getTelefonePessoa();
-            
+
             this.jtfTelefoneResidencial.setText(telefone.getTelefoneResidencial());
             this.jtfTelefoneComercial.setText(telefone.getTelefoneComercial());
             this.jtfTelefoneCelular.setText(telefone.getTelefoneCelular());
-            
+
             Pessoa pessoa = paciente.getPessoa();
             this.jtfDataNascimentoPessoa.setText(pessoa.getDataNacimentoPessoa().toString());
             this.jtfRgPessoa.setText(pessoa.getRgPessoa());
@@ -666,13 +640,68 @@ public class JFramePrincipal extends javax.swing.JFrame {
             this.jtfProfissaoPaciente.setText(paciente.getProfissaoPaciente());
             this.jcbEscolaridadePaciente.setSelectedItem(paciente.getEscolaridadePaciente());
             this.jtfEmailPessoa.setText(pessoa.getEmailPessoa().getEnderecoEmail());
-            
+
         }
     }//GEN-LAST:event_jTablePacienteMouseReleased
 
-    private void jtfProfissaoPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfProfissaoPacienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfProfissaoPacienteActionPerformed
+    private void jtfPesquisaPacienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPesquisaPacienteKeyReleased
+        String campoPesquisa = this.jtfPesquisaPaciente.getText(); 
+
+        ArrayList<Paciente> listaPaciente = null;
+        
+        try {
+            listaPaciente = SistemaControle.pacienteControle().listarPaciente();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this,"Erro na leitura do banco de dados.\n"
+                    + "Por favor, entre em contato com o suporte.\n"
+                    + "Informações sobre o erro: " + ex.getMessage());
+        }
+
+        if (listaPaciente != null) {
+            DefaultTableModel tabelaPaciente
+                    = (DefaultTableModel) this.jTablePaciente.getModel();
+            
+            tabelaPaciente.setNumRows(0);            
+            
+            for (int i = 0; i < listaPaciente.size(); i++) {
+                Paciente paciente = listaPaciente.get(i);
+
+                String prontuarioPaciente = String.valueOf(paciente.getProntuarioPaciente());
+                String nomePaciente = paciente.getPessoa().getNomePessoa().toLowerCase();
+                
+                if (nomePaciente.contains(campoPesquisa)
+                        || prontuarioPaciente.contains(campoPesquisa)) {
+                    
+                    tabelaPaciente.addRow(new Object[]{
+                        paciente.getProntuarioPaciente(),
+                        paciente.getPessoa().getNomePessoa(),
+                        paciente.getPessoa().getDataCadastroPessoa(),
+                        paciente
+                    });
+                }
+                
+                this.jTablePaciente.setModel(tabelaPaciente);
+                this.jTablePaciente.setRowSelectionAllowed(true);
+                this.jTablePaciente.setColumnSelectionAllowed(false);
+            }
+        }
+
+
+    }//GEN-LAST:event_jtfPesquisaPacienteKeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int selectedRow = this.jTablePaciente.getSelectedRow();
+        
+        if (selectedRow > -1) {
+            Paciente paciente = (Paciente) this.jTablePaciente.getValueAt(selectedRow, 3);
+            
+            AtualizarPaciente atualizarPaciente = new AtualizarPaciente(this, true, paciente);
+            atualizarPaciente.setVisible(true);
+            
+        } else {
+            JOptionPane.showMessageDialog(this, "Favor escolher o paciente que deseja editar (:");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -690,15 +719,11 @@ public class JFramePrincipal extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JFramePrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JFramePrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JFramePrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(JFramePrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        
         //</editor-fold>
 
         /* Create and display the form */
@@ -729,10 +754,10 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenuAbout;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuConfig;
+    private javax.swing.JMenu jMenuIniciar;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
@@ -745,7 +770,6 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTablePaciente;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JComboBox<String> jcbEscolaridadePaciente;
     private javax.swing.JComboBox<String> jcbEstadoCivilPessoa;
     private javax.swing.JComboBox<String> jcbEstadoEndereco;
@@ -760,6 +784,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField jtfEmissorRgPessoa;
     private javax.swing.JTextField jtfLogradouroEndedereco;
     private javax.swing.JTextField jtfNumEndereco;
+    private javax.swing.JTextField jtfPesquisaPaciente;
     private javax.swing.JTextField jtfProfissaoPaciente;
     private javax.swing.JTextField jtfRgPessoa;
     private javax.swing.JTextField jtfTelefoneCelular;
@@ -772,9 +797,9 @@ public class JFramePrincipal extends javax.swing.JFrame {
             ArrayList<Paciente> listaPaciente = SistemaControle.pacienteControle().listarPaciente();
 
             DefaultTableModel tabelaPaciente = (DefaultTableModel) this.jTablePaciente.getModel();
-            
+
             tabelaPaciente.setNumRows(0);
-            
+
             String dataAux;
 
             for (int i = 0; i < listaPaciente.size(); i++) {
@@ -783,7 +808,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 dataAux = calendar.get(Calendar.DAY_OF_MONTH) + "/"
                         + (calendar.get(Calendar.MONTH) + 1) + "/"
                         + calendar.get(Calendar.YEAR);
-                        
+
                 tabelaPaciente.addRow(new Object[]{
                     listaPaciente.get(i).getProntuarioPaciente(),
                     listaPaciente.get(i).getPessoa().getNomePessoa(),
@@ -791,7 +816,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                     listaPaciente.get(i)
                 });
             }
-            
+
             this.jTablePaciente.setModel(tabelaPaciente);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Erro de leitura dos dados. Favor entrar em"

@@ -25,7 +25,9 @@ import javax.swing.JOptionPane;
  *
  * @author gilca
  */
-public class CadastrarPaciente extends javax.swing.JDialog {
+public class AtualizarPaciente extends javax.swing.JDialog {
+
+    private Paciente paciente;
 
     /**
      * Creates new form CadastrarPaciente
@@ -33,9 +35,23 @@ public class CadastrarPaciente extends javax.swing.JDialog {
      * @param parent
      * @param modal
      */
-    public CadastrarPaciente(java.awt.Frame parent, boolean modal) {
+    private AtualizarPaciente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        initComponents();         
+        initComponents();
+    }
+
+    /**
+     * Creates new form CadastrarPaciente
+     *
+     * @param parent
+     * @param modal
+     * @param paciente
+     */
+    public AtualizarPaciente(java.awt.Frame parent, boolean modal, Paciente paciente) {
+        super(parent, modal);
+        this.paciente = paciente;
+        initComponents();
+        this.preencherCamposPaciente();
     }
 
     /**
@@ -65,7 +81,7 @@ public class CadastrarPaciente extends javax.swing.JDialog {
         jcbEscolaridade = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jtfProfissaoPessoa = new javax.swing.JTextField();
+        jtfProfissaoPaciente = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         jtfEmailPessoa = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
@@ -94,7 +110,6 @@ public class CadastrarPaciente extends javax.swing.JDialog {
         jLabel20 = new javax.swing.JLabel();
         jtfTelefoneCelular = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
@@ -216,7 +231,7 @@ public class CadastrarPaciente extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfProfissaoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtfProfissaoPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel21)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -257,7 +272,7 @@ public class CadastrarPaciente extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
                     .addComponent(jtfEmailPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfProfissaoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfProfissaoPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16)
                     .addComponent(jtfCpfPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -410,21 +425,14 @@ public class CadastrarPaciente extends javax.swing.JDialog {
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton1.setText("Limpar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Cadastrar");
+        jButton2.setText("Salvar Alterações");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Fechar");
+        jButton3.setText("Cancelar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -436,12 +444,10 @@ public class CadastrarPaciente extends javax.swing.JDialog {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -449,7 +455,6 @@ public class CadastrarPaciente extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -489,17 +494,16 @@ public class CadastrarPaciente extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -533,12 +537,13 @@ public class CadastrarPaciente extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        this.setTitle("Cadastrar Paciente");
+        this.setTitle("Atualizar Paciente");
         this.setLocationRelativeTo(null);
         URL url = this.getClass().getResource("nurse-16.png");
         Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(url);
         this.setIconImage(iconeTitulo);
-        
+        this.jtfProntuarioPaciente.setEditable(false);
+
     }//GEN-LAST:event_formWindowOpened
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -588,41 +593,41 @@ public class CadastrarPaciente extends javax.swing.JDialog {
                         .construir();
 
                 Telefone telefone = new Telefone(pessoa.getIdPessoa(),
-                        this.jtfTelefoneResidencial.getText(), 
-                        this.jtfTelefoneComercial.getText(), 
+                        this.jtfTelefoneResidencial.getText(),
+                        this.jtfTelefoneComercial.getText(),
                         this.jtfTelefoneCelular.getText()
                 );
-                
-                Email email = new Email(pessoa.getIdPessoa(), 
+
+                Email email = new Email(pessoa.getIdPessoa(),
                         this.jtfEmailPessoa.getText()
                 );
-                
-                Paciente paciente = new Paciente.Builder()
+
+                this.paciente = new Paciente.Builder()
                         .prontuarioPaciente(Integer.parseInt(this.jtfProntuarioPaciente.getText()))
                         .pessoa(pessoa)
                         .estadoCivilPaciente(this.jcbEstadoCivilPessoa.getSelectedItem().toString())
-                        .profissaoPaciente(this.jtfProfissaoPessoa.getText())
+                        .profissaoPaciente(this.jtfProfissaoPaciente.getText())
                         .escolaridadePaciente(this.jcbEscolaridade.getSelectedItem().toString())
                         .contruir();
-                
-                ArrayList<String> queryList = new ArrayList<>();
 
-                queryList.add(SistemaControle.enderecoControle().gerarQueryCadastrarEndereco(endereco));
-                queryList.add(SistemaControle.telefoneControle().gerarQuerycadastrarTelefone(telefone));
-                queryList.add(SistemaControle.emailControle().gerarQueryCadastrarEmail(email));
-                queryList.add(SistemaControle.pacienteControle().gerarQuerycadastrarPaciente(paciente));
+//                ArrayList<String> queryList = new ArrayList<>();
+//
+//                queryList.add(SistemaControle.enderecoControle().gerarQueryCadastrarEndereco(endereco));
+//                queryList.add(SistemaControle.telefoneControle().gerarQuerycadastrarTelefone(telefone));
+//                queryList.add(SistemaControle.emailControle().gerarQueryCadastrarEmail(email));
+//                queryList.add(SistemaControle.pacienteControle().gerarQuerycadastrarPaciente(this.paciente));
 
-                boolean excuteTransaction = SistemaControle.pacienteControle().excuteTransaction(queryList);
-                
-                if (excuteTransaction) {
-                    JOptionPane.showMessageDialog(this, "Paciente cadastrado com sucesso!!");
-                    this.dispose();
-                } else {
-                    JOptionPane.showMessageDialog(this, "Falha no cadastro! Favor "
-                            + "entrar em contato com o suporte.\nInformações sobre o erro: Desconhecidas");
-                    SistemaControle.pessoaControle().apagarPessoa(pessoa.getIdPessoa());
-                    this.dispose();
-                }
+//                boolean excuteTransaction = SistemaControle.pacienteControle().excuteTransaction(queryList);
+//
+//                if (excuteTransaction) {
+//                    JOptionPane.showMessageDialog(this, "Paciente cadastrado com sucesso!!");
+//                    this.dispose();
+//                } else {
+//                    JOptionPane.showMessageDialog(this, "Falha no cadastro! Favor "
+//                            + "entrar em contato com o suporte.\nInformações sobre o erro: Desconhecidas");
+//                    SistemaControle.pessoaControle().apagarPessoa(pessoa.getIdPessoa());
+//                    this.dispose();
+//                }
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Erro de gravação dos dados. Favor entrar em"
@@ -630,10 +635,6 @@ public class CadastrarPaciente extends javax.swing.JDialog {
             this.dispose();
         }
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.limparCampos();
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -652,15 +653,18 @@ public class CadastrarPaciente extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastrarPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AtualizarPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(() -> {
-            CadastrarPaciente dialog = new CadastrarPaciente(new javax.swing.JFrame(), true);
+            AtualizarPaciente dialog = new AtualizarPaciente(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
@@ -672,7 +676,6 @@ public class CadastrarPaciente extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JFormattedTextField jFormattedTextField1;
@@ -719,7 +722,7 @@ public class CadastrarPaciente extends javax.swing.JDialog {
     private javax.swing.JTextField jtfLogradouroEndereco;
     private javax.swing.JTextField jtfNomePessoa;
     private javax.swing.JTextField jtfNumeroEndereco;
-    private javax.swing.JTextField jtfProfissaoPessoa;
+    private javax.swing.JTextField jtfProfissaoPaciente;
     private javax.swing.JTextField jtfProntuarioPaciente;
     private javax.swing.JTextField jtfRgPessoa;
     private javax.swing.JTextField jtfTelefoneCelular;
@@ -738,18 +741,66 @@ public class CadastrarPaciente extends javax.swing.JDialog {
         this.jtfLogradouroEndereco.setText("");
         this.jtfNomePessoa.setText("");
         this.jtfNumeroEndereco.setText("");
-        this.jtfProfissaoPessoa.setText("");
+        this.jtfProfissaoPaciente.setText("");
         this.jtfProntuarioPaciente.setText("");
         this.jtfRgPessoa.setText("");
         this.jtfTelefoneResidencial.setText("");
         this.jtfTelefoneComercial.setText("");
         this.jtfTelefoneCelular.setText("");
-        
+
         this.jcbEscolaridade.setSelectedIndex(0);
         this.jcbEstadoCivilPessoa.setSelectedIndex(0);
         this.jcbEstadoEndereco.setSelectedIndex(0);
         this.jcbSexoPessoa.setSelectedIndex(0);
-        
+
         this.jFormattedTextField1.setText("");
+    }
+
+    private void preencherCamposPaciente() {
+        Pessoa pessoa;
+        Endereco endereco;
+        Telefone telefone;
+        Email email;
+
+        if (this.paciente != null) {
+            pessoa = this.paciente.getPessoa();
+            endereco = pessoa.getEnderecoPessoa();
+            telefone = pessoa.getTelefonePessoa();
+            email = pessoa.getEmailPessoa();
+
+            if (endereco != null && telefone != null && email != null) {
+                this.jtfBairroEndereco.setText(endereco.getBairroEndereco());
+                this.jtfCepEndereco.setText(endereco.getCEPEndereco());
+                this.jtfCidadeEndereco.setText(endereco.getCidadeEndereco());
+                this.jtfCompEndereco.setText(endereco.getComplementoEndereco() + "");
+                this.jtfCpfPessoa.setText(pessoa.getCpfPessoa());
+                this.jtfEmailPessoa.setText(email.getEnderecoEmail());
+                this.jtfEmissorRgPessoa.setText(pessoa.getOrgaoEmissorRGPessoa());
+                this.jtfLogradouroEndereco.setText(endereco.getLogradouroEndereco());
+                this.jtfNomePessoa.setText(pessoa.getNomePessoa());
+                this.jtfNumeroEndereco.setText(endereco.getNumeroEndereco());
+                this.jtfProfissaoPaciente.setText(this.paciente.getProfissaoPaciente());
+                this.jtfProntuarioPaciente.setText(String.valueOf(this.paciente.getProntuarioPaciente()));
+                this.jtfRgPessoa.setText(pessoa.getRgPessoa());
+                this.jtfTelefoneResidencial.setText(telefone.getTelefoneResidencial());
+                this.jtfTelefoneComercial.setText(telefone.getTelefoneComercial());
+                this.jtfTelefoneCelular.setText(telefone.getTelefoneCelular());
+
+                this.jcbEscolaridade.setSelectedItem(paciente.getEscolaridadePaciente());
+                this.jcbEstadoCivilPessoa.setSelectedItem(paciente.getEstadoCivilPaciente());
+                this.jcbEstadoEndereco.setSelectedItem(endereco.getEstadoEndereco());
+                this.jcbSexoPessoa.setSelectedItem(pessoa.getSexoPessoa());
+
+                Date dataAux = (Date) pessoa.getDataNacimentoPessoa();
+                Calendar calendar = new GregorianCalendar();
+                calendar.setTimeInMillis(dataAux.getTime());
+                String stringAux = calendar.get(Calendar.DAY_OF_MONTH)
+                        + String.valueOf((calendar.get(Calendar.MONDAY) + 1))
+                        + calendar.get(Calendar.YEAR);
+
+                this.jFormattedTextField1.setText(stringAux);
+            }
+
+        }
     }
 }
