@@ -591,6 +591,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         CadastrarPaciente cadastrarPaciente = new CadastrarPaciente(this, true);
         cadastrarPaciente.setVisible(true);
+        this.preencherTabelaPaciente();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -740,6 +741,10 @@ public class JFramePrincipal extends javax.swing.JFrame {
             ArrayList<Paciente> listaPaciente = SistemaControle.pacienteControle().listarPaciente();
 
             DefaultTableModel tabelaPaciente = (DefaultTableModel) this.jTablePaciente.getModel();
+            
+            tabelaPaciente.setNumRows(0);
+            
+            String dataAux;
 
             for (int i = 0; i < listaPaciente.size(); i++) {
                 tabelaPaciente.addRow(new Object[]{
@@ -752,7 +757,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
             
             this.jTablePaciente.setModel(tabelaPaciente);
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Erro de gravação dos dados. Favor entrar em"
+            JOptionPane.showMessageDialog(this, "Erro de leitura dos dados. Favor entrar em"
                     + "contato com o suporte.\nInformação sobre o erro:" + ex.getMessage());
         }
     }

@@ -88,8 +88,8 @@ public class PacienteControle extends QueryHelper {
             
             Telefone telefone = new Telefone(this.resultSet.getInt("idPessoa"),
                     this.resultSet.getString("telefoneResidencial"),
-                    this.resultSet.getString("telefoneResidencial"),
-                    this.resultSet.getString("telefoneResidencial"));
+                    this.resultSet.getString("telefoneComercial"),
+                    this.resultSet.getString("telefoneCelular"));
             
             Email email = new Email(this.resultSet.getInt("idPessoa"), 
                     this.resultSet.getString("enderecoEmail"));
@@ -100,7 +100,7 @@ public class PacienteControle extends QueryHelper {
                     .telefonePessoa(telefone)
                     .emailPessoa(email)
                     .dataCadastroPessoa(this.resultSet.getDate("dataCadastroPessoa"))
-                    .nomePessoa(this.resultSet.getString(this.resultSet.getString("nomePessoa")))
+                    .nomePessoa(this.resultSet.getString("nomePessoa"))
                     .sexoPessoa(this.resultSet.getString("sexoPessoa").charAt(0))
                     .rgPessoa(this.resultSet.getString("rgPessoa"))
                     .orgaoEmissorRGPessoa(this.resultSet.getString("orgaoEmissorRgPessoa"))
