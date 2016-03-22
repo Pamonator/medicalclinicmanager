@@ -120,7 +120,7 @@ public class CadastrarPaciente extends javax.swing.JDialog {
         jtfNomePessoa.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel13.setText("Data de Nascimento:");
+        jLabel13.setText("Data Nascimento:");
 
         jcbSexoPessoa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "F" }));
         jcbSexoPessoa.addActionListener(new java.awt.event.ActionListener() {
@@ -197,7 +197,7 @@ public class CadastrarPaciente extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jFormattedTextField1)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -217,7 +217,7 @@ public class CadastrarPaciente extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel17)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jcbEstadoCivilPessoa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jcbEstadoCivilPessoa, 0, 127, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel23)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
