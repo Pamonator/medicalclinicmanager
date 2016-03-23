@@ -604,6 +604,29 @@ public class JFramePrincipal extends javax.swing.JFrame {
         URL url = this.getClass().getResource("nurse-16.png");
         Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(url);
         this.setIconImage(iconeTitulo);
+        
+        this.jtfLogradouroEndedereco.setEditable(false);
+        this.jtfNumEndereco.setEditable(false);
+        this.jtfCompEndereco.setEditable(false);
+        this.jtfBairroEndereco.setEditable(false);
+        this.jtfCidadeEndereco.setEditable(false);
+        this.jcbEstadoEndereco.setEditable(false);
+        this.jtfCepEndereco.setEditable(false);
+        
+        this.jtfTelefoneResidencial.setEditable(false);
+        this.jtfTelefoneComercial.setEditable(false);
+        this.jtfTelefoneCelular.setEditable(false);
+        
+        this.jtfDataNascimentoPessoa.setEditable(false);
+        this.jtfRgPessoa.setEditable(false);
+        this.jtfEmissorRgPessoa.setEditable(false);
+        this.jtfCpfPessoa.setEditable(false);
+        this.jcbSexoPessoa.setEditable(false);
+        this.jcbEscolaridadePaciente.setEditable(false);
+        this.jcbEstadoCivilPessoa.setEditable(false);
+        this.jtfProfissaoPaciente.setEditable(false);
+        this.jtfEmailPessoa.setEditable(false);
+        
     }//GEN-LAST:event_formWindowOpened
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
