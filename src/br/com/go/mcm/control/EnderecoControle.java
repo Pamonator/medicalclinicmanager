@@ -6,7 +6,6 @@
 package br.com.go.mcm.control;
 
 import br.com.go.mcm.model.Endereco;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
@@ -14,7 +13,7 @@ import java.sql.SQLException;
  * @author gilca
  */
 public class EnderecoControle extends QueryHelper {
-    
+
     public String gerarQueryCadastrarEndereco(Endereco endereco) throws SQLException {
         this.query = "INSERT INTO endereco VALUES("
                 + endereco.getIdPessoa() + ", "
@@ -25,15 +24,15 @@ public class EnderecoControle extends QueryHelper {
                 + "'" + endereco.getCidadeEndereco() + "', "
                 + "'" + endereco.getEstadoEndereco() + "', "
                 + "'" + endereco.getCEPEndereco() + "'); ";
-        
+
         return this.query;
     }
-    
+
     public boolean cadastrarEndereco(Endereco endereco) throws SQLException {
         this.query = "INSERT INTO endereco VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-        
+
         this.prepStatement = this.mySqlControle.getConnection().prepareStatement(query);
-        
+
         this.prepStatement.setInt(1, endereco.getIdPessoa());
         this.prepStatement.setString(2, endereco.getLogradouroEndereco());
         this.prepStatement.setString(3, endereco.getNumeroEndereco());
@@ -42,13 +41,26 @@ public class EnderecoControle extends QueryHelper {
         this.prepStatement.setString(6, endereco.getCidadeEndereco());
         this.prepStatement.setString(7, endereco.getEstadoEndereco());
         this.prepStatement.setString(8, endereco.getCEPEndereco());
-        
+
         return this.executeUpdate();
     }
 
     public boolean apagarEndereco(int idEndereco) throws SQLException {
-        
-        
+
         return this.executeUpdate();
+    }
+
+    public String gerarQueryAtualizarEndereco(Endereco endereco) {
+        this.query = "UPDATE endereco SET logradouroEndereco = '"
+                + endereco.getLogradouroEndereco() + "', "
+                + "numeroEndereco = '" + endereco.getNumeroEndereco() + "', "
+                + "complementoEndereco = '" + endereco.getComplementoEndereco() + "', "
+                + "bairroEndereco = '" + endereco.getBairroEndereco() + "', "
+                + "cidadeEndereco = '" + endereco.getCidadeEndereco() + "', "
+                + "estadoEndereco = '" + endereco.getEstadoEndereco() + "', "
+                + "cepEndereco = '" + endereco.getCEPEndereco() + "' "
+                + "WHERE idPessoa = " + endereco.getIdPessoa() + ";";        
+        
+        return this.query;
     }
 }

@@ -37,6 +37,16 @@ public class TelefoneControle extends QueryHelper {
         
         return this.executeUpdate();
     }
+    
+    public String gerarQueryAtualizarTelefone(Telefone telefone) throws SQLException {
+        this.query = "UPDATE telefone SET telefoneResidencial = '"
+                + telefone.getTelefoneResidencial() + "', "
+                + "telefoneComercial = '" + telefone.getTelefoneComercial() + "', "
+                + "telefoneCelular = '" + telefone.getTelefoneCelular() + "' "
+                + "WHERE idPessoa = " + telefone.getIdPessoa() + ";";        
+        
+        return this.query;
+    }
 
     public boolean apagarTelefone(int idTelefone) throws SQLException{
         

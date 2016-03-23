@@ -37,4 +37,11 @@ public class EmailControle extends QueryHelper {
         
         return this.executeUpdate();
     }
+    
+    public String gerarQueryAtualizarEmail(Email email) throws SQLException {
+        this.query = "UPDATE email SET enderecoEmail = '" + email.getEnderecoEmail()
+                + "' WHERE idPessoa = " + email.getIdPessoa() + ";";
+        
+        return this.query;
+    }
 }

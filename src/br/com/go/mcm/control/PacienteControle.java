@@ -49,6 +49,16 @@ public class PacienteControle extends QueryHelper {
         return this.executeUpdate();
     }
 
+    public String gerarQueryAtualizarPaciente(Paciente paciente) {
+        this.query = "UPDATE paciente SET estadoCivilPaciente = '"
+                + paciente.getEstadoCivilPaciente() + "', "
+                + "profissaoPaciente = '" + paciente.getProfissaoPaciente() + "', "
+                + "escolaridadePaciente = '" + paciente.getEscolaridadePaciente() + "' "
+                + "WHERE prontuarioPaciente = " + paciente.getProntuarioPaciente() + ";";
+        
+        return this.query;
+    }
+    
     public boolean atualizarPaciente(Paciente paciente) throws SQLException {
         this.query = "UPDATE paciente SET estadoCivilPaciente = ?, "
                 + "profissaoPaciente = ?, escolaridadePaciente = ? "

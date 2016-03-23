@@ -697,7 +697,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
             
             AtualizarPaciente atualizarPaciente = new AtualizarPaciente(this, true, paciente);
             atualizarPaciente.setVisible(true);
-            
+            this.preencherTabelaPaciente();
         } else {
             JOptionPane.showMessageDialog(this, "Favor escolher o paciente que deseja editar (:");
         }

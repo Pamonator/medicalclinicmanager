@@ -564,6 +564,7 @@ public class AtualizarPaciente extends javax.swing.JDialog {
         Date dataNascimentoPessoa = new Date(calendar.getTimeInMillis());
 
         Pessoa pessoa = new Pessoa.Builder()
+                .idPessoa(this.paciente.getPessoa().getIdPessoa())
                 .nomePessoa(this.jtfNomePessoa.getText())
                 .sexoPessoa(this.jcbSexoPessoa.getSelectedItem().toString().charAt(0))
                 .rgPessoa(this.jtfRgPessoa.getText())
@@ -573,14 +574,9 @@ public class AtualizarPaciente extends javax.swing.JDialog {
                 .contruir();
 
         try {
-            boolean cadastrarPessoa = SistemaControle.pessoaControle().cadastrarPessoa(pessoa);
+            boolean atualizarPessoa = SistemaControle.pessoaControle().atualizarPessoa(pessoa);
 
-            if (cadastrarPessoa) {
-                pessoa.setIdPessoa(SistemaControle
-                        .pessoaControle()
-                        .getUltimoIdCadastrado("pessoa", "idPessoa")
-                );
-
+            if (atualizarPessoa) {
                 Endereco endereco = new Endereco.Builder()
                         .idPessoa(pessoa.getIdPessoa())
                         .logradouroEndereco(this.jtfLogradouroEndereco.getText())
@@ -610,24 +606,24 @@ public class AtualizarPaciente extends javax.swing.JDialog {
                         .escolaridadePaciente(this.jcbEscolaridade.getSelectedItem().toString())
                         .contruir();
 
-//                ArrayList<String> queryList = new ArrayList<>();
-//
-//                queryList.add(SistemaControle.enderecoControle().gerarQueryCadastrarEndereco(endereco));
-//                queryList.add(SistemaControle.telefoneControle().gerarQuerycadastrarTelefone(telefone));
-//                queryList.add(SistemaControle.emailControle().gerarQueryCadastrarEmail(email));
-//                queryList.add(SistemaControle.pacienteControle().gerarQuerycadastrarPaciente(this.paciente));
+                ArrayList<String> queryList = new ArrayList<>();
 
-//                boolean excuteTransaction = SistemaControle.pacienteControle().excuteTransaction(queryList);
-//
-//                if (excuteTransaction) {
-//                    JOptionPane.showMessageDialog(this, "Paciente cadastrado com sucesso!!");
-//                    this.dispose();
-//                } else {
-//                    JOptionPane.showMessageDialog(this, "Falha no cadastro! Favor "
-//                            + "entrar em contato com o suporte.\nInformações sobre o erro: Desconhecidas");
-//                    SistemaControle.pessoaControle().apagarPessoa(pessoa.getIdPessoa());
-//                    this.dispose();
-//                }
+                queryList.add(SistemaControle.enderecoControle().gerarQueryAtualizarEndereco(endereco));
+                queryList.add(SistemaControle.telefoneControle().gerarQueryAtualizarTelefone(telefone));
+                queryList.add(SistemaControle.emailControle().gerarQueryAtualizarEmail(email));
+                queryList.add(SistemaControle.pacienteControle().gerarQueryAtualizarPaciente(this.paciente));
+
+                boolean excuteTransaction = SistemaControle.pacienteControle().excuteTransaction(queryList);
+
+                if (excuteTransaction) {
+                    JOptionPane.showMessageDialog(this, "Paciente cadastrado com sucesso!!");
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Falha no cadastro! Favor "
+                            + "entrar em contato com o suporte.\nInformações sobre o erro: Desconhecidas");
+                    SistemaControle.pessoaControle().apagarPessoa(pessoa.getIdPessoa());
+                    this.dispose();
+                }
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Erro de gravação dos dados. Favor entrar em"
