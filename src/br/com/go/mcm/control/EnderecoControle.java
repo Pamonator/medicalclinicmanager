@@ -14,7 +14,13 @@ import java.sql.SQLException;
  */
 public class EnderecoControle extends QueryHelper {
 
-    public String gerarQueryCadastrarEndereco(Endereco endereco) throws SQLException {
+    /**
+     * Método que prepara uma query SQL para o cadastro de um endereco
+     * junto ao banco de dados.
+     * @param endereco - o objeto do tipo Endereco a ser gravado no banco
+     * @return uma String contendo a query SQL
+     */
+    public String gerarQueryCadastrarEndereco(Endereco endereco) {
         this.query = "INSERT INTO endereco VALUES("
                 + endereco.getIdPessoa() + ", "
                 + "'" + endereco.getLogradouroEndereco() + "', "
@@ -28,6 +34,14 @@ public class EnderecoControle extends QueryHelper {
         return this.query;
     }
 
+    /**
+     * Método responsável pela persistência de um objeto do tipo Endereco
+     * junto ao banco de dados.
+     * @param endereco - o objeto do tipo Endereco a ser gravado no banco
+     * @return True se os dados foram gravados corretamente ou 
+     * False se a gravação falhar
+     * @throws SQLException
+     */
     public boolean cadastrarEndereco(Endereco endereco) throws SQLException {
         this.query = "INSERT INTO endereco VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -50,6 +64,12 @@ public class EnderecoControle extends QueryHelper {
         return this.executeUpdate();
     }
 
+    /**
+     * Método que prepara uma query SQL para a atualização(edição)
+     * dos dados de um endereco previamente cadastrado no banco de dados.
+     * @param endereco - o objeto do tipo Endereco a ser gravado no banco
+     * @return uma String contendo a query SQL
+     */
     public String gerarQueryAtualizarEndereco(Endereco endereco) {
         this.query = "UPDATE endereco SET logradouroEndereco = '"
                 + endereco.getLogradouroEndereco() + "', "

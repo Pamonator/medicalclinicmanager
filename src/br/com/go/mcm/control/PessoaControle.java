@@ -15,6 +15,14 @@ import java.sql.SQLException;
  */
 public class PessoaControle extends QueryHelper {
 
+    /**
+     * Método responsável pela persistência de um objeto do tipo Pessoa
+     * junto ao banco de dados.
+     * @param pessoa - o objeto do tipo Paciente a ser gravado no banco
+     * @return True se os dados foram gravados corretamente ou 
+     * False se a gravação falhar
+     * @throws SQLException
+     */
     public boolean cadastrarPessoa(Pessoa pessoa) throws SQLException {
         this.query = "INSERT INTO pessoa (nomePessoa, sexoPessoa, rgPessoa, "
                 + "orgaoEmissorRgPessoa, cpfPessoa, dataNascimentoPessoa)"
@@ -32,6 +40,14 @@ public class PessoaControle extends QueryHelper {
         return this.executeUpdate();
     }
 
+    /**
+     * Método responsável pela atualização dos
+     * dados de uma pessoa previamente cadastrada no banco de dados.
+     * @param pessoa - o objeto do tipo Paciente a ser gravado no banco
+     * @return True se os dados foram gravados corretamente ou 
+     * False se a gravação falhar
+     * @throws SQLException
+     */
     public boolean atualizarPessoa(Pessoa pessoa) throws SQLException {
         this.query = "UPDATE pessoa SET nomePessoa = ?, sexoPessoa = ?, "
                 + "rgPessoa = ?, orgaoEmissorRgPessoa = ?, cpfPessoa = ?, "
@@ -50,6 +66,13 @@ public class PessoaControle extends QueryHelper {
         return this.executeUpdate();
     }
 
+    /**
+     * Método que remove uma pessoa cadastrada no banco de dados do sistema
+     * @param idPessoa - o ID da pessoa que será apagada
+     * @return True se algum registro do banco foi apagado, ou False caso a 
+     * pessoa não esteja cadastrada no banco.
+     * @throws SQLException
+     */
     public boolean apagarPessoa(int idPessoa) throws SQLException {
         this.query = "DELETE FROM pessoa WHERE idPessoa = ?";
 
@@ -58,6 +81,5 @@ public class PessoaControle extends QueryHelper {
         this.prepStatement.setInt(1, idPessoa);
 
         return this.executeUpdate();
-
     }
 }

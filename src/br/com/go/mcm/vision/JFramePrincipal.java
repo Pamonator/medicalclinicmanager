@@ -65,7 +65,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablePaciente = new javax.swing.JTable();
         jtfPesquisaPaciente = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jbEditarPaciente = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -97,7 +97,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuIniciar = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuSair = new javax.swing.JMenuItem();
         jMenuConfig = new javax.swing.JMenu();
         jMenuAbout = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -273,12 +273,12 @@ public class JFramePrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Editar Paciente");
-        jButton1.setBorder(null);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbEditarPaciente.setBackground(new java.awt.Color(255, 255, 255));
+        jbEditarPaciente.setText("Editar Paciente");
+        jbEditarPaciente.setBorder(null);
+        jbEditarPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbEditarPacienteActionPerformed(evt);
             }
         });
 
@@ -297,7 +297,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jbEditarPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -308,7 +308,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jtfPesquisaPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbEditarPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -563,13 +563,13 @@ public class JFramePrincipal extends javax.swing.JFrame {
         });
         jMenuIniciar.add(jMenuItem1);
 
-        jMenuItem2.setText("Sair");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jMenuSair.setText("Sair");
+        jMenuSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jMenuSairActionPerformed(evt);
             }
         });
-        jMenuIniciar.add(jMenuItem2);
+        jMenuIniciar.add(jMenuSair);
 
         jMenuBar1.add(jMenuIniciar);
 
@@ -588,23 +588,43 @@ public class JFramePrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /*
+        Este método recebe um evento disparado por um usuário operando o sistema
+        quando o mesmo clica em iniciar > cadastrar paciente
+     */
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        //instanciando a janela de cadastro
         CadastrarPaciente cadastrarPaciente = new CadastrarPaciente(this, true);
+
+        //tornando a janela visível
         cadastrarPaciente.setVisible(true);
+
+        //ao terminar o cadastro de um novo paciente, a tabela contendo a lista 
+        //de paciente é atualizada pelo método abaixo
         this.preencherTabelaPaciente();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    /*
+        Este método recebe um evento que é disparado quando a janela se abre        
+     */
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        //setando a localização da janela aberta para o centro do monitor
         this.setLocationRelativeTo(null);
+        //título da janela
         this.setTitle("Medical Clinic Manager");
+        //chamando o método que preenche a tabela de pacientes
         this.preencherTabelaPaciente();
+        //setando a operação padrão quando a janela é fechada
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        //escondendo os menus ainda nao implementados
         this.jMenuConfig.setVisible(false);
         this.jMenuAbout.setVisible(false);
+        //setando o ícone da janela
         URL url = this.getClass().getResource("nurse-16.png");
         Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(url);
         this.setIconImage(iconeTitulo);
-        
+
+        //travando os campos jTextField que não podem ser editados.
         this.jtfLogradouroEndedereco.setEditable(false);
         this.jtfNumEndereco.setEditable(false);
         this.jtfCompEndereco.setEditable(false);
@@ -612,11 +632,11 @@ public class JFramePrincipal extends javax.swing.JFrame {
         this.jtfCidadeEndereco.setEditable(false);
         this.jcbEstadoEndereco.setEditable(false);
         this.jtfCepEndereco.setEditable(false);
-        
+
         this.jtfTelefoneResidencial.setEditable(false);
         this.jtfTelefoneComercial.setEditable(false);
         this.jtfTelefoneCelular.setEditable(false);
-        
+
         this.jtfDataNascimentoPessoa.setEditable(false);
         this.jtfRgPessoa.setEditable(false);
         this.jtfEmissorRgPessoa.setEditable(false);
@@ -626,35 +646,33 @@ public class JFramePrincipal extends javax.swing.JFrame {
         this.jcbEstadoCivilPessoa.setEditable(false);
         this.jtfProfissaoPaciente.setEditable(false);
         this.jtfEmailPessoa.setEditable(false);
-        
+
     }//GEN-LAST:event_formWindowOpened
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
+        //encerra o programa
         this.dispose();
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_jMenuSairActionPerformed
 
+    /**
+     * Este método recebe um evento disparado quando um usuário do sistema clica
+     * em alguma das linhas da tabela paciente. Este método preenche os campos
+     * de endereço, dados pessoais, telefone e email com as informações do
+     * paciente baseado na linha selecionada na tabela paciente
+     */
     private void jTablePacienteMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePacienteMouseReleased
+        //recebendo o índice da linha selecionada pelo usuário
         int selectedRow = this.jTablePaciente.getSelectedRow();
 
+        //verificando se realmente alguma linha foi selecionada, o índice começa em 0
         if (selectedRow > - 1) {
+            //passando por referência o objeto paciente armazenado na última coluna da tabela Paciente
             Paciente paciente = (Paciente) this.jTablePaciente.getValueAt(selectedRow, 3);
 
-            Endereco endereco = paciente.getPessoa().getEnderecoPessoa();
-            this.jtfLogradouroEndedereco.setText(endereco.getLogradouroEndereco());
-            this.jtfNumEndereco.setText(endereco.getNumeroEndereco());
-            this.jtfCompEndereco.setText(endereco.getComplementoEndereco() + "");
-            this.jtfBairroEndereco.setText(endereco.getBairroEndereco());
-            this.jtfCidadeEndereco.setText(endereco.getCidadeEndereco());
-            this.jtfCepEndereco.setText(endereco.getCEPEndereco());
-            this.jcbEstadoEndereco.setSelectedItem(endereco.getEstadoEndereco());
-
-            Telefone telefone = paciente.getPessoa().getTelefonePessoa();
-
-            this.jtfTelefoneResidencial.setText(telefone.getTelefoneResidencial());
-            this.jtfTelefoneComercial.setText(telefone.getTelefoneComercial());
-            this.jtfTelefoneCelular.setText(telefone.getTelefoneCelular());
-
+            ////passando por referência o objeto pessoa contido no objeto paciente
             Pessoa pessoa = paciente.getPessoa();
+
+            ////preenchendo os campos da pessoa
             this.jtfDataNascimentoPessoa.setText(pessoa.getDataNacimentoPessoa().toString());
             this.jtfRgPessoa.setText(pessoa.getRgPessoa());
             this.jtfEmissorRgPessoa.setText(pessoa.getOrgaoEmissorRGPessoa());
@@ -664,37 +682,73 @@ public class JFramePrincipal extends javax.swing.JFrame {
             this.jcbEscolaridadePaciente.setSelectedItem(paciente.getEscolaridadePaciente());
             this.jtfEmailPessoa.setText(pessoa.getEmailPessoa().getEnderecoEmail());
 
+            //passando por referência o objeto endereco contido no objeto paciente
+            Endereco endereco = pessoa.getEnderecoPessoa();
+
+            //preenchendo os campos do endereço
+            this.jtfLogradouroEndedereco.setText(endereco.getLogradouroEndereco());
+            this.jtfNumEndereco.setText(endereco.getNumeroEndereco());
+            this.jtfCompEndereco.setText(endereco.getComplementoEndereco() + "");
+            this.jtfBairroEndereco.setText(endereco.getBairroEndereco());
+            this.jtfCidadeEndereco.setText(endereco.getCidadeEndereco());
+            this.jtfCepEndereco.setText(endereco.getCEPEndereco());
+            this.jcbEstadoEndereco.setSelectedItem(endereco.getEstadoEndereco());
+
+            //passando por referência o objeto telefone contido no objeto paciente
+            Telefone telefone = pessoa.getTelefonePessoa();
+
+            //preenchendo os campos do telefone
+            this.jtfTelefoneResidencial.setText(telefone.getTelefoneResidencial());
+            this.jtfTelefoneComercial.setText(telefone.getTelefoneComercial());
+            this.jtfTelefoneCelular.setText(telefone.getTelefoneCelular());
+
         }
     }//GEN-LAST:event_jTablePacienteMouseReleased
 
+    /**
+     * Este método recebe um evento disparado quando um usuário do sistema
+     * digita no campo de busca por paciente. Este método filtra os resultados
+     * encontrados de acordo com o texto digitado, exibindo na tabela paciente
+     * apenas registros que contenham parte ou todo do texto digitado
+     */
     private void jtfPesquisaPacienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPesquisaPacienteKeyReleased
-        String campoPesquisa = this.jtfPesquisaPaciente.getText(); 
+        //salvando em uma String o texto digitado no campo de pesquisa de paciente
+        String campoPesquisa = this.jtfPesquisaPaciente.getText();
 
+        //declarando uma lista de pacientes e passando o valor null;
         ArrayList<Paciente> listaPaciente = null;
-        
+
+        //buscando a lista de pacientes no banco
         try {
+            //salvando o resultado da busca na lista de pacientes
             listaPaciente = SistemaControle.pacienteControle().listarPaciente();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this,"Erro na leitura do banco de dados.\n"
+            //exibindo uma mensagem caso seja disparada uma exceção
+            JOptionPane.showMessageDialog(this, "Erro na leitura do banco de dados.\n"
                     + "Por favor, entre em contato com o suporte.\n"
                     + "Informações sobre o erro: " + ex.getMessage());
         }
 
+        //verificando se a lista de paciente foi preenchida ou se continua vazia (null)
         if (listaPaciente != null) {
+            //pegando o modelo da tabela paciente
             DefaultTableModel tabelaPaciente
                     = (DefaultTableModel) this.jTablePaciente.getModel();
-            
-            tabelaPaciente.setNumRows(0);            
-            
+
+            //setando o número de linhas da tabela para zero
+            tabelaPaciente.setNumRows(0);
+
+            //loop que varre a lista de pacientes e busca. em cada paciente da lista, pelo texto digitado no campo de pesquisa 
             for (int i = 0; i < listaPaciente.size(); i++) {
                 Paciente paciente = listaPaciente.get(i);
 
                 String prontuarioPaciente = String.valueOf(paciente.getProntuarioPaciente());
                 String nomePaciente = paciente.getPessoa().getNomePessoa().toLowerCase();
-                
+
+                //se o nome do paciente ou o prontuário do mesmo possuem parte ou todo do texto digitado, o paciente é inserido na tabela paciente
                 if (nomePaciente.contains(campoPesquisa)
                         || prontuarioPaciente.contains(campoPesquisa)) {
-                    
+
                     tabelaPaciente.addRow(new Object[]{
                         paciente.getProntuarioPaciente(),
                         paciente.getPessoa().getNomePessoa(),
@@ -702,9 +756,12 @@ public class JFramePrincipal extends javax.swing.JFrame {
                         paciente
                     });
                 }
-                
+
+                //setando o novo modelo da tabela paciente
                 this.jTablePaciente.setModel(tabelaPaciente);
+                //indicando ser possivel selecionar uma linha da tabela
                 this.jTablePaciente.setRowSelectionAllowed(true);
+                //indicando NÃO ser possível a selecao de uma coluna da tabela
                 this.jTablePaciente.setColumnSelectionAllowed(false);
             }
         }
@@ -712,19 +769,32 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jtfPesquisaPacienteKeyReleased
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    /**
+     * Este método recebe um evento disparado quando um usuário do sistema clica
+     * no botão editar paciente. Este método invoca a abertura da janela de
+     * atualização do paciente
+     */
+    private void jbEditarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditarPacienteActionPerformed
+        //lendo o índice da linha selecionada pelo usuário
         int selectedRow = this.jTablePaciente.getSelectedRow();
-        
+
+        //verificando se realmente alguma linha foi selecionada, o índice começa em 0
         if (selectedRow > -1) {
+            //passando por referência o objeto do tipo Paciente contido na última coluna da tabela
             Paciente paciente = (Paciente) this.jTablePaciente.getValueAt(selectedRow, 3);
-            
+
+            //instanciando a janela de atualizar paciente
             AtualizarPaciente atualizarPaciente = new AtualizarPaciente(this, true, paciente);
+            //exibindo a tela para o usuário
             atualizarPaciente.setVisible(true);
+            //após o fechamento da janela preenchemos novamente a tabela usuario
             this.preencherTabelaPaciente();
         } else {
+            //caso o usuário tenha clicado no botão editar sem antes selecionar um paciente na tabela de paciente
+            //é exibida a mensagem abaixo.
             JOptionPane.showMessageDialog(this, "Favor escolher o paciente que deseja editar (:");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jbEditarPacienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -746,7 +816,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(JFramePrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         //</editor-fold>
 
         /* Create and display the form */
@@ -756,7 +826,6 @@ public class JFramePrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -782,8 +851,8 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuConfig;
     private javax.swing.JMenu jMenuIniciar;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuSair;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -793,6 +862,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTablePaciente;
+    private javax.swing.JButton jbEditarPaciente;
     private javax.swing.JComboBox<String> jcbEscolaridadePaciente;
     private javax.swing.JComboBox<String> jcbEstadoCivilPessoa;
     private javax.swing.JComboBox<String> jcbEstadoEndereco;
@@ -815,6 +885,9 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField jtfTelefoneResidencial;
     // End of variables declaration//GEN-END:variables
 
+    /*
+    *   Método que preenche a tabela paciente
+     */
     private void preencherTabelaPaciente() {
         try {
             ArrayList<Paciente> listaPaciente = SistemaControle.pacienteControle().listarPaciente();
@@ -840,7 +913,13 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 });
             }
 
+            //setando o novo modelo da tabela paciente
             this.jTablePaciente.setModel(tabelaPaciente);
+            //indicando ser possivel selecionar uma linha da tabela
+            this.jTablePaciente.setRowSelectionAllowed(true);
+            //indicando NÃO ser possível a selecao de uma coluna da tabela
+            this.jTablePaciente.setColumnSelectionAllowed(false);
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Erro de leitura dos dados. Favor entrar em"
                     + "contato com o suporte.\nInformação sobre o erro:" + ex.getMessage());

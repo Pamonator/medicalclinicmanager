@@ -15,13 +15,27 @@ import java.sql.SQLException;
  */
 public class EmailControle extends QueryHelper {
     
-    public String gerarQueryCadastrarEmail(Email email) throws SQLException {
+    /**
+     * Método que prepara uma query SQL para o cadastro de um email
+     * junto ao banco de dados.
+     * @param email - o objeto do tipo email a ser gravado no banco
+     * @return uma String contendo a query SQL
+     */
+    public String gerarQueryCadastrarEmail(Email email) {
         this.query = "INSERT INTO email VALUES (" + email.getIdPessoa()
                 + ", '" +email.getEnderecoEmail() + "'); ";     
         
         return this.query;
     }    
     
+    /**
+     * Método responsável pela persistência de um objeto do tipo Email
+     * junto ao banco de dados.
+     * @param email - o objeto do tipo email a ser gravado no banco
+     * @return True se os dados foram gravados corretamente ou 
+     * False se a gravação falhar
+     * @throws SQLException
+     */
     public boolean cadastrarEmail(Email email) throws SQLException {
         this.query = "INSERT INTO email VALUES (?, ?)";
         
@@ -38,7 +52,13 @@ public class EmailControle extends QueryHelper {
         return this.executeUpdate();
     }
     
-    public String gerarQueryAtualizarEmail(Email email) throws SQLException {
+    /**
+     * Método que prepara uma query SQL para a atualização(edição)
+     * de um email previamente cadastrado no banco de dados.
+     * @param email - o objeto do tipo email a ser atualizado no banco
+     * @return uma String contendo a query SQL
+     */
+    public String gerarQueryAtualizarEmail(Email email) {
         this.query = "UPDATE email SET enderecoEmail = '" + email.getEnderecoEmail()
                 + "' WHERE idPessoa = " + email.getIdPessoa() + ";";
         

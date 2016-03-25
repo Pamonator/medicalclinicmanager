@@ -6,7 +6,6 @@
 package br.com.go.mcm.control;
 
 import br.com.go.mcm.model.Telefone;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
@@ -15,6 +14,12 @@ import java.sql.SQLException;
  */
 public class TelefoneControle extends QueryHelper {
     
+    /**
+     * Método que prepara uma query SQL para o cadastro de um telefone
+     * junto ao banco de dados.
+     * @param telefone - o objeto do tipo Telefone a ser gravado no banco
+     * @return uma String contendo a query SQL
+     */
     public String gerarQuerycadastrarTelefone(Telefone telefone) throws SQLException {
         this.query = "INSERT INTO telefone VALUES ("
                 + telefone.getIdPessoa() + ", "
@@ -25,6 +30,14 @@ public class TelefoneControle extends QueryHelper {
         return this.query;
     }
     
+    /**
+     * Método responsável pela persistência de um objeto do tipo Paciente
+     * junto ao banco de dados.
+     * @param telefone - o objeto do tipo Telefone a ser gravado no banco
+     * @return True se os dados foram gravados corretamente ou 
+     * False se a gravação falhar
+     * @throws SQLException
+     */
     public boolean cadastrarTelefone(Telefone telefone) throws SQLException {
         this.query = "INSERT INTO telefone VALUES (?, ?, ?, ?)";
 
@@ -38,7 +51,13 @@ public class TelefoneControle extends QueryHelper {
         return this.executeUpdate();
     }
     
-    public String gerarQueryAtualizarTelefone(Telefone telefone) throws SQLException {
+    /**
+     * Método que prepara uma query SQL para a edição do cadastro
+     * de um paciente previamente cadastrado no banco de dados.
+     * @param telefone - o objeto do tipo Telefone que será atualizado no banco
+     * @return uma String contendo a query SQL
+     */
+    public String gerarQueryAtualizarTelefone(Telefone telefone) {
         this.query = "UPDATE telefone SET telefoneResidencial = '"
                 + telefone.getTelefoneResidencial() + "', "
                 + "telefoneComercial = '" + telefone.getTelefoneComercial() + "', "
@@ -47,11 +66,5 @@ public class TelefoneControle extends QueryHelper {
         
         return this.query;
     }
-
-    public boolean apagarTelefone(int idTelefone) throws SQLException{
-        
-        
-        return this.executeUpdate();
-    }
-    
+   
 }

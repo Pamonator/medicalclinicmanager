@@ -94,9 +94,9 @@ public class CadastrarPaciente extends javax.swing.JDialog {
         jLabel20 = new javax.swing.JLabel();
         jtfTelefoneCelular = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jbLimparCampos = new javax.swing.JButton();
+        jbCadastrarPaciente = new javax.swing.JButton();
+        jbSair = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
@@ -410,24 +410,24 @@ public class CadastrarPaciente extends javax.swing.JDialog {
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton1.setText("Limpar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbLimparCampos.setText("Limpar");
+        jbLimparCampos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbLimparCamposActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Cadastrar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jbCadastrarPaciente.setText("Cadastrar");
+        jbCadastrarPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jbCadastrarPacienteActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Fechar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jbSair.setText("Fechar");
+        jbSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jbSairActionPerformed(evt);
             }
         });
 
@@ -437,11 +437,11 @@ public class CadastrarPaciente extends javax.swing.JDialog {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbLimparCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbCadastrarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -449,9 +449,9 @@ public class CadastrarPaciente extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jbLimparCampos)
+                    .addComponent(jbCadastrarPaciente)
+                    .addComponent(jbSair))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -532,32 +532,48 @@ public class CadastrarPaciente extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        //título da janela
         this.setTitle("Cadastrar Paciente");
+        //localização da janela (centro do monitor)
         this.setLocationRelativeTo(null);
+        //ícone da janela
         URL url = this.getClass().getResource("nurse-16.png");
         Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(url);
         this.setIconImage(iconeTitulo);
         
     }//GEN-LAST:event_formWindowOpened
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jbSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSairActionPerformed
+        //fecha a janela
         this.dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jbSairActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    /*
+        Método que é chamado qd o botão cadastrar paciente é pressionado
+        
+        obs - é preciso implementar a verificação de preenchimento dos campos!!!!
+    
+    */
+    private void jbCadastrarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarPacienteActionPerformed
+        //lendo a data do jformattedTextField e guardando em uma string        
         String aux = this.jFormattedTextField1.getText();
 
+        //dividindo a string, removendo o símbolo "/" da formatação da data
         String[] split = aux.split("/");
 
+        //instanciando um objeto do tipo Calendar com a data digitada no formulário
         Calendar calendar;
         calendar = new GregorianCalendar(Integer.parseInt(split[2]),
                 Integer.parseInt(split[1]) - 1,
                 Integer.parseInt(split[0])
         );
 
+        //tranformando o objeto Calendar em Date (Date é o formato aceito pelo banco)
         Date dataNascimentoPessoa = new Date(calendar.getTimeInMillis());
 
+        //instanciando a pessoa a ser caastrada no banco(deve ser gravada primeiro!!)
         Pessoa pessoa = new Pessoa.Builder()
                 .nomePessoa(this.jtfNomePessoa.getText())
                 .sexoPessoa(this.jcbSexoPessoa.getSelectedItem().toString().charAt(0))
@@ -567,15 +583,21 @@ public class CadastrarPaciente extends javax.swing.JDialog {
                 .dataNacimentoPessoa(dataNascimentoPessoa)
                 .contruir();
 
+        //bloco que executa a instrução SQL e captura uma possível exceção
         try {
+            //armazenando o resultado da query SQL que cadastra uma pessoa
             boolean cadastrarPessoa = SistemaControle.pessoaControle().cadastrarPessoa(pessoa);
 
+            //caso o cadastro tenha sido realizado com sucesso, damos continuidade à gravação dos demais dados
+            //(endereco, telefone, email, paciente)
             if (cadastrarPessoa) {
+                //recuperando do banco o idPessoa (primaryKey auto_increment) que foi gravada no banco
                 pessoa.setIdPessoa(SistemaControle
                         .pessoaControle()
                         .getUltimoIdCadastrado("pessoa", "idPessoa")
                 );
 
+                //instanciando o objeto Endereco a partir dos dados digitados pelo usuário
                 Endereco endereco = new Endereco.Builder()
                         .idPessoa(pessoa.getIdPessoa())
                         .logradouroEndereco(this.jtfLogradouroEndereco.getText())
@@ -587,16 +609,20 @@ public class CadastrarPaciente extends javax.swing.JDialog {
                         .CEPEndereco(this.jtfCepEndereco.getText())
                         .construir();
 
+                //instanciando o objeto Telefone a partir dos dados digitados pelo usuário
                 Telefone telefone = new Telefone(pessoa.getIdPessoa(),
                         this.jtfTelefoneResidencial.getText(), 
                         this.jtfTelefoneComercial.getText(), 
                         this.jtfTelefoneCelular.getText()
                 );
-                
+
+                //instanciando o objeto Email a partir dos dados digitados pelo usuário                
                 Email email = new Email(pessoa.getIdPessoa(), 
                         this.jtfEmailPessoa.getText()
                 );
                 
+                //instanciando o objeto Paciente a partir dos dados digitados pelo usuário
+
                 Paciente paciente = new Paciente.Builder()
                         .prontuarioPaciente(Integer.parseInt(this.jtfProntuarioPaciente.getText()))
                         .pessoa(pessoa)
@@ -605,35 +631,43 @@ public class CadastrarPaciente extends javax.swing.JDialog {
                         .escolaridadePaciente(this.jcbEscolaridade.getSelectedItem().toString())
                         .contruir();
                 
+                //declarando e instanciando o ArrayList que receberá a lista das queries que serão executadas "em bloco"
                 ArrayList<String> queryList = new ArrayList<>();
 
+                //gerando as queries e adicionando as mesmas à lista
                 queryList.add(SistemaControle.enderecoControle().gerarQueryCadastrarEndereco(endereco));
                 queryList.add(SistemaControle.telefoneControle().gerarQuerycadastrarTelefone(telefone));
                 queryList.add(SistemaControle.emailControle().gerarQueryCadastrarEmail(email));
                 queryList.add(SistemaControle.pacienteControle().gerarQuerycadastrarPaciente(paciente));
 
+                //executando as varias queries em um bloco
                 boolean excuteTransaction = SistemaControle.pacienteControle().excuteTransaction(queryList);
                 
+                //exibindo as mensagens de sucesso ou erro da execução do bloco de queries SQL
                 if (excuteTransaction) {
                     JOptionPane.showMessageDialog(this, "Paciente cadastrado com sucesso!!");
+                    //fecha a janela
                     this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(this, "Falha no cadastro! Favor "
                             + "entrar em contato com o suporte.\nInformações sobre o erro: Desconhecidas");
+                    //caso o bloco de queries nao tenha sido executado, removemos a pessoa previamente cadastrada
                     SistemaControle.pessoaControle().apagarPessoa(pessoa.getIdPessoa());
+                    //fecha a janela
                     this.dispose();
                 }
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Erro de gravação dos dados. Favor entrar em"
                     + "contato com o suporte.\nInformação sobre o erro:" + ex.getMessage());
+            //fecha a janela
             this.dispose();
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jbCadastrarPacienteActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimparCamposActionPerformed
         this.limparCampos();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jbLimparCamposActionPerformed
 
     /**
      * @param args the command line arguments
@@ -672,9 +706,6 @@ public class CadastrarPaciente extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -705,6 +736,9 @@ public class CadastrarPaciente extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JButton jbCadastrarPaciente;
+    private javax.swing.JButton jbLimparCampos;
+    private javax.swing.JButton jbSair;
     private javax.swing.JComboBox<String> jcbEscolaridade;
     private javax.swing.JComboBox<String> jcbEstadoCivilPessoa;
     private javax.swing.JComboBox<String> jcbEstadoEndereco;
@@ -727,6 +761,10 @@ public class CadastrarPaciente extends javax.swing.JDialog {
     private javax.swing.JTextField jtfTelefoneResidencial;
     // End of variables declaration//GEN-END:variables
 
+    /*
+        método que apaga o texto de todos os campos preenchidos do formulário    
+    */
+  
     private void limparCampos() {
         this.jtfBairroEndereco.setText("");
         this.jtfCepEndereco.setText("");
