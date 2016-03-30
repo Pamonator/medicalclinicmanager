@@ -51,4 +51,11 @@ public class SistemaControle {
         return new EmailControle();
     }
         
+    /**
+     *
+     * @return
+     */
+    public static MedicoControle medicoControle() {
+        return new MedicoControle();
+    }
 }
