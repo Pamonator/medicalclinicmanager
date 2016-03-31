@@ -58,4 +58,8 @@ public class SistemaControle {
     public static MedicoControle medicoControle() {
         return new MedicoControle();
     }
+    
+    public static FuncionarioControle funcionarioControle() {
+        return new FuncionarioControle();
+    }
 }

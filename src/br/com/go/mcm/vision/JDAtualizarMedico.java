@@ -8,7 +8,7 @@ package br.com.go.mcm.vision;
 import br.com.go.mcm.control.SistemaControle;
 import br.com.go.mcm.model.Email;
 import br.com.go.mcm.model.Endereco;
-import br.com.go.mcm.model.Paciente;
+import br.com.go.mcm.model.Medico;
 import br.com.go.mcm.model.Pessoa;
 import br.com.go.mcm.model.Telefone;
 import java.awt.Image;
@@ -25,9 +25,9 @@ import javax.swing.JOptionPane;
  *
  * @author gilca
  */
-public class AtualizarPaciente extends javax.swing.JDialog {
+public class JDAtualizarMedico extends javax.swing.JDialog {
 
-    private Paciente paciente;
+    private Medico medico;
 
     /**
      * Creates new form CadastrarPaciente
@@ -35,7 +35,7 @@ public class AtualizarPaciente extends javax.swing.JDialog {
      * @param parent
      * @param modal
      */
-    private AtualizarPaciente(java.awt.Frame parent, boolean modal) {
+    public JDAtualizarMedico(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -45,13 +45,12 @@ public class AtualizarPaciente extends javax.swing.JDialog {
      *
      * @param parent
      * @param modal
-     * @param paciente
+     * @param medico
      */
-    public AtualizarPaciente(java.awt.Frame parent, boolean modal, Paciente paciente) {
+    public JDAtualizarMedico(java.awt.Frame parent, boolean modal, Medico medico) {
         super(parent, modal);
-        this.paciente = paciente;
         initComponents();
-        this.preencherCamposPaciente();
+        this.medico = medico;
     }
 
     /**
@@ -76,17 +75,15 @@ public class AtualizarPaciente extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         jtfCpfPessoa = new javax.swing.JTextField();
         jtfEmissorRgPessoa = new javax.swing.JTextField();
-        jLabel17 = new javax.swing.JLabel();
-        jcbEstadoCivilPessoa = new javax.swing.JComboBox<>();
-        jcbEscolaridade = new javax.swing.JComboBox<>();
-        jLabel14 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jtfProfissaoPaciente = new javax.swing.JTextField();
+        jtfEspecialidadeMedico = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         jtfEmailPessoa = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
-        jtfProntuarioPaciente = new javax.swing.JTextField();
+        jtfCrmMedico = new javax.swing.JTextField();
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        jLabel14 = new javax.swing.JLabel();
+        jcbStatusMedico = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         jtfCepEndereco = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -110,8 +107,9 @@ public class AtualizarPaciente extends javax.swing.JDialog {
         jLabel20 = new javax.swing.JLabel();
         jtfTelefoneCelular = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jbLimparCampos = new javax.swing.JButton();
+        jbCadastrarMedico = new javax.swing.JButton();
+        jbSair = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
@@ -157,26 +155,16 @@ public class AtualizarPaciente extends javax.swing.JDialog {
 
         jtfEmissorRgPessoa.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
-        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel17.setText("Estado Civil:");
-
-        jcbEstadoCivilPessoa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solteiro(a)", "Casado(a)", "Divorciado(a)", "Disquitado(a)", "Viúvo(a)", "Outros" }));
-
-        jcbEscolaridade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sem Formação", "Fundamental", "Médio", "Superior" }));
-
-        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel14.setText("Escolaridade:");
-
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel12.setText("Profissão:");
+        jLabel12.setText("Especialidade:");
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel21.setText("Email:");
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel23.setText("Prontuário:");
+        jLabel23.setText("CRM:");
 
-        jtfProntuarioPaciente.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jtfCrmMedico.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         try {
             jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -184,6 +172,10 @@ public class AtualizarPaciente extends javax.swing.JDialog {
             ex.printStackTrace();
         }
         jFormattedTextField1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        jLabel14.setText("Status:");
+
+        jcbStatusMedico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ativo", "Inativo" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -193,46 +185,42 @@ public class AtualizarPaciente extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextField1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jcbSexoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jcbEscolaridade, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfRgPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfEmissorRgPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel17)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jcbEstadoCivilPessoa, 0, 127, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel23)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfProntuarioPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtfCrmMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfNomePessoa))
+                        .addComponent(jtfNomePessoa)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jcbSexoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfRgPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfEmissorRgPessoa, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfEspecialidadeMedico)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jcbStatusMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfCpfPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfProfissaoPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jtfCpfPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel21)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jtfEmailPessoa)))
@@ -246,36 +234,39 @@ public class AtualizarPaciente extends javax.swing.JDialog {
                         .addGap(49, 49, 49)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addComponent(jtfRgPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel15)
+                            .addComponent(jtfEmissorRgPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jtfNomePessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel23)
-                            .addComponent(jtfProntuarioPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel14)
-                            .addComponent(jcbEscolaridade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfCrmMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jcbSexoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
+                            .addComponent(jLabel3))))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel21)
+                        .addComponent(jtfEmailPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel16)
+                        .addComponent(jtfCpfPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel17)
-                            .addComponent(jcbEstadoCivilPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addComponent(jtfRgPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel15)
-                            .addComponent(jtfEmissorRgPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel21)
-                    .addComponent(jtfEmailPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfProfissaoPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16)
-                    .addComponent(jtfCpfPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtfEspecialidadeMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jcbStatusMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -425,17 +416,24 @@ public class AtualizarPaciente extends javax.swing.JDialog {
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton2.setText("Salvar Alterações");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jbLimparCampos.setText("Limpar");
+        jbLimparCampos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jbLimparCamposActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Cancelar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jbCadastrarMedico.setText("Cadastrar");
+        jbCadastrarMedico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jbCadastrarMedicoActionPerformed(evt);
+            }
+        });
+
+        jbSair.setText("Fechar");
+        jbSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSairActionPerformed(evt);
             }
         });
 
@@ -444,10 +442,12 @@ public class AtualizarPaciente extends javax.swing.JDialog {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jbLimparCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jbCadastrarMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -455,8 +455,9 @@ public class AtualizarPaciente extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jbLimparCampos)
+                    .addComponent(jbCadastrarMedico)
+                    .addComponent(jbSair))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -472,7 +473,7 @@ public class AtualizarPaciente extends javax.swing.JDialog {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addContainerGap())
@@ -494,16 +495,17 @@ public class AtualizarPaciente extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -536,35 +538,52 @@ public class AtualizarPaciente extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        this.setTitle("Atualizar Paciente");
+        //título da janela
+        this.setTitle("Atualizar Médico");
+        //localização da janela (centro do monitor)
         this.setLocationRelativeTo(null);
+        //ícone da janela
         URL url = this.getClass().getResource("nurse-16.png");
         Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(url);
         this.setIconImage(iconeTitulo);
-        this.jtfProntuarioPaciente.setEditable(false);
+
+        //preenche os campos do formulário com os dados do médico 
+        this.preencherCamposMedico();
 
     }//GEN-LAST:event_formWindowOpened
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jbSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSairActionPerformed
+        //fecha a janela
         this.dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jbSairActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    /*
+        Método que é chamado qd o botão cadastrar paciente é pressionado
+        
+        obs - é preciso implementar a verificação de preenchimento dos campos!!!!
+    
+     */
+    private void jbCadastrarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarMedicoActionPerformed
+        //lendo a data do jformattedTextField e guardando em uma string        
         String aux = this.jFormattedTextField1.getText();
 
+        //dividindo a string, removendo o símbolo "/" da formatação da data
         String[] split = aux.split("/");
 
+        //instanciando um objeto do tipo Calendar com a data digitada no formulário
         Calendar calendar;
-        calendar = new GregorianCalendar(Integer.parseInt(split[2]),
-                Integer.parseInt(split[1]) - 1,
-                Integer.parseInt(split[0])
-        );
+        int dia = Integer.parseInt(split[2]);
+        int mes = Integer.parseInt(split[1]) - 1;
+        int ano = Integer.parseInt(split[0]);
+        calendar = new GregorianCalendar(dia, mes, ano);
 
+        //tranformando o objeto Calendar em Date (Date é o formato aceito pelo banco)
         Date dataNascimentoPessoa = new Date(calendar.getTimeInMillis());
 
+        //instanciando a pessoa a ser cadastrada no banco(deve ser gravada primeiro!!)
         Pessoa pessoa = new Pessoa.Builder()
-                .idPessoa(this.paciente.getPessoa().getIdPessoa())
                 .nomePessoa(this.jtfNomePessoa.getText())
                 .sexoPessoa(this.jcbSexoPessoa.getSelectedItem().toString().charAt(0))
                 .rgPessoa(this.jtfRgPessoa.getText())
@@ -573,10 +592,21 @@ public class AtualizarPaciente extends javax.swing.JDialog {
                 .dataNacimentoPessoa(dataNascimentoPessoa)
                 .contruir();
 
+        //bloco que executa a instrução SQL e captura uma possível exceção
         try {
-            boolean atualizarPessoa = SistemaControle.pessoaControle().atualizarPessoa(pessoa);
+            //armazenando o resultado da query SQL que cadastra uma pessoa
+            boolean cadastrarPessoa = SistemaControle.pessoaControle().cadastrarPessoa(pessoa);
 
-            if (atualizarPessoa) {
+            //caso o cadastro tenha sido realizado com sucesso, damos continuidade à gravação dos demais dados
+            //(endereco, telefone, email, paciente)
+            if (cadastrarPessoa) {
+                //recuperando do banco o idPessoa (primaryKey auto_increment) que foi gravada no banco
+                pessoa.setIdPessoa(SistemaControle
+                        .pessoaControle()
+                        .getUltimoIdCadastrado("pessoa", "idPessoa")
+                );
+
+                //instanciando o objeto Endereco a partir dos dados digitados pelo usuário
                 Endereco endereco = new Endereco.Builder()
                         .idPessoa(pessoa.getIdPessoa())
                         .logradouroEndereco(this.jtfLogradouroEndereco.getText())
@@ -588,49 +618,63 @@ public class AtualizarPaciente extends javax.swing.JDialog {
                         .CEPEndereco(this.jtfCepEndereco.getText())
                         .construir();
 
+                //instanciando o objeto Telefone a partir dos dados digitados pelo usuário
                 Telefone telefone = new Telefone(pessoa.getIdPessoa(),
                         this.jtfTelefoneResidencial.getText(),
                         this.jtfTelefoneComercial.getText(),
                         this.jtfTelefoneCelular.getText()
                 );
 
+                //instanciando o objeto Email a partir dos dados digitados pelo usuário                
                 Email email = new Email(pessoa.getIdPessoa(),
                         this.jtfEmailPessoa.getText()
                 );
 
-                this.paciente = new Paciente.Builder()
-                        .prontuarioPaciente(Integer.parseInt(this.jtfProntuarioPaciente.getText()))
-                        .pessoa(pessoa)
-                        .estadoCivilPaciente(this.jcbEstadoCivilPessoa.getSelectedItem().toString())
-                        .profissaoPaciente(this.jtfProfissaoPaciente.getText())
-                        .escolaridadePaciente(this.jcbEscolaridade.getSelectedItem().toString())
-                        .contruir();
+                //instanciando o objeto Medico a partir dos dados digitados pelo usuário
+                this.medico = new Medico(this.medico.getIdMedico(),
+                        this.jtfCrmMedico.getText(),
+                        this.jtfEspecialidadeMedico.getText(),
+                        pessoa,
+                        this.jcbStatusMedico.getSelectedItem().toString().charAt(0)
+                );
 
+                //declarando e instanciando o ArrayList que receberá a lista das queries que serão executadas "em bloco"
                 ArrayList<String> queryList = new ArrayList<>();
 
+                //gerando as queries e adicionando as mesmas à lista
                 queryList.add(SistemaControle.enderecoControle().gerarQueryAtualizarEndereco(endereco));
                 queryList.add(SistemaControle.telefoneControle().gerarQueryAtualizarTelefone(telefone));
                 queryList.add(SistemaControle.emailControle().gerarQueryAtualizarEmail(email));
-                queryList.add(SistemaControle.pacienteControle().gerarQueryAtualizarPaciente(this.paciente));
+                queryList.add(SistemaControle.medicoControle().gerarQueryAtualizarMedico(medico));
 
-                boolean excuteTransaction = SistemaControle.pacienteControle().excuteTransaction(queryList);
+                //executando as varias queries em um bloco
+                boolean excuteTransaction = SistemaControle.medicoControle().excuteTransaction(queryList);
 
+                //exibindo as mensagens de sucesso ou erro da execução do bloco de queries SQL
                 if (excuteTransaction) {
-                    JOptionPane.showMessageDialog(this, "Paciente cadastrado com sucesso!!");
+                    JOptionPane.showMessageDialog(this, "Médico cadastrado com sucesso!!");
+                    //fecha a janela
                     this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(this, "Falha no cadastro! Favor "
                             + "entrar em contato com o suporte.\nInformações sobre o erro: Desconhecidas");
+                    //caso o bloco de queries nao tenha sido executado, removemos a pessoa previamente cadastrada
                     SistemaControle.pessoaControle().apagarPessoa(pessoa.getIdPessoa());
+                    //fecha a janela
                     this.dispose();
                 }
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Erro de gravação dos dados. Favor entrar em"
                     + "contato com o suporte.\nInformação sobre o erro:" + ex.getMessage());
+            //fecha a janela
             this.dispose();
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jbCadastrarMedicoActionPerformed
+
+    private void jbLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimparCamposActionPerformed
+        this.limparCampos();
+    }//GEN-LAST:event_jbLimparCamposActionPerformed
 
     /**
      * @param args the command line arguments
@@ -649,8 +693,12 @@ public class AtualizarPaciente extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AtualizarPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDAtualizarMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -660,7 +708,7 @@ public class AtualizarPaciente extends javax.swing.JDialog {
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(() -> {
-            AtualizarPaciente dialog = new AtualizarPaciente(new javax.swing.JFrame(), true);
+            JDAtualizarMedico dialog = new JDAtualizarMedico(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
@@ -672,8 +720,6 @@ public class AtualizarPaciente extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -683,7 +729,6 @@ public class AtualizarPaciente extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
@@ -704,28 +749,33 @@ public class AtualizarPaciente extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JComboBox<String> jcbEscolaridade;
-    private javax.swing.JComboBox<String> jcbEstadoCivilPessoa;
+    private javax.swing.JButton jbCadastrarMedico;
+    private javax.swing.JButton jbLimparCampos;
+    private javax.swing.JButton jbSair;
     private javax.swing.JComboBox<String> jcbEstadoEndereco;
     private javax.swing.JComboBox<String> jcbSexoPessoa;
+    private javax.swing.JComboBox<String> jcbStatusMedico;
     private javax.swing.JTextField jtfBairroEndereco;
     private javax.swing.JTextField jtfCepEndereco;
     private javax.swing.JTextField jtfCidadeEndereco;
     private javax.swing.JTextField jtfCompEndereco;
     private javax.swing.JTextField jtfCpfPessoa;
+    private javax.swing.JTextField jtfCrmMedico;
     private javax.swing.JTextField jtfEmailPessoa;
     private javax.swing.JTextField jtfEmissorRgPessoa;
+    private javax.swing.JTextField jtfEspecialidadeMedico;
     private javax.swing.JTextField jtfLogradouroEndereco;
     private javax.swing.JTextField jtfNomePessoa;
     private javax.swing.JTextField jtfNumeroEndereco;
-    private javax.swing.JTextField jtfProfissaoPaciente;
-    private javax.swing.JTextField jtfProntuarioPaciente;
     private javax.swing.JTextField jtfRgPessoa;
     private javax.swing.JTextField jtfTelefoneCelular;
     private javax.swing.JTextField jtfTelefoneComercial;
     private javax.swing.JTextField jtfTelefoneResidencial;
     // End of variables declaration//GEN-END:variables
 
+    /*
+        método que apaga o texto de todos os campos preenchidos do formulário    
+     */
     private void limparCampos() {
         this.jtfBairroEndereco.setText("");
         this.jtfCepEndereco.setText("");
@@ -737,78 +787,69 @@ public class AtualizarPaciente extends javax.swing.JDialog {
         this.jtfLogradouroEndereco.setText("");
         this.jtfNomePessoa.setText("");
         this.jtfNumeroEndereco.setText("");
-        this.jtfProfissaoPaciente.setText("");
-        this.jtfProntuarioPaciente.setText("");
+        this.jtfEspecialidadeMedico.setText("");
+        this.jtfCrmMedico.setText("");
         this.jtfRgPessoa.setText("");
         this.jtfTelefoneResidencial.setText("");
         this.jtfTelefoneComercial.setText("");
         this.jtfTelefoneCelular.setText("");
 
-        this.jcbEscolaridade.setSelectedIndex(0);
-        this.jcbEstadoCivilPessoa.setSelectedIndex(0);
         this.jcbEstadoEndereco.setSelectedIndex(0);
         this.jcbSexoPessoa.setSelectedIndex(0);
 
         this.jFormattedTextField1.setText("");
     }
 
-    private void preencherCamposPaciente() {
-        Pessoa pessoa;
-        Endereco endereco;
-        Telefone telefone;
-        Email email;
+    public void preencherCamposMedico() {
+        Pessoa pessoa = this.medico.getPessoa();
+        Endereco endereco = pessoa.getEnderecoPessoa();
+        Telefone telefone = pessoa.getTelefonePessoa();
+        Email email = pessoa.getEmailPessoa();
 
-        if (this.paciente != null) {
-            pessoa = this.paciente.getPessoa();
-            endereco = pessoa.getEnderecoPessoa();
-            telefone = pessoa.getTelefonePessoa();
-            email = pessoa.getEmailPessoa();
+        this.jtfBairroEndereco.setText(endereco.getBairroEndereco());
+        this.jtfCepEndereco.setText(endereco.getCEPEndereco());
+        this.jtfCidadeEndereco.setText(endereco.getCidadeEndereco());
+        this.jtfCompEndereco.setText(endereco.getComplementoEndereco() + "");
+        this.jtfCpfPessoa.setText(pessoa.getCpfPessoa());
+        this.jtfEmailPessoa.setText(email.getEnderecoEmail());
+        this.jtfEmissorRgPessoa.setText(pessoa.getOrgaoEmissorRGPessoa());
+        this.jtfLogradouroEndereco.setText(endereco.getLogradouroEndereco());
+        this.jtfNomePessoa.setText(pessoa.getNomePessoa());
+        this.jtfNumeroEndereco.setText(endereco.getNumeroEndereco());
+        this.jtfEspecialidadeMedico.setText(this.medico.getEspecialidadeMedico());
+        this.jtfCrmMedico.setText(String.valueOf(this.medico.getCrmMedico()));
+        this.jtfRgPessoa.setText(pessoa.getRgPessoa());
+        this.jtfTelefoneResidencial.setText(telefone.getTelefoneResidencial());
+        this.jtfTelefoneComercial.setText(telefone.getTelefoneComercial());
+        this.jtfTelefoneCelular.setText(telefone.getTelefoneCelular());
 
-            if (endereco != null && telefone != null && email != null) {
-                this.jtfBairroEndereco.setText(endereco.getBairroEndereco());
-                this.jtfCepEndereco.setText(endereco.getCEPEndereco());
-                this.jtfCidadeEndereco.setText(endereco.getCidadeEndereco());
-                this.jtfCompEndereco.setText(endereco.getComplementoEndereco() + "");
-                this.jtfCpfPessoa.setText(pessoa.getCpfPessoa());
-                this.jtfEmailPessoa.setText(email.getEnderecoEmail());
-                this.jtfEmissorRgPessoa.setText(pessoa.getOrgaoEmissorRGPessoa());
-                this.jtfLogradouroEndereco.setText(endereco.getLogradouroEndereco());
-                this.jtfNomePessoa.setText(pessoa.getNomePessoa());
-                this.jtfNumeroEndereco.setText(endereco.getNumeroEndereco());
-                this.jtfProfissaoPaciente.setText(this.paciente.getProfissaoPaciente());
-                this.jtfProntuarioPaciente.setText(String.valueOf(this.paciente.getProntuarioPaciente()));
-                this.jtfRgPessoa.setText(pessoa.getRgPessoa());
-                this.jtfTelefoneResidencial.setText(telefone.getTelefoneResidencial());
-                this.jtfTelefoneComercial.setText(telefone.getTelefoneComercial());
-                this.jtfTelefoneCelular.setText(telefone.getTelefoneCelular());
+        this.jcbEstadoEndereco.setSelectedItem(endereco.getEstadoEndereco());
+        this.jcbSexoPessoa.setSelectedItem(pessoa.getSexoPessoa());
 
-                this.jcbEscolaridade.setSelectedItem(paciente.getEscolaridadePaciente());
-                this.jcbEstadoCivilPessoa.setSelectedItem(paciente.getEstadoCivilPaciente());
-                this.jcbEstadoEndereco.setSelectedItem(endereco.getEstadoEndereco());
-                this.jcbSexoPessoa.setSelectedItem(pessoa.getSexoPessoa());
+        Date dataAux = (Date) pessoa.getDataNacimentoPessoa();
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTimeInMillis(dataAux.getTime());
+        String stringAux;
 
-                Date dataAux = (Date) pessoa.getDataNacimentoPessoa();
-                Calendar calendar = new GregorianCalendar();
-                calendar.setTimeInMillis(dataAux.getTime());
-                String stringAux;
+        int dia = calendar.get(Calendar.DATE);
+        int mes = calendar.get(Calendar.MONTH) + 1;
+        int ano = calendar.get(Calendar.YEAR);
 
-                if (Calendar.DAY_OF_MONTH < 10) {
-                    stringAux = "0" + calendar.get(Calendar.DAY_OF_MONTH);
-                } else {
-                    stringAux = "" + calendar.get(Calendar.DAY_OF_MONTH);
-                }
-
-                if ((calendar.get(Calendar.MONTH) + 1) < 10) {
-                    stringAux += "0" + String.valueOf((calendar.get(Calendar.MONTH) + 1));
-                } else {
-                    stringAux += String.valueOf((calendar.get(Calendar.MONTH) + 1));
-                }
-                
-                stringAux += calendar.get(Calendar.YEAR);
-
-                this.jFormattedTextField1.setText(stringAux);
-            }
-
+        if (dia < 10) {
+            stringAux = "0" + dia;
+        } else {
+            stringAux = "" + dia;
         }
+
+        if (mes < 10) {
+            stringAux += "0" + mes;
+        } else {
+            stringAux += mes;
+        }
+
+        stringAux += ano;
+
+        this.jFormattedTextField1.setText(stringAux);
+
     }
 }

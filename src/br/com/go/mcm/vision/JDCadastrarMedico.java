@@ -25,9 +25,7 @@ import javax.swing.JOptionPane;
  *
  * @author gilca
  */
-public class AtualizarMedico extends javax.swing.JDialog {
-
-    private Medico medico;
+public class JDCadastrarMedico extends javax.swing.JDialog {
 
     /**
      * Creates new form CadastrarPaciente
@@ -35,22 +33,9 @@ public class AtualizarMedico extends javax.swing.JDialog {
      * @param parent
      * @param modal
      */
-    public AtualizarMedico(java.awt.Frame parent, boolean modal) {
+    public JDCadastrarMedico(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-    }
-
-    /**
-     * Creates new form CadastrarPaciente
-     *
-     * @param parent
-     * @param modal
-     * @param medico
-     */
-    public AtualizarMedico(java.awt.Frame parent, boolean modal, Medico medico) {
-        super(parent, modal);
-        initComponents();
-        this.medico = medico;
     }
 
     /**
@@ -82,8 +67,6 @@ public class AtualizarMedico extends javax.swing.JDialog {
         jLabel23 = new javax.swing.JLabel();
         jtfCrmMedico = new javax.swing.JTextField();
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
-        jLabel14 = new javax.swing.JLabel();
-        jcbStatusMedico = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         jtfCepEndereco = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -117,6 +100,9 @@ public class AtualizarMedico extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -156,7 +142,7 @@ public class AtualizarMedico extends javax.swing.JDialog {
         jtfEmissorRgPessoa.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel12.setText("Especialidade:");
+        jLabel12.setText("Especialidade Médica:");
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel21.setText("Email:");
@@ -172,10 +158,6 @@ public class AtualizarMedico extends javax.swing.JDialog {
             ex.printStackTrace();
         }
         jFormattedTextField1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-
-        jLabel14.setText("Status:");
-
-        jcbStatusMedico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ativo", "Inativo" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -207,15 +189,11 @@ public class AtualizarMedico extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfEmissorRgPessoa, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE))
+                        .addComponent(jtfEmissorRgPessoa))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfEspecialidadeMedico)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jcbStatusMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jtfEspecialidadeMedico))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -256,17 +234,10 @@ public class AtualizarMedico extends javax.swing.JDialog {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel16)
                         .addComponent(jtfCpfPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtfEspecialidadeMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jcbStatusMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel14))))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfEspecialidadeMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -541,16 +512,13 @@ public class AtualizarMedico extends javax.swing.JDialog {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         //título da janela
-        this.setTitle("Atualizar Médico");
+        this.setTitle("Cadastrar Médico");
         //localização da janela (centro do monitor)
         this.setLocationRelativeTo(null);
         //ícone da janela
         URL url = this.getClass().getResource("nurse-16.png");
         Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(url);
         this.setIconImage(iconeTitulo);
-        
-        //preenche os campos do formulário com os dados do médico 
-        this.preencherCamposMedico();
 
     }//GEN-LAST:event_formWindowOpened
 
@@ -574,10 +542,10 @@ public class AtualizarMedico extends javax.swing.JDialog {
 
         //instanciando um objeto do tipo Calendar com a data digitada no formulário
         Calendar calendar;
-        int dia = Integer.parseInt(split[2]);
-        int mes = Integer.parseInt(split[1]) - 1;
-        int ano = Integer.parseInt(split[0]);
-        calendar = new GregorianCalendar(dia, mes, ano);
+        calendar = new GregorianCalendar(Integer.parseInt(split[2]),
+                Integer.parseInt(split[1]) - 1,
+                Integer.parseInt(split[0])
+        );
 
         //tranformando o objeto Calendar em Date (Date é o formato aceito pelo banco)
         Date dataNascimentoPessoa = new Date(calendar.getTimeInMillis());
@@ -630,25 +598,23 @@ public class AtualizarMedico extends javax.swing.JDialog {
                         this.jtfEmailPessoa.getText()
                 );
 
-                //instanciando o objeto Paciente a partir dos dados digitados pelo usuário
-                Medico medico = new Medico(this.medico.getIdMedico(),
-                        this.jtfCrmMedico.getText(),
-                        this.jtfEspecialidadeMedico.getText(), 
-                        pessoa,
-                        this.jcbStatusMedico.getSelectedItem().toString().charAt(0)
+                //instanciando o objeto Medico a partir dos dados digitados pelo usuário
+                Medico medico = new Medico(this.jtfCrmMedico.getText(),
+                        this.jtfEspecialidadeMedico.getText(),
+                        pessoa
                 );
 
                 //declarando e instanciando o ArrayList que receberá a lista das queries que serão executadas "em bloco"
                 ArrayList<String> queryList = new ArrayList<>();
 
                 //gerando as queries e adicionando as mesmas à lista
-                queryList.add(SistemaControle.enderecoControle().gerarQueryAtualizarEndereco(endereco));
-                queryList.add(SistemaControle.telefoneControle().gerarQueryAtualizarTelefone(telefone));
-                queryList.add(SistemaControle.emailControle().gerarQueryAtualizarEmail(email));
-                queryList.add(SistemaControle.medicoControle().gerarQueryAtualizarMedico(medico));
+                queryList.add(SistemaControle.enderecoControle().gerarQueryCadastrarEndereco(endereco));
+                queryList.add(SistemaControle.telefoneControle().gerarQuerycadastrarTelefone(telefone));
+                queryList.add(SistemaControle.emailControle().gerarQueryCadastrarEmail(email));
+                queryList.add(SistemaControle.medicoControle().gerarQueryCadastrarMedico(medico));
 
                 //executando as varias queries em um bloco
-                boolean excuteTransaction = SistemaControle.pacienteControle().excuteTransaction(queryList);
+                boolean excuteTransaction = SistemaControle.medicoControle().excuteTransaction(queryList);
 
                 //exibindo as mensagens de sucesso ou erro da execução do bloco de queries SQL
                 if (excuteTransaction) {
@@ -676,6 +642,10 @@ public class AtualizarMedico extends javax.swing.JDialog {
         this.limparCampos();
     }//GEN-LAST:event_jbLimparCamposActionPerformed
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowClosed
+
     /**
      * @param args the command line arguments
      */
@@ -693,7 +663,7 @@ public class AtualizarMedico extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AtualizarMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDCadastrarMedico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -704,7 +674,7 @@ public class AtualizarMedico extends javax.swing.JDialog {
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(() -> {
-            AtualizarMedico dialog = new AtualizarMedico(new javax.swing.JFrame(), true);
+            JDCadastrarMedico dialog = new JDCadastrarMedico(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
@@ -722,7 +692,6 @@ public class AtualizarMedico extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel18;
@@ -750,7 +719,6 @@ public class AtualizarMedico extends javax.swing.JDialog {
     private javax.swing.JButton jbSair;
     private javax.swing.JComboBox<String> jcbEstadoEndereco;
     private javax.swing.JComboBox<String> jcbSexoPessoa;
-    private javax.swing.JComboBox<String> jcbStatusMedico;
     private javax.swing.JTextField jtfBairroEndereco;
     private javax.swing.JTextField jtfCepEndereco;
     private javax.swing.JTextField jtfCidadeEndereco;
@@ -794,42 +762,5 @@ public class AtualizarMedico extends javax.swing.JDialog {
         this.jcbSexoPessoa.setSelectedIndex(0);
 
         this.jFormattedTextField1.setText("");
-    }
-
-    public void preencherCamposMedico() {
-        Pessoa pessoa = this.medico.getPessoa();
-        Endereco endereco = pessoa.getEnderecoPessoa();
-        Telefone telefone = pessoa.getTelefonePessoa();
-        Email email = pessoa.getEmailPessoa();
-
-        this.jtfBairroEndereco.setText(endereco.getBairroEndereco());
-        this.jtfCepEndereco.setText(endereco.getCEPEndereco());
-        this.jtfCidadeEndereco.setText(endereco.getCidadeEndereco());
-        this.jtfCompEndereco.setText(endereco.getComplementoEndereco() + "");
-        this.jtfCpfPessoa.setText(pessoa.getCpfPessoa());
-        this.jtfEmailPessoa.setText(email.getEnderecoEmail());
-        this.jtfEmissorRgPessoa.setText(pessoa.getOrgaoEmissorRGPessoa());
-        this.jtfLogradouroEndereco.setText(endereco.getLogradouroEndereco());
-        this.jtfNomePessoa.setText(pessoa.getNomePessoa());
-        this.jtfNumeroEndereco.setText(endereco.getNumeroEndereco());
-        this.jtfEspecialidadeMedico.setText(this.medico.getEspecialidadeMedico());
-        this.jtfCrmMedico.setText(String.valueOf(this.medico.getCrmMedico()));
-        this.jtfRgPessoa.setText(pessoa.getRgPessoa());
-        this.jtfTelefoneResidencial.setText(telefone.getTelefoneResidencial());
-        this.jtfTelefoneComercial.setText(telefone.getTelefoneComercial());
-        this.jtfTelefoneCelular.setText(telefone.getTelefoneCelular());
-
-        this.jcbEstadoEndereco.setSelectedItem(endereco.getEstadoEndereco());
-        this.jcbSexoPessoa.setSelectedItem(pessoa.getSexoPessoa());
-
-        Date dataAux = (Date) pessoa.getDataNacimentoPessoa();
-        Calendar calendar = new GregorianCalendar();
-        calendar.setTimeInMillis(dataAux.getTime());
-        String stringAux = calendar.get(Calendar.DAY_OF_MONTH)
-                + String.valueOf((calendar.get(Calendar.MONTH) + 1))
-                + calendar.get(Calendar.YEAR);
-
-        this.jFormattedTextField1.setText(stringAux);
-
     }
 }

@@ -594,7 +594,7 @@ public class JFramePrincipal_old extends javax.swing.JFrame {
      */
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         //instanciando a janela de cadastro
-        CadastrarPaciente cadastrarPaciente = new CadastrarPaciente(this, true);
+        JDCadastrarPaciente cadastrarPaciente = new JDCadastrarPaciente(this, true);
 
         //tornando a janela visível
         cadastrarPaciente.setVisible(true);
@@ -784,7 +784,7 @@ public class JFramePrincipal_old extends javax.swing.JFrame {
             Paciente paciente = (Paciente) this.jTablePaciente.getValueAt(selectedRow, 3);
 
             //instanciando a janela de atualizar paciente
-            AtualizarPaciente atualizarPaciente = new AtualizarPaciente(this, true, paciente);
+            JDAtualizarPaciente atualizarPaciente = new JDAtualizarPaciente(this, true, paciente);
             //exibindo a tela para o usuário
             atualizarPaciente.setVisible(true);
             //após o fechamento da janela preenchemos novamente a tabela usuario
