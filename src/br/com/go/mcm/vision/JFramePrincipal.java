@@ -7,6 +7,7 @@ package br.com.go.mcm.vision;
 
 import br.com.go.mcm.control.SistemaControle;
 import br.com.go.mcm.model.Endereco;
+import br.com.go.mcm.model.Medico;
 import br.com.go.mcm.model.Paciente;
 import br.com.go.mcm.model.Pessoa;
 import br.com.go.mcm.model.Telefone;
@@ -117,7 +118,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jtfCidadeEnderecoMedico = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
-        jcbEstadoEndereco1 = new javax.swing.JComboBox<>();
+        jcbEstadoEnderecoMedico = new javax.swing.JComboBox<>();
         jPanel12 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
         jtfDataNascimentoMedico = new javax.swing.JTextField();
@@ -158,6 +159,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 formWindowOpened(evt);
             }
         });
+        getContentPane().setLayout(new java.awt.BorderLayout());
 
         jTabbedPane4.setBackground(new java.awt.Color(51, 153, 255));
 
@@ -375,7 +377,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         jtfTelefoneComercial.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
-        jLabel18.setText("Celularl:");
+        jLabel18.setText("Celular:");
 
         jtfTelefoneCelular.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
@@ -718,7 +720,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         jLabel28.setText("Estado:");
 
-        jcbEstadoEndereco1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+        jcbEstadoEnderecoMedico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -741,7 +743,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel28)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jcbEstadoEndereco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jcbEstadoEnderecoMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -782,7 +784,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel27)
                     .addComponent(jtfCepEnderecoMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel28)
-                    .addComponent(jcbEstadoEndereco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jcbEstadoEnderecoMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
@@ -924,7 +926,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         jtfTelefoneComercialMedico.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
-        jLabel40.setText("Celularl:");
+        jLabel40.setText("Celular:");
 
         jtfTelefoneCelularMedico.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
@@ -1073,7 +1075,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         //ao terminar o cadastro de um novo paciente, a tabela contendo a lista 
         //de paciente é atualizada pelo método abaixo
-        this.preencherTabelaPaciente();        
+        this.preencherTabelaPaciente();
     }//GEN-LAST:event_jMenuItemCadastrarPacienteActionPerformed
 
     /*
@@ -1086,6 +1088,8 @@ public class JFramePrincipal extends javax.swing.JFrame {
         this.setTitle("Medical Clinic Manager");
         //chamando o método que preenche a tabela de pacientes
         this.preencherTabelaPaciente();
+        //chamando o método que preenche a tabela de medicos
+        this.preencherTabelaMedico();
         //setando a operação padrão quando a janela é fechada
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         //escondendo os menus ainda nao implementados
@@ -1185,15 +1189,15 @@ public class JFramePrincipal extends javax.swing.JFrame {
         } catch (SQLException ex) {
             //exibindo uma mensagem caso seja disparada uma exceção
             JOptionPane.showMessageDialog(this, "Erro na leitura do banco de dados.\n"
-                + "Por favor, entre em contato com o suporte.\n"
-                + "Informações sobre o erro: " + ex.getMessage());
+                    + "Por favor, entre em contato com o suporte.\n"
+                    + "Informações sobre o erro: " + ex.getMessage());
         }
 
         //verificando se a lista de paciente foi preenchida ou se continua vazia (null)
         if (listaPaciente != null) {
             //pegando o modelo da tabela paciente
             DefaultTableModel tabelaPaciente
-            = (DefaultTableModel) this.jTablePaciente.getModel();
+                    = (DefaultTableModel) this.jTablePaciente.getModel();
 
             //setando o número de linhas da tabela para zero
             tabelaPaciente.setNumRows(0);
@@ -1207,7 +1211,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
                 //se o nome do paciente ou o prontuário do mesmo possuem parte ou todo do texto digitado, o paciente é inserido na tabela paciente
                 if (nomePaciente.contains(campoPesquisa)
-                    || prontuarioPaciente.contains(campoPesquisa)) {
+                        || prontuarioPaciente.contains(campoPesquisa)) {
 
                     tabelaPaciente.addRow(new Object[]{
                         paciente.getProntuarioPaciente(),
@@ -1251,7 +1255,45 @@ public class JFramePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbEditarPacienteActionPerformed
 
     private void jTableMedicoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMedicoMouseReleased
-        // TODO add your handling code here:
+        //recebendo o índice da linha selecionada pelo usuário
+        int selectedRow = this.jTableMedico.getSelectedRow();
+
+        //verificando se realmente alguma linha foi selecionada, o índice começa em 0
+        if (selectedRow > - 1) {
+            //passando por referência o objeto paciente armazenado na última coluna da tabela Paciente
+            Medico medico = (Medico) this.jTableMedico.getValueAt(selectedRow, 3);
+
+            ////passando por referência o objeto pessoa contido no objeto paciente
+            Pessoa pessoa = medico.getPessoa();
+
+            ////preenchendo os campos da pessoa
+            this.jtfDataNascimentoMedico.setText(pessoa.getDataNacimentoPessoa().toString());
+            this.jtfRgMedico.setText(pessoa.getRgPessoa());
+            this.jtfEmissorRgMedico.setText(pessoa.getOrgaoEmissorRGPessoa());
+            this.jtfCpfMedico.setText(pessoa.getCpfPessoa());
+            this.jtfEspecialidadeMedico.setText(medico.getEspecialidadeMedico());
+            this.jtfEmailMedico.setText(pessoa.getEmailPessoa().getEnderecoEmail());
+
+            //passando por referência o objeto endereco contido no objeto paciente
+            Endereco endereco = pessoa.getEnderecoPessoa();
+
+            //preenchendo os campos do endereço
+            this.jtfLogradouroEndederecoMedico.setText(endereco.getLogradouroEndereco());
+            this.jtfNumEnderecoMedico.setText(endereco.getNumeroEndereco());
+            this.jtfCompEndereco.setText(endereco.getComplementoEndereco() + "");
+            this.jtfBairroEnderecoMedico.setText(endereco.getBairroEndereco());
+            this.jtfCidadeEnderecoMedico.setText(endereco.getCidadeEndereco());
+            this.jtfCepEnderecoMedico.setText(endereco.getCEPEndereco());
+            this.jcbEstadoEnderecoMedico.setSelectedItem(endereco.getEstadoEndereco());
+
+            //passando por referência o objeto telefone contido no objeto paciente
+            Telefone telefone = pessoa.getTelefonePessoa();
+
+            //preenchendo os campos do telefone
+            this.jtfTelefoneResidencialMedico.setText(telefone.getTelefoneResidencial());
+            this.jtfTelefoneComercialMedico.setText(telefone.getTelefoneComercial());
+            this.jtfTelefoneCelularMedico.setText(telefone.getTelefoneCelular());
+        }
     }//GEN-LAST:event_jTableMedicoMouseReleased
 
     private void jtfPesquisaMedicoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPesquisaMedicoKeyReleased
@@ -1259,16 +1301,33 @@ public class JFramePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jtfPesquisaMedicoKeyReleased
 
     private void jbEditarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditarMedicoActionPerformed
-        AtualizarMedico atualizarMedico = new AtualizarMedico(this, true);
-        atualizarMedico.setVisible(true);
+        //lendo o índice da linha selecionada pelo usuário
+        int selectedRow = this.jTableMedico.getSelectedRow();
+
+        //verificando se realmente alguma linha foi selecionada, o índice começa em 0
+        if (selectedRow > -1) {
+            //passando por referência o objeto do tipo Paciente contido na última coluna da tabela
+            Medico medico = (Medico) this.jTableMedico.getValueAt(selectedRow, 3);
+
+            AtualizarMedico atualizarMedico = new AtualizarMedico(this, true, medico);
+            atualizarMedico.setVisible(true);
+
+            this.preencherTabelaMedico();
+        } else {
+            //caso o usuário tenha clicado no botão editar sem antes selecionar um paciente na tabela de paciente
+            //é exibida a mensagem abaixo.
+            JOptionPane.showMessageDialog(this, "Favor escolher o médico que deseja editar (:");
+        }
+
+
     }//GEN-LAST:event_jbEditarMedicoActionPerformed
 
     private void jMenuItemCadastrarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastrarMedicoActionPerformed
         CadastrarMedico cadastrarMedico = new CadastrarMedico(this, true);
         cadastrarMedico.setVisible(true);
-        
+
         this.preencherTabelaMedico();
-        
+
     }//GEN-LAST:event_jMenuItemCadastrarMedicoActionPerformed
 
     /**
@@ -1371,7 +1430,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jcbEscolaridadePaciente;
     private javax.swing.JComboBox<String> jcbEstadoCivilPessoa;
     private javax.swing.JComboBox<String> jcbEstadoEndereco;
-    private javax.swing.JComboBox<String> jcbEstadoEndereco1;
+    private javax.swing.JComboBox<String> jcbEstadoEnderecoMedico;
     private javax.swing.JComboBox<String> jcbSexoPessoa;
     private javax.swing.JComboBox<String> jcbSexoPessoa1;
     private javax.swing.JTextField jtfBairroEndereco;
@@ -1450,6 +1509,40 @@ public class JFramePrincipal extends javax.swing.JFrame {
     }
 
     private void preencherTabelaMedico() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            ArrayList<Medico> listaMedico = SistemaControle.medicoControle().listarMedico();
+
+            DefaultTableModel tabelaMedico = (DefaultTableModel) this.jTableMedico.getModel();
+
+            tabelaMedico.setNumRows(0);
+
+            String dataAux;
+
+            for (int i = 0; i < listaMedico.size(); i++) {
+                Calendar calendar = new GregorianCalendar();
+                calendar.setTime(listaMedico.get(i).getPessoa().getDataCadastroPessoa());
+                dataAux = calendar.get(Calendar.DAY_OF_MONTH) + "/"
+                        + (calendar.get(Calendar.MONTH) + 1) + "/"
+                        + calendar.get(Calendar.YEAR);
+
+                tabelaMedico.addRow(new Object[]{
+                    listaMedico.get(i).getCrmMedico(),
+                    listaMedico.get(i).getPessoa().getNomePessoa(),
+                    dataAux,
+                    listaMedico.get(i)
+                });
+            }
+
+            //setando o novo modelo da tabela paciente
+            this.jTableMedico.setModel(tabelaMedico);
+            //indicando ser possivel selecionar uma linha da tabela
+            this.jTableMedico.setRowSelectionAllowed(true);
+            //indicando NÃO ser possível a selecao de uma coluna da tabela
+            this.jTableMedico.setColumnSelectionAllowed(false);
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Erro de leitura dos dados. Favor entrar em"
+                    + "contato com o suporte.\nInformação sobre o erro:" + ex.getMessage());
+        }
     }
 }

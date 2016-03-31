@@ -32,7 +32,9 @@ public class MedicoControle extends QueryHelper {
     public String gerarQueryAtualizarMedico(Medico medico) throws SQLException {
         this.query = "UPDATE medico SET idPessoa = " +  medico.getPessoa().getIdPessoa() + ", "
                 + "crmMedico = '" + medico.getCrmMedico() + "', "
-                + "especialidadeMedico = '" + medico.getEspecialidadeMedico() + "';";
+                + "especialidadeMedico = '" + medico.getEspecialidadeMedico() + "', "
+                + "statusMedico = '" + medico.getStatusMedico() + "' "
+                + "WHERE idMedico = " + medico.getIdMedico() + "; ";
 
         return this.query;
     }
@@ -84,11 +86,11 @@ public class MedicoControle extends QueryHelper {
         this.query = "SELECT * FROM medico m "
                 + "NATURAL JOIN pessoa pes "
                 + "LEFT OUTER JOIN telefone tel "
-                + "ON tel.idpessoa = medic.idpessoa "
+                + "ON tel.idpessoa = m.idPessoa "
                 + "LEFT OUTER JOIN email e "
-                + "ON e.idpessoa = medic.idpessoa "
-                + "LEFT OUTER JOIN edereco en "
-                + "ON en.idpessoa = m.idPpessoa";   
+                + "ON e.idpessoa = m.idPessoa "
+                + "LEFT OUTER JOIN endereco en "
+                + "ON en.idpessoa = m.idPessoa";   
         
         this.prepStatement = this.mySqlControle.getConnection().prepareStatement(query);
         
@@ -144,10 +146,10 @@ public class MedicoControle extends QueryHelper {
             );
             
             listaMedico.add(medico);
-        }
+        } 
         
         return listaMedico;
-
+        
     }
 
 }

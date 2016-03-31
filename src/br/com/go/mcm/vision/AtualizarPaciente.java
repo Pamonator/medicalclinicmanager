@@ -790,9 +790,21 @@ public class AtualizarPaciente extends javax.swing.JDialog {
                 Date dataAux = (Date) pessoa.getDataNacimentoPessoa();
                 Calendar calendar = new GregorianCalendar();
                 calendar.setTimeInMillis(dataAux.getTime());
-                String stringAux = calendar.get(Calendar.DAY_OF_MONTH)
-                        + String.valueOf((calendar.get(Calendar.MONDAY) + 1))
-                        + calendar.get(Calendar.YEAR);
+                String stringAux;
+
+                if (Calendar.DAY_OF_MONTH < 10) {
+                    stringAux = "0" + calendar.get(Calendar.DAY_OF_MONTH);
+                } else {
+                    stringAux = "" + calendar.get(Calendar.DAY_OF_MONTH);
+                }
+
+                if ((calendar.get(Calendar.MONTH) + 1) < 10) {
+                    stringAux += "0" + String.valueOf((calendar.get(Calendar.MONTH) + 1));
+                } else {
+                    stringAux += String.valueOf((calendar.get(Calendar.MONTH) + 1));
+                }
+                
+                stringAux += calendar.get(Calendar.YEAR);
 
                 this.jFormattedTextField1.setText(stringAux);
             }

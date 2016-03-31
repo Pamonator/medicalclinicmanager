@@ -548,6 +548,9 @@ public class AtualizarMedico extends javax.swing.JDialog {
         URL url = this.getClass().getResource("nurse-16.png");
         Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(url);
         this.setIconImage(iconeTitulo);
+        
+        //preenche os campos do formulário com os dados do médico 
+        this.preencherCamposMedico();
 
     }//GEN-LAST:event_formWindowOpened
 
@@ -571,10 +574,10 @@ public class AtualizarMedico extends javax.swing.JDialog {
 
         //instanciando um objeto do tipo Calendar com a data digitada no formulário
         Calendar calendar;
-        calendar = new GregorianCalendar(Integer.parseInt(split[2]),
-                Integer.parseInt(split[1]) - 1,
-                Integer.parseInt(split[0])
-        );
+        int dia = Integer.parseInt(split[2]);
+        int mes = Integer.parseInt(split[1]) - 1;
+        int ano = Integer.parseInt(split[0]);
+        calendar = new GregorianCalendar(dia, mes, ano);
 
         //tranformando o objeto Calendar em Date (Date é o formato aceito pelo banco)
         Date dataNascimentoPessoa = new Date(calendar.getTimeInMillis());
@@ -823,7 +826,7 @@ public class AtualizarMedico extends javax.swing.JDialog {
         Calendar calendar = new GregorianCalendar();
         calendar.setTimeInMillis(dataAux.getTime());
         String stringAux = calendar.get(Calendar.DAY_OF_MONTH)
-                + String.valueOf((calendar.get(Calendar.MONDAY) + 1))
+                + String.valueOf((calendar.get(Calendar.MONTH) + 1))
                 + calendar.get(Calendar.YEAR);
 
         this.jFormattedTextField1.setText(stringAux);
