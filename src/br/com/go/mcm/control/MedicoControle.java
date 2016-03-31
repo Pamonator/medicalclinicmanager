@@ -83,14 +83,11 @@ public class MedicoControle extends QueryHelper {
     }
 
     public ArrayList<Medico> listarMedico() throws SQLException {
-        this.query = "SELECT * FROM medico m "
-                + "NATURAL JOIN pessoa pes "
-                + "LEFT OUTER JOIN telefone tel "
-                + "ON tel.idpessoa = m.idPessoa "
-                + "LEFT OUTER JOIN email e "
-                + "ON e.idpessoa = m.idPessoa "
-                + "LEFT OUTER JOIN endereco en "
-                + "ON en.idpessoa = m.idPessoa";   
+        this.query = "SELECT * FROM medico "
+                + "NATURAL JOIN pessoa "
+                + "NATURAL JOIN endereco "
+                + "NATURAL JOIN telefone "
+                + "NATURAL JOIN email";                   
         
         this.prepStatement = this.mySqlControle.getConnection().prepareStatement(query);
         

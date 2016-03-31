@@ -584,6 +584,7 @@ public class JDAtualizarMedico extends javax.swing.JDialog {
 
         //instanciando a pessoa a ser cadastrada no banco(deve ser gravada primeiro!!)
         Pessoa pessoa = new Pessoa.Builder()
+                .idPessoa(this.medico.getPessoa().getIdPessoa())
                 .nomePessoa(this.jtfNomePessoa.getText())
                 .sexoPessoa(this.jcbSexoPessoa.getSelectedItem().toString().charAt(0))
                 .rgPessoa(this.jtfRgPessoa.getText())
@@ -595,7 +596,7 @@ public class JDAtualizarMedico extends javax.swing.JDialog {
         //bloco que executa a instrução SQL e captura uma possível exceção
         try {
             //armazenando o resultado da query SQL que cadastra uma pessoa
-            boolean cadastrarPessoa = SistemaControle.pessoaControle().cadastrarPessoa(pessoa);
+            boolean cadastrarPessoa = SistemaControle.pessoaControle().atualizarPessoa(pessoa);
 
             //caso o cadastro tenha sido realizado com sucesso, damos continuidade à gravação dos demais dados
             //(endereco, telefone, email, paciente)
@@ -652,7 +653,7 @@ public class JDAtualizarMedico extends javax.swing.JDialog {
 
                 //exibindo as mensagens de sucesso ou erro da execução do bloco de queries SQL
                 if (excuteTransaction) {
-                    JOptionPane.showMessageDialog(this, "Médico cadastrado com sucesso!!");
+                    JOptionPane.showMessageDialog(this, "Informações alteradas com sucesso!!");
                     //fecha a janela
                     this.dispose();
                 } else {

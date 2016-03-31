@@ -14,28 +14,36 @@
             <Property name="text" type="java.lang.String" value="In&#xed;cio"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemCadastrarPaciente">
+            <MenuItem class="javax.swing.JMenuItem" name="jmiCadastrarPaciente">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cadastrar Paciente"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemCadastrarPacienteActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiCadastrarPacienteActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemCadastrarMedico">
+            <MenuItem class="javax.swing.JMenuItem" name="jmiCadastrarMedico">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cadastrar M&#xe9;dico"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemCadastrarMedicoActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiCadastrarMedicoActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuSair">
+            <MenuItem class="javax.swing.JMenuItem" name="jmiCadastrarFuncionario">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Cadastrar Funcion&#xe1;rio"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiCadastrarFuncionarioActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jmiSair">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Sair"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuSairActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiSairActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -95,7 +103,7 @@
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
   <SubComponents>
-    <Container class="javax.swing.JTabbedPane" name="jTabbedPane4">
+    <Container class="javax.swing.JTabbedPane" name="jTabbedPane">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="99" red="33" type="rgb"/>
@@ -324,6 +332,9 @@
               <SubComponents>
                 <Container class="javax.swing.JPanel" name="jPanel5">
                   <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder title="Endere&#xe7;o"/>
@@ -415,6 +426,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JTextField" name="jtfCepEndereco">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="horizontalAlignment" type="int" value="4"/>
                       </Properties>
                     </Component>
@@ -425,6 +437,7 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="jtfLogradouroEndedereco">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="horizontalAlignment" type="int" value="4"/>
                       </Properties>
                     </Component>
@@ -435,6 +448,7 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="jtfNumEndereco">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="horizontalAlignment" type="int" value="4"/>
                       </Properties>
                     </Component>
@@ -445,6 +459,7 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="jtfCompEndereco">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="horizontalAlignment" type="int" value="4"/>
                       </Properties>
                     </Component>
@@ -455,6 +470,7 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="jtfBairroEndereco">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="horizontalAlignment" type="int" value="4"/>
                       </Properties>
                     </Component>
@@ -465,6 +481,7 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="jtfCidadeEndereco">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="horizontalAlignment" type="int" value="4"/>
                       </Properties>
                     </Component>
@@ -550,6 +567,9 @@
               <SubComponents>
                 <Container class="javax.swing.JPanel" name="jPanel7">
                   <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder title="Telefones"/>
@@ -613,11 +633,13 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="jtfTelefoneResidencial">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="horizontalAlignment" type="int" value="4"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jtfTelefoneComercial">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="horizontalAlignment" type="int" value="4"/>
                       </Properties>
                     </Component>
@@ -628,6 +650,7 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="jtfTelefoneCelular">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="horizontalAlignment" type="int" value="4"/>
                       </Properties>
                     </Component>
@@ -763,6 +786,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtfDataNascimentoPessoa">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="horizontalAlignment" type="int" value="4"/>
                   </Properties>
                 </Component>
@@ -789,6 +813,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtfRgPessoa">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="horizontalAlignment" type="int" value="4"/>
                   </Properties>
                 </Component>
@@ -890,16 +915,19 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtfEmailPessoa">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="horizontalAlignment" type="int" value="4"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtfEmissorRgPessoa">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="horizontalAlignment" type="int" value="4"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtfCpfPessoa">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="horizontalAlignment" type="int" value="4"/>
                   </Properties>
                 </Component>
@@ -1122,6 +1150,9 @@
               <SubComponents>
                 <Container class="javax.swing.JPanel" name="jPanel11">
                   <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder title="Endere&#xe7;o"/>
@@ -1213,6 +1244,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JTextField" name="jtfCepEnderecoMedico">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="horizontalAlignment" type="int" value="4"/>
                       </Properties>
                     </Component>
@@ -1223,6 +1255,7 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="jtfLogradouroEndederecoMedico">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="horizontalAlignment" type="int" value="4"/>
                       </Properties>
                     </Component>
@@ -1233,6 +1266,7 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="jtfNumEnderecoMedico">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="horizontalAlignment" type="int" value="4"/>
                       </Properties>
                     </Component>
@@ -1243,6 +1277,7 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="jtfCompEnderecoMedico">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="horizontalAlignment" type="int" value="4"/>
                       </Properties>
                     </Component>
@@ -1253,6 +1288,7 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="jtfBairroEnderecoMedico">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="horizontalAlignment" type="int" value="4"/>
                       </Properties>
                     </Component>
@@ -1263,6 +1299,7 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="jtfCidadeEnderecoMedico">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="horizontalAlignment" type="int" value="4"/>
                       </Properties>
                     </Component>
@@ -1426,6 +1463,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtfDataNascimentoMedico">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="horizontalAlignment" type="int" value="4"/>
                   </Properties>
                 </Component>
@@ -1452,6 +1490,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtfRgMedico">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="horizontalAlignment" type="int" value="4"/>
                   </Properties>
                 </Component>
@@ -1492,6 +1531,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtfEspecialidadeMedico">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="horizontalAlignment" type="int" value="4"/>
                   </Properties>
                 </Component>
@@ -1505,16 +1545,19 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtfEmailMedico">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="horizontalAlignment" type="int" value="4"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtfEmissorRgMedico">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="horizontalAlignment" type="int" value="4"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtfCpfMedico">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="horizontalAlignment" type="int" value="4"/>
                   </Properties>
                 </Component>
@@ -1550,6 +1593,9 @@
               <SubComponents>
                 <Container class="javax.swing.JPanel" name="jPanel14">
                   <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder title="Telefones"/>
@@ -1613,11 +1659,13 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="jtfTelefoneResidencialMedico">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="horizontalAlignment" type="int" value="4"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jtfTelefoneComercialMedico">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="horizontalAlignment" type="int" value="4"/>
                       </Properties>
                     </Component>
@@ -1628,6 +1676,7 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="jtfTelefoneCelularMedico">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="horizontalAlignment" type="int" value="4"/>
                       </Properties>
                     </Component>
@@ -1637,11 +1686,16 @@
             </Container>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="jPanel1">
+        <Container class="javax.swing.JPanel" name="jPanelFuncionario">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="99" red="33" type="rgb"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="tab3">
-                <Property name="tabTitle" type="java.lang.String" value="tab3"/>
+              <JTabbedPaneConstraints tabName="Funcionario">
+                <Property name="tabTitle" type="java.lang.String" value="Funcionario"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -1701,7 +1755,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jScrollPane3" alignment="0" pref="0" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jtfPesquisaMedico1" min="-2" pref="273" max="-2" attributes="0"/>
+                                  <Component id="jtfPesquisaFuncionario" min="-2" pref="273" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jLabel34" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -1719,7 +1773,7 @@
                           <Component id="jScrollPane3" pref="164" max="32767" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jtfPesquisaMedico1" alignment="0" pref="30" max="32767" attributes="0"/>
+                              <Component id="jtfPesquisaFuncionario" alignment="0" pref="30" max="32767" attributes="0"/>
                               <Component id="jbEditarFuncionario" alignment="0" max="32767" attributes="0"/>
                               <Component id="jLabel34" alignment="0" max="32767" attributes="0"/>
                           </Group>
@@ -1780,13 +1834,13 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.JTextField" name="jtfPesquisaMedico1">
+                <Component class="javax.swing.JTextField" name="jtfPesquisaFuncionario">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="4"/>
                     <Property name="toolTipText" type="java.lang.String" value="buscar por nome ou prontu&#xe1;rio"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtfPesquisaMedico1KeyReleased"/>
+                    <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtfPesquisaFuncionarioKeyReleased"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="jbEditarFuncionario">
@@ -1828,7 +1882,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel46" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jtfEmailMedico1" max="32767" attributes="0"/>
+                                  <Component id="jtfEmailFuncionario" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel41" min="-2" max="-2" attributes="0"/>
@@ -1837,27 +1891,27 @@
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="jLabel42" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jtfRgMedico1" min="-2" pref="80" max="-2" attributes="0"/>
+                                  <Component id="jtfRgFuncionario" min="-2" pref="80" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel45" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jtfEspecialidadeMedico1" max="32767" attributes="0"/>
+                                  <Component id="jtfCargoFuncionario" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel43" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jtfEmissorRgMedico1" max="32767" attributes="0"/>
+                                  <Component id="jtfEmissorRgFuncionario" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel44" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jtfCpfMedico1" max="32767" attributes="0"/>
+                                  <Component id="jtfCpfFuncionario" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel36" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jtfDataNascimentoMedico1" min="-2" pref="119" max="-2" attributes="0"/>
+                                  <Component id="jtfDataNascimentoFuncionario" min="-2" pref="119" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -1871,13 +1925,13 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel36" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                              <Component id="jtfDataNascimentoMedico1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfDataNascimentoFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                   <Component id="jLabel42" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jtfRgMedico1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jtfRgFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                   <Component id="jLabel41" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -1887,22 +1941,22 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel43" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jtfEmissorRgMedico1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfEmissorRgFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel44" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jtfCpfMedico1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfCpfFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel45" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                              <Component id="jtfEspecialidadeMedico1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfCargoFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel46" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jtfEmailMedico1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfEmailFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -1918,8 +1972,9 @@
                     <Property name="text" type="java.lang.String" value="Data de Nascimento:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jtfDataNascimentoMedico1">
+                <Component class="javax.swing.JTextField" name="jtfDataNascimentoFuncionario">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="horizontalAlignment" type="int" value="4"/>
                   </Properties>
                 </Component>
@@ -1944,8 +1999,9 @@
                     <Property name="text" type="java.lang.String" value="Sexo:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jtfRgMedico1">
+                <Component class="javax.swing.JTextField" name="jtfRgFuncionario">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="horizontalAlignment" type="int" value="4"/>
                   </Properties>
                 </Component>
@@ -1981,11 +2037,12 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="11" style="1"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Especialidade:"/>
+                    <Property name="text" type="java.lang.String" value="Cargo:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jtfEspecialidadeMedico1">
+                <Component class="javax.swing.JTextField" name="jtfCargoFuncionario">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="horizontalAlignment" type="int" value="4"/>
                   </Properties>
                 </Component>
@@ -1997,18 +2054,21 @@
                     <Property name="text" type="java.lang.String" value="Email:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jtfEmailMedico1">
+                <Component class="javax.swing.JTextField" name="jtfEmailFuncionario">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="horizontalAlignment" type="int" value="4"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jtfEmissorRgMedico1">
+                <Component class="javax.swing.JTextField" name="jtfEmissorRgFuncionario">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="horizontalAlignment" type="int" value="4"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jtfCpfMedico1">
+                <Component class="javax.swing.JTextField" name="jtfCpfFuncionario">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="horizontalAlignment" type="int" value="4"/>
                   </Properties>
                 </Component>
@@ -2049,6 +2109,9 @@
               <SubComponents>
                 <Container class="javax.swing.JPanel" name="jPanel18">
                   <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder title="Endere&#xe7;o"/>
@@ -2070,26 +2133,26 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jtfBairroEnderecoMedico1" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jtfCidadeEnderecoMedico1" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jtfBairroEnderecoFuncionario" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jtfCidadeEnderecoFuncionario" alignment="0" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jtfCepEnderecoMedico1" min="-2" pref="151" max="-2" attributes="0"/>
+                                      <Component id="jtfCepEnderecoFuncionario" min="-2" pref="151" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Component id="jLabel53" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jcbEstadoEnderecoMedico1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jcbEstadoEnderecoFuncionario" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                           <Group type="102" alignment="1" attributes="0">
-                                              <Component id="jtfNumEnderecoMedico1" min="-2" pref="90" max="-2" attributes="0"/>
+                                              <Component id="jtfNumEnderecoFuncionario" min="-2" pref="90" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
                                               <Component id="jLabel49" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jtfCompEnderecoMedico1" max="32767" attributes="0"/>
+                                              <Component id="jtfCompEnderecoFuncionario" max="32767" attributes="0"/>
                                           </Group>
-                                          <Component id="jtfLogradouroEndederecoMedico1" alignment="1" min="-2" pref="327" max="-2" attributes="0"/>
+                                          <Component id="jtfLogradouroEndederecoFuncionario" alignment="1" min="-2" pref="327" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -2103,43 +2166,44 @@
                               <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel47" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jtfLogradouroEndederecoMedico1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jtfLogradouroEndederecoFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                       <Component id="jLabel49" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jtfCompEnderecoMedico1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jtfCompEnderecoFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                       <Component id="jLabel48" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jtfNumEnderecoMedico1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jtfNumEnderecoFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel50" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jtfBairroEnderecoMedico1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jtfBairroEnderecoFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel51" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jtfCidadeEnderecoMedico1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jtfCidadeEnderecoFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel52" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jtfCepEnderecoMedico1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jtfCepEnderecoFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel53" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jcbEstadoEnderecoMedico1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jcbEstadoEnderecoFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JTextField" name="jtfCepEnderecoMedico1">
+                    <Component class="javax.swing.JTextField" name="jtfCepEnderecoFuncionario">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="horizontalAlignment" type="int" value="4"/>
                       </Properties>
                     </Component>
@@ -2148,8 +2212,9 @@
                         <Property name="text" type="java.lang.String" value="Logradouro:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jtfLogradouroEndederecoMedico1">
+                    <Component class="javax.swing.JTextField" name="jtfLogradouroEndederecoFuncionario">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="horizontalAlignment" type="int" value="4"/>
                       </Properties>
                     </Component>
@@ -2158,8 +2223,9 @@
                         <Property name="text" type="java.lang.String" value="N&#xfa;mero:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jtfNumEnderecoMedico1">
+                    <Component class="javax.swing.JTextField" name="jtfNumEnderecoFuncionario">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="horizontalAlignment" type="int" value="4"/>
                       </Properties>
                     </Component>
@@ -2168,8 +2234,9 @@
                         <Property name="text" type="java.lang.String" value="Complemento:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jtfCompEnderecoMedico1">
+                    <Component class="javax.swing.JTextField" name="jtfCompEnderecoFuncionario">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="horizontalAlignment" type="int" value="4"/>
                       </Properties>
                     </Component>
@@ -2178,8 +2245,9 @@
                         <Property name="text" type="java.lang.String" value="Bairro:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jtfBairroEnderecoMedico1">
+                    <Component class="javax.swing.JTextField" name="jtfBairroEnderecoFuncionario">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="horizontalAlignment" type="int" value="4"/>
                       </Properties>
                     </Component>
@@ -2188,8 +2256,9 @@
                         <Property name="text" type="java.lang.String" value="Cidade:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jtfCidadeEnderecoMedico1">
+                    <Component class="javax.swing.JTextField" name="jtfCidadeEnderecoFuncionario">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="horizontalAlignment" type="int" value="4"/>
                       </Properties>
                     </Component>
@@ -2203,7 +2272,7 @@
                         <Property name="text" type="java.lang.String" value="Estado:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JComboBox" name="jcbEstadoEnderecoMedico1">
+                    <Component class="javax.swing.JComboBox" name="jcbEstadoEnderecoFuncionario">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="27">
@@ -2275,6 +2344,9 @@
               <SubComponents>
                 <Container class="javax.swing.JPanel" name="jPanel20">
                   <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder title="Telefones"/>
@@ -2294,9 +2366,9 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jtfTelefoneComercialMedico1" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jtfTelefoneResidencialMedico1" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jtfTelefoneCelularMedico1" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jtfTelefoneComercialFuncionario" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jtfTelefoneResidencialFuncionario" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jtfTelefoneCelularFuncionario" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -2308,17 +2380,17 @@
                               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel54" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jtfTelefoneResidencialMedico1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jtfTelefoneResidencialFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace pref="33" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel55" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jtfTelefoneComercialMedico1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jtfTelefoneComercialFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel56" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jtfTelefoneCelularMedico1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jtfTelefoneCelularFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -2336,13 +2408,15 @@
                         <Property name="text" type="java.lang.String" value="Comercial:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jtfTelefoneResidencialMedico1">
+                    <Component class="javax.swing.JTextField" name="jtfTelefoneResidencialFuncionario">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="horizontalAlignment" type="int" value="4"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jtfTelefoneComercialMedico1">
+                    <Component class="javax.swing.JTextField" name="jtfTelefoneComercialFuncionario">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="horizontalAlignment" type="int" value="4"/>
                       </Properties>
                     </Component>
@@ -2351,8 +2425,9 @@
                         <Property name="text" type="java.lang.String" value="Celular:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jtfTelefoneCelularMedico1">
+                    <Component class="javax.swing.JTextField" name="jtfTelefoneCelularFuncionario">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="horizontalAlignment" type="int" value="4"/>
                       </Properties>
                     </Component>

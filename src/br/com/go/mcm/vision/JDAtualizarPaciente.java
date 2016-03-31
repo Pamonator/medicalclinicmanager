@@ -616,7 +616,7 @@ public class JDAtualizarPaciente extends javax.swing.JDialog {
                 boolean excuteTransaction = SistemaControle.pacienteControle().excuteTransaction(queryList);
 
                 if (excuteTransaction) {
-                    JOptionPane.showMessageDialog(this, "Paciente cadastrado com sucesso!!");
+                    JOptionPane.showMessageDialog(this, "Informações alteradas com sucesso!!");
                     this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(this, "Falha no cadastro! Favor "

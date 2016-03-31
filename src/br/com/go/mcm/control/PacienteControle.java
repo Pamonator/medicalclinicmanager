@@ -137,14 +137,11 @@ public class PacienteControle extends QueryHelper {
         //criando a query que busca as informações desejadas
         //no caso ja buscamos todas as informações pertinentes a um paciente em 
         //uma mesma query utilizando junção(JOIN) das tabelas no banco
-        this.query = "SELECT * FROM paciente pac "
-                + "NATURAL JOIN pessoa pes "
-                + "LEFT OUTER JOIN telefone tel "
-                + "ON tel.idpessoa = pac.idpessoa "
-                + "LEFT OUTER JOIN email e "
-                + "ON e.idpessoa = pac.idpessoa "
-                + "LEFT OUTER JOIN endereco en "
-                + "ON en.idpessoa = pac.idpessoa";
+        this.query = "SELECT * FROM paciente "
+                + "NATURAL JOIN pessoa "
+                + "NATURAL JOIN endereco "
+                + "NATURAL JOIN telefone "
+                + "NATURAL JOIN email";
         
         //preparando o statement que chamará a execução da query SQL junto ao banco
         // this.mySqlControle.getConnection()  >> abre a conexao com o banco

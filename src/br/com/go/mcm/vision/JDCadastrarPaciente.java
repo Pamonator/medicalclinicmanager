@@ -636,7 +636,7 @@ public class JDCadastrarPaciente extends javax.swing.JDialog {
 
                 //gerando as queries e adicionando as mesmas à lista
                 queryList.add(SistemaControle.enderecoControle().gerarQueryCadastrarEndereco(endereco));
-                queryList.add(SistemaControle.telefoneControle().gerarQuerycadastrarTelefone(telefone));
+                queryList.add(SistemaControle.telefoneControle().gerarQueryCadastrarTelefone(telefone));
                 queryList.add(SistemaControle.emailControle().gerarQueryCadastrarEmail(email));
                 queryList.add(SistemaControle.pacienteControle().gerarQuerycadastrarPaciente(paciente));
 

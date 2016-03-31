@@ -20,7 +20,7 @@ public class TelefoneControle extends QueryHelper {
      * @param telefone - o objeto do tipo Telefone a ser gravado no banco
      * @return uma String contendo a query SQL
      */
-    public String gerarQuerycadastrarTelefone(Telefone telefone) throws SQLException {
+    public String gerarQueryCadastrarTelefone(Telefone telefone) {
         this.query = "INSERT INTO telefone VALUES ("
                 + telefone.getIdPessoa() + ", "
                 + "'" + telefone.getTelefoneResidencial() + "', "

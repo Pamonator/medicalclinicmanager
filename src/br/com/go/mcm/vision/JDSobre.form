@@ -118,7 +118,7 @@
                   <Font name="Tahoma" size="12" style="2"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Vers&#xe3;o: 0.2 alpha"/>
+                <Property name="text" type="java.lang.String" value="Vers&#xe3;o: 0.3 alpha"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">

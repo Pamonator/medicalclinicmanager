@@ -91,7 +91,7 @@ public class CadastrarPacienteTeste {
         ArrayList<String> queryList = new ArrayList<>();
         
         queryList.add(SistemaControle.enderecoControle().gerarQueryCadastrarEndereco(endereco));
-        queryList.add(SistemaControle.telefoneControle().gerarQuerycadastrarTelefone(telefone));
+        queryList.add(SistemaControle.telefoneControle().gerarQueryCadastrarTelefone(telefone));
         queryList.add(SistemaControle.emailControle().gerarQueryCadastrarEmail(email));
         queryList.add(SistemaControle.pacienteControle().gerarQuerycadastrarPaciente(paciente));
 
