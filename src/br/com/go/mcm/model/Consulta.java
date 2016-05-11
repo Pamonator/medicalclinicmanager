@@ -6,7 +6,6 @@
 package br.com.go.mcm.model;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  *
@@ -20,7 +19,8 @@ public class Consulta {
     private String statusConsulta;
     private Date dataConsulta;
     private String diagnostico;
-    private List<String> examesSolicitado;
+    private String examesSolicitado;
+    private char isRetorno;
     
     private Consulta(Builder builder){
         this.idConsulta = builder.idConsulta;
@@ -30,6 +30,7 @@ public class Consulta {
         this.dataConsulta = builder.dataConsulta;
         this.diagnostico = builder.diagnostico;
         this.examesSolicitado = builder.examesSolicitado;
+        this.isRetorno = builder.isRetorno;
         
     }
 
@@ -81,12 +82,20 @@ public class Consulta {
         this.medico = medico;
     }
 
-    public List<String> getExamesSolicitado() {
+    public String getExamesSolicitado() {
         return examesSolicitado;
     }
 
-    public void setExamesSolicitado(List<String> examesSolicitado) {
+    public void setExamesSolicitado(String examesSolicitado) {
         this.examesSolicitado = examesSolicitado;
+    }
+
+    public char getIsRetorno() {
+        return isRetorno;
+    }
+
+    public void setIsRetorno(char isRetorno) {
+        this.isRetorno = isRetorno;
     }
 
     public static class Builder {
@@ -96,7 +105,8 @@ public class Consulta {
         private String statusConsulta;
         private Date dataConsulta;
         private String diagnostico;
-        private List<String> examesSolicitado;
+        private String examesSolicitado;
+        private char isRetorno;
     
     
     public Builder idConsulta(int idConsulta){
@@ -123,10 +133,16 @@ public class Consulta {
         this.diagnostico = diagnostico;
         return this;
     }
-    public Builder examesSolicitados(List<String> examesSolicitado){
+    public Builder examesSolicitados(String examesSolicitado){
         this.examesSolicitado = examesSolicitado;
         return this;
     }
+    
+    public Builder isRetorno(char isRetorno) {
+        this.isRetorno = isRetorno;
+        return this;
+    }
+    
     public Consulta construir(){
         return new Consulta(this);
     }
