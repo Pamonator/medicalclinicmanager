@@ -11,15 +11,10 @@ package br.com.go.mcm.model;
  */
 public class Medico {
 
-    private int idMedico;
     private String crmMedico;
     private String especialidadeMedico;
     private Pessoa pessoa;
-    private char statusMedico;
-
-    public int getIdMedico() {
-        return idMedico;
-    }
+    private char statusMedico;   
 
     public Medico(String crmMedico, String especialidadeMedico, Pessoa pessoa) {
         this.crmMedico = crmMedico;
@@ -27,18 +22,13 @@ public class Medico {
         this.pessoa = pessoa;
     }
 
-    public Medico(int idMedico, String crmMedico, String especialidadeMedico, Pessoa pessoa, char statusMedico) {
-        this.idMedico = idMedico;
+    public Medico(String crmMedico, String especialidadeMedico, Pessoa pessoa, char statusMedico) {
         this.crmMedico = crmMedico;
         this.especialidadeMedico = especialidadeMedico;
         this.pessoa = pessoa;
         this.statusMedico = statusMedico;
     }
     
-    public void setIdMedico(int idMedico) {
-        this.idMedico = idMedico;
-    }
-
     public String getCrmMedico() {
         return crmMedico;
     }

@@ -34,7 +34,7 @@ public class MedicoControle extends QueryHelper {
                 + "crmMedico = '" + medico.getCrmMedico() + "', "
                 + "especialidadeMedico = '" + medico.getEspecialidadeMedico() + "', "
                 + "statusMedico = '" + medico.getStatusMedico() + "' "
-                + "WHERE idMedico = " + medico.getIdMedico() + "; ";
+                + "WHERE crmMedico = " + medico.getCrmMedico() + "; ";
 
         return this.query;
     }
@@ -56,7 +56,7 @@ public class MedicoControle extends QueryHelper {
         this.query = "UPDATE medico SET crmMedico = ?, "
                 + "especialidadeMedico = ?, "
                 + "statusMedico = ? "
-                + "WHERE idMedico = ?";
+                + "WHERE crmMedico = ?";
 
         this.prepStatement = this.mySqlControle.getConnection().prepareStatement(this.query);
 
@@ -135,8 +135,7 @@ public class MedicoControle extends QueryHelper {
                     .dataNacimentoPessoa(this.resultSet.getDate("dataNascimentoPessoa"))
                     .contruir();
             
-            Medico medico = new Medico(this.resultSet.getInt("idMedico"),                    
-                    this.resultSet.getString("crmMedico"),
+            Medico medico = new Medico(this.resultSet.getString("crmMedico"),
                     this.resultSet.getString("especialidadeMedico"),
                     pessoa,
                     this.resultSet.getString("statusMedico").charAt(0)

@@ -423,7 +423,7 @@ public class JDAtualizarMedico extends javax.swing.JDialog {
             }
         });
 
-        jbCadastrarMedico.setText("Cadastrar");
+        jbCadastrarMedico.setText("Salvar");
         jbCadastrarMedico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbCadastrarMedicoActionPerformed(evt);
@@ -632,8 +632,7 @@ public class JDAtualizarMedico extends javax.swing.JDialog {
                 );
 
                 //instanciando o objeto Medico a partir dos dados digitados pelo usuário
-                this.medico = new Medico(this.medico.getIdMedico(),
-                        this.jtfCrmMedico.getText(),
+                this.medico = new Medico(this.jtfCrmMedico.getText(),
                         this.jtfEspecialidadeMedico.getText(),
                         pessoa,
                         this.jcbStatusMedico.getSelectedItem().toString().charAt(0)
