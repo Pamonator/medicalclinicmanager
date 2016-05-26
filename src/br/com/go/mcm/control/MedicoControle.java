@@ -34,7 +34,7 @@ public class MedicoControle extends QueryHelper {
                 + "crmMedico = '" + medico.getCrmMedico() + "', "
                 + "especialidadeMedico = '" + medico.getEspecialidadeMedico() + "', "
                 + "statusMedico = '" + medico.getStatusMedico() + "' "
-                + "WHERE crmMedico = " + medico.getCrmMedico() + "; ";
+                + "WHERE crmMedico = '" + medico.getCrmMedico() + "'; ";
 
         return this.query;
     }
