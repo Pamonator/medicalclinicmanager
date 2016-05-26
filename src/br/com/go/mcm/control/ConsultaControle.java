@@ -24,7 +24,7 @@ public class ConsultaControle extends QueryHelper {
                 + "diagnosticoConsulta, exameSolicitado, isRetorno) VALUES ("
                 + consulta.getPaciente().getProntuarioPaciente() + ", '"
                 + consulta.getMedico().getCrmMedico() + "', '"
-                + consulta.getDataConsulta() + "', '" + consulta.getDiagnostico() + "', '"
+                + consulta.getDataConsulta() + "', '" + consulta.getAnotacoesConsulta() + "', '"
                 + consulta.getExamesSolicitados() + "', '"
                 +consulta.getIsRetorno() + "');";
 
@@ -34,7 +34,7 @@ public class ConsultaControle extends QueryHelper {
     public String gerarQueryAtualizarAgendarConsulta(Consulta consulta) {
         this.query = "UPDATE consulta SET prontuarioPaciente = " + consulta.getPaciente().getProntuarioPaciente() + ", "
                 + "crmMedico = '" + consulta.getMedico() + "', dataConsulta = '" + consulta.getDataConsulta() + "', "
-                + "diagnosticoConsulta = '" + consulta.getDiagnostico() + "', "
+                + "diagnosticoConsulta = '" + consulta.getAnotacoesConsulta() + "', "
                 + "exameSolicitado = '" + consulta.getExamesSolicitados() + "', "
                 + "statusConsulta = '" + consulta.getStatusConsulta() + "', "
                 + "isRetorno = '" + consulta.getIsRetorno() + "', ";
@@ -51,31 +51,18 @@ public class ConsultaControle extends QueryHelper {
         
         List<Consulta> listaConsulta = new ArrayList<>();       
         
-        this.query = "SELECT idConsulta, statusConsulta, dataConsulta, diagnostico, examesSolicitados, isRetorno"
-                + " FROM consulta NATURAL JOIN"
-                + "("
-                + "SELECT idPessoa, nomePessoa "
-                + "FROM Pessoa pes NATURAL JOIN  paciente paci"
-                + ")"
-                + "("
-                + "SELECT nomePessoa AS nomeMedico "
-                + "FROM Pessoa NATURAL JOIN Medico "
-                + ")"
-                + ")"
-                + "SELECT logradouroEndereco, numeroEndereco, complementoEndereco, bairroEndereco, cidadeEndereco, estadoEndereco, CEPEndereco"
-                + "FROM Endereco NATURAL JOIN Paciente"
-                + ")"
-                + "("
-                + "SELECT telefoneResidencial, telefoneComercial, telefoneCelular"
-                + "FROM Telefone NATRURAL JOIN Paciente"
-                + ")"
-                + "("
-                + "SELECT  telefoneResidencial AS telefoneResidencialMedico, telefoneComercial AS telefoneComercialMedico, telefoneCelular AS telefoneCelularMedico"
-                + "FROM Telefone NATURAL JOIN Medico "
-                + ")"
-              
-                 ;
-        
+        this.query = "SELECT * FROM consulta c" +
+                "JOIN (SELECT pe.idPessoa as idPaciente, pe.nomePessoa, p.prontuarioPaciente, t.telefoneResidencial, " +
+                "t.telefoneComercial, t.telefoneCelular FROM telefone t " +
+                "NATURAL JOIN pessoa pe " +
+                "NATURAL JOIN paciente p) as pesquisaPaciente " +
+                "ON pesquisaPaciente.prontuarioPaciente = c.prontuarioPaciente " +
+                "JOIN (SELECT pes.idPessoa as idMedico, pes.nomePessoa as nomeMedico, m.crmMedico, " +
+                "t.telefoneResidencial as trMedico, t.telefoneComercial as tcmMedico, " +
+                "t.telefoneCelular as tclMedico FROM telefone t " +
+                "NATURAL JOIN pessoa pes " + 
+                "NATURAL JOIN medico m) as teste2 " +
+                "ON teste2.crmMedico = c.crmMedico";       
         
         this.prepStatement = this.mySqlControle.getConnection().prepareStatement(query);
         
@@ -90,7 +77,7 @@ public class ConsultaControle extends QueryHelper {
                     .statusConsulta(this.resultSet.getString("statusConsulta"))
                     .dataConsulta(this.resultSet.getDate("dataConsulta"))
                     .examesSolicitados(this.resultSet.getString("examesSolicitados"))
-                    .diagnostico(this.resultSet.getString("diagnostico"))
+                    .anotacoesConsulta(this.resultSet.getString("diagnostico"))
                     .isRetorno(this.resultSet.getString("isRetorno").charAt(0))
                     .paciente(paciente)
                     .medico(medico)

@@ -28,6 +28,10 @@ public class Medico {
         this.pessoa = pessoa;
         this.statusMedico = statusMedico;
     }
+
+    public Medico() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     public String getCrmMedico() {
         return crmMedico;

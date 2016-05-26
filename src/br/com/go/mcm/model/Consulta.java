@@ -18,8 +18,8 @@ public class Consulta {
     private Medico medico;
     private String statusConsulta;
     private Date dataConsulta;
-    private String diagnostico;
-    private String examesSolicitado;
+    private String anotacoesConsulta;
+    private String examesSolicitados;
     private char isRetorno;
     
     private Consulta(Builder builder){
@@ -28,8 +28,8 @@ public class Consulta {
         this.medico = builder.medico;
         this.statusConsulta = builder.statusConsulta;
         this.dataConsulta = builder.dataConsulta;
-        this.diagnostico = builder.diagnostico;
-        this.examesSolicitado = builder.examesSolicitado;
+        this.anotacoesConsulta = builder.anotacoesConsulta;
+        this.examesSolicitados = builder.examesSolicitados;
         this.isRetorno = builder.isRetorno;
         
     }
@@ -66,12 +66,12 @@ public class Consulta {
         this.dataConsulta = dataConsulta;
     }
 
-    public String getDiagnostico() {
-        return diagnostico;
+    public String getAnotacoesConsulta() {
+        return anotacoesConsulta;
     }
 
-    public void setDiagnostico(String diagnostico) {
-        this.diagnostico = diagnostico;
+    public void setAnotacoesConsulta(String anotacoesConsulta) {
+        this.anotacoesConsulta = anotacoesConsulta;
     }
 
     public Medico getMedico() {
@@ -82,12 +82,12 @@ public class Consulta {
         this.medico = medico;
     }
 
-    public String getExamesSolicitado() {
-        return examesSolicitado;
+    public String getExamesSolicitados() {
+        return examesSolicitados;
     }
 
-    public void setExamesSolicitado(String examesSolicitado) {
-        this.examesSolicitado = examesSolicitado;
+    public void setExamesSolicitados(String examesSolicitados) {
+        this.examesSolicitados = examesSolicitados;
     }
 
     public char getIsRetorno() {
@@ -104,8 +104,8 @@ public class Consulta {
         private Medico medico;
         private String statusConsulta;
         private Date dataConsulta;
-        private String diagnostico;
-        private String examesSolicitado;
+        private String anotacoesConsulta;
+        private String examesSolicitados;
         private char isRetorno;
     
     
@@ -129,12 +129,12 @@ public class Consulta {
         this.dataConsulta = dataConsulta;
         return this;
     }
-    public Builder diagnostico(String diagnostico){
-        this.diagnostico = diagnostico;
+    public Builder anotacoesConsulta(String anotacoesConsulta){
+        this.anotacoesConsulta = anotacoesConsulta;
         return this;
     }
-    public Builder examesSolicitados(String examesSolicitado){
-        this.examesSolicitado = examesSolicitado;
+    public Builder examesSolicitados(String examesSolicitados){
+        this.examesSolicitados = examesSolicitados;
         return this;
     }
     
