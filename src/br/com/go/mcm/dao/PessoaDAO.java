@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.go.mcm.control;
+package br.com.go.mcm.dao;
 
 import br.com.go.mcm.model.Pessoa;
 import java.sql.Date;
@@ -13,7 +13,7 @@ import java.sql.SQLException;
  *
  * @author gilca
  */
-public class PessoaControle extends QueryHelper {
+public class PessoaDAO extends QueryHelper {
 
     /**
      * Método responsável pela persistência de um objeto do tipo Pessoa

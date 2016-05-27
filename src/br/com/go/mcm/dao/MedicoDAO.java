@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.go.mcm.control;
+package br.com.go.mcm.dao;
 
 import br.com.go.mcm.model.Email;
 import br.com.go.mcm.model.Endereco;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
  *
  * @author User
  */
-public class MedicoControle extends QueryHelper {
+public class MedicoDAO extends QueryHelper {
 
     public String gerarQueryCadastrarMedico(Medico medico) throws SQLException {
         this.query = "INSERT INTO medico (idPessoa, crmMedico, especialidadeMedico) "
@@ -135,6 +135,7 @@ public class MedicoControle extends QueryHelper {
                     .dataNacimentoPessoa(this.resultSet.getDate("dataNascimentoPessoa"))
                     .contruir();
             
+            //e finalmente, instanciando o medico
             Medico medico = new Medico(this.resultSet.getString("crmMedico"),
                     this.resultSet.getString("especialidadeMedico"),
                     pessoa,

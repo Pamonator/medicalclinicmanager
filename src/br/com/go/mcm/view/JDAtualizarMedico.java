@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.go.mcm.vision;
+package br.com.go.mcm.view;
 
-import br.com.go.mcm.control.SistemaControle;
+import br.com.go.mcm.dao.DAOManager;
 import br.com.go.mcm.model.Email;
 import br.com.go.mcm.model.Endereco;
 import br.com.go.mcm.model.Medico;
@@ -596,13 +596,13 @@ public class JDAtualizarMedico extends javax.swing.JDialog {
         //bloco que executa a instrução SQL e captura uma possível exceção
         try {
             //armazenando o resultado da query SQL que cadastra uma pessoa
-            boolean cadastrarPessoa = SistemaControle.pessoaControle().atualizarPessoa(pessoa);
+            boolean cadastrarPessoa = DAOManager.pessoaControle().atualizarPessoa(pessoa);
 
             //caso o cadastro tenha sido realizado com sucesso, damos continuidade à gravação dos demais dados
             //(endereco, telefone, email, paciente)
             if (cadastrarPessoa) {
                 //recuperando do banco o idPessoa (primaryKey auto_increment) que foi gravada no banco
-                pessoa.setIdPessoa(SistemaControle
+                pessoa.setIdPessoa(DAOManager
                         .pessoaControle()
                         .getUltimoIdCadastrado("pessoa", "idPessoa")
                 );
@@ -642,13 +642,13 @@ public class JDAtualizarMedico extends javax.swing.JDialog {
                 ArrayList<String> queryList = new ArrayList<>();
 
                 //gerando as queries e adicionando as mesmas à lista
-                queryList.add(SistemaControle.enderecoControle().gerarQueryAtualizarEndereco(endereco));
-                queryList.add(SistemaControle.telefoneControle().gerarQueryAtualizarTelefone(telefone));
-                queryList.add(SistemaControle.emailControle().gerarQueryAtualizarEmail(email));
-                queryList.add(SistemaControle.medicoControle().gerarQueryAtualizarMedico(medico));
+                queryList.add(DAOManager.enderecoControle().gerarQueryAtualizarEndereco(endereco));
+                queryList.add(DAOManager.telefoneControle().gerarQueryAtualizarTelefone(telefone));
+                queryList.add(DAOManager.emailControle().gerarQueryAtualizarEmail(email));
+                queryList.add(DAOManager.medicoControle().gerarQueryAtualizarMedico(medico));
 
                 //executando as varias queries em um bloco
-                boolean excuteTransaction = SistemaControle.medicoControle().excuteTransaction(queryList);
+                boolean excuteTransaction = DAOManager.medicoControle().excuteTransaction(queryList);
 
                 //exibindo as mensagens de sucesso ou erro da execução do bloco de queries SQL
                 if (excuteTransaction) {
@@ -659,7 +659,7 @@ public class JDAtualizarMedico extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(this, "Falha no cadastro! Favor "
                             + "entrar em contato com o suporte.\nInformações sobre o erro: Desconhecidas");
                     //caso o bloco de queries nao tenha sido executado, removemos a pessoa previamente cadastrada
-                    SistemaControle.pessoaControle().apagarPessoa(pessoa.getIdPessoa());
+                    DAOManager.pessoaControle().apagarPessoa(pessoa.getIdPessoa());
                     //fecha a janela
                     this.dispose();
                 }

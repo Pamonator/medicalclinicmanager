@@ -5,7 +5,7 @@
  */
 package br.com.go.mcm.pacotetestjunit;
 
-import br.com.go.mcm.control.SistemaControle;
+import br.com.go.mcm.dao.DAOManager;
 import br.com.go.mcm.dbconnection.RestaurarBackupMYSQL;
 import br.com.go.mcm.model.Pessoa;
 import java.sql.Date;
@@ -53,6 +53,6 @@ public class CadastrarPessoaTeste {
                 .dataNacimentoPessoa(dataNascimentoPessoa)
                 .contruir();
         
-        Assert.assertTrue(SistemaControle.pessoaControle().cadastrarPessoa(pessoa));
+        Assert.assertTrue(DAOManager.pessoaControle().cadastrarPessoa(pessoa));
     }
 }

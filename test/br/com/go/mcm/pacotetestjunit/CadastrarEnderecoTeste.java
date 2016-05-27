@@ -5,7 +5,7 @@
  */
 package br.com.go.mcm.pacotetestjunit;
 
-import br.com.go.mcm.control.SistemaControle;
+import br.com.go.mcm.dao.DAOManager;
 import br.com.go.mcm.model.Endereco;
 import java.sql.SQLException;
 import org.junit.After;
@@ -42,7 +42,7 @@ public class CadastrarEnderecoTeste {
 
     @Test
     public void inserirEndereco() throws SQLException {
-        int idPessoa = SistemaControle.pessoaControle().getUltimoIdCadastrado("pessoa", "idPessoa");
+        int idPessoa = DAOManager.pessoaControle().getUltimoIdCadastrado("pessoa", "idPessoa");
         
         Endereco endereco = new Endereco.Builder()
                 .idPessoa(idPessoa)
@@ -55,6 +55,6 @@ public class CadastrarEnderecoTeste {
                 .CEPEndereco("11660-001")
                 .construir();
 
-        assertTrue(SistemaControle.enderecoControle().cadastrarEndereco(endereco));
+        assertTrue(DAOManager.enderecoControle().cadastrarEndereco(endereco));
     }
 }

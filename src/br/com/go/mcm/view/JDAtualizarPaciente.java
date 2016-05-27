@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.go.mcm.vision;
+package br.com.go.mcm.view;
 
-import br.com.go.mcm.control.SistemaControle;
+import br.com.go.mcm.dao.DAOManager;
 import br.com.go.mcm.model.Email;
 import br.com.go.mcm.model.Endereco;
 import br.com.go.mcm.model.Paciente;
@@ -574,7 +574,7 @@ public class JDAtualizarPaciente extends javax.swing.JDialog {
                 .contruir();
 
         try {
-            boolean atualizarPessoa = SistemaControle.pessoaControle().atualizarPessoa(pessoa);
+            boolean atualizarPessoa = DAOManager.pessoaControle().atualizarPessoa(pessoa);
 
             if (atualizarPessoa) {
                 Endereco endereco = new Endereco.Builder()
@@ -608,12 +608,12 @@ public class JDAtualizarPaciente extends javax.swing.JDialog {
 
                 ArrayList<String> queryList = new ArrayList<>();
 
-                queryList.add(SistemaControle.enderecoControle().gerarQueryAtualizarEndereco(endereco));
-                queryList.add(SistemaControle.telefoneControle().gerarQueryAtualizarTelefone(telefone));
-                queryList.add(SistemaControle.emailControle().gerarQueryAtualizarEmail(email));
-                queryList.add(SistemaControle.pacienteControle().gerarQueryAtualizarPaciente(this.paciente));
+                queryList.add(DAOManager.enderecoControle().gerarQueryAtualizarEndereco(endereco));
+                queryList.add(DAOManager.telefoneControle().gerarQueryAtualizarTelefone(telefone));
+                queryList.add(DAOManager.emailControle().gerarQueryAtualizarEmail(email));
+                queryList.add(DAOManager.pacienteControle().gerarQueryAtualizarPaciente(this.paciente));
 
-                boolean excuteTransaction = SistemaControle.pacienteControle().excuteTransaction(queryList);
+                boolean excuteTransaction = DAOManager.pacienteControle().excuteTransaction(queryList);
 
                 if (excuteTransaction) {
                     JOptionPane.showMessageDialog(this, "Informações alteradas com sucesso!!");
@@ -621,7 +621,7 @@ public class JDAtualizarPaciente extends javax.swing.JDialog {
                 } else {
                     JOptionPane.showMessageDialog(this, "Falha no cadastro! Favor "
                             + "entrar em contato com o suporte.\nInformações sobre o erro: Desconhecidas");
-                    SistemaControle.pessoaControle().apagarPessoa(pessoa.getIdPessoa());
+                    DAOManager.pessoaControle().apagarPessoa(pessoa.getIdPessoa());
                     this.dispose();
                 }
             }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.go.mcm.control;
+package br.com.go.mcm.dao;
 
 import br.com.go.mcm.dbconnection.MySqlControle;
 import java.sql.Connection;

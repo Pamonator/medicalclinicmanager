@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.go.mcm.control;
+package br.com.go.mcm.dao;
 
 import br.com.go.mcm.model.Endereco;
 import java.sql.SQLException;
@@ -12,7 +12,7 @@ import java.sql.SQLException;
  *
  * @author gilca
  */
-public class EnderecoControle extends QueryHelper {
+public class EnderecoDAO extends QueryHelper {
 
     /**
      * Método que prepara uma query SQL para o cadastro de um endereco

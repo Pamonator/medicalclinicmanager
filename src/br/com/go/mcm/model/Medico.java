@@ -15,6 +15,8 @@ public class Medico {
     private String especialidadeMedico;
     private Pessoa pessoa;
     private char statusMedico;   
+    
+    public Medico() {}
 
     public Medico(String crmMedico, String especialidadeMedico, Pessoa pessoa) {
         this.crmMedico = crmMedico;
@@ -27,10 +29,6 @@ public class Medico {
         this.especialidadeMedico = especialidadeMedico;
         this.pessoa = pessoa;
         this.statusMedico = statusMedico;
-    }
-
-    public Medico() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     public String getCrmMedico() {

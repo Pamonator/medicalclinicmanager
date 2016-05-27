@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.go.mcm.vision;
+package br.com.go.mcm.view;
 
-import br.com.go.mcm.control.SistemaControle;
+import br.com.go.mcm.dao.DAOManager;
 import br.com.go.mcm.model.Email;
 import br.com.go.mcm.model.Endereco;
-import br.com.go.mcm.model.Funcionario;
+import br.com.go.mcm.model.Paciente;
 import br.com.go.mcm.model.Pessoa;
 import br.com.go.mcm.model.Telefone;
 import java.awt.Image;
@@ -25,32 +25,17 @@ import javax.swing.JOptionPane;
  *
  * @author gilca
  */
-public class JDAtualizarFuncionario extends javax.swing.JDialog {
+public class JDCadastrarPaciente extends javax.swing.JDialog {
 
-    private Funcionario funcionario;
-    
     /**
      * Creates new form CadastrarPaciente
      *
      * @param parent
      * @param modal
      */
-    private JDAtualizarFuncionario(java.awt.Frame parent, boolean modal) {
+    public JDCadastrarPaciente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        initComponents();
-    }
-    
-    /**
-     * Creates new form CadastrarPaciente
-     *
-     * @param parent
-     * @param modal
-     * @param funcionario
-     */
-    public JDAtualizarFuncionario(java.awt.Frame parent, boolean modal, Funcionario funcionario) {
-        super(parent, modal);
-        initComponents();
-        this.funcionario = funcionario;
+        initComponents();         
     }
 
     /**
@@ -75,15 +60,17 @@ public class JDAtualizarFuncionario extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         jtfCpfPessoa = new javax.swing.JTextField();
         jtfEmissorRgPessoa = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        jcbEstadoCivilPessoa = new javax.swing.JComboBox<>();
+        jcbEscolaridade = new javax.swing.JComboBox<>();
+        jLabel14 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jtfCargoFuncionario = new javax.swing.JTextField();
+        jtfProfissaoPessoa = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         jtfEmailPessoa = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
-        jtfNumFuncionario = new javax.swing.JTextField();
+        jtfProntuarioPaciente = new javax.swing.JTextField();
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
-        jLabel14 = new javax.swing.JLabel();
-        jcbStatusFuncionario = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         jtfCepEndereco = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -107,7 +94,8 @@ public class JDAtualizarFuncionario extends javax.swing.JDialog {
         jLabel20 = new javax.swing.JLabel();
         jtfTelefoneCelular = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
-        jbAtualizarFuncionario = new javax.swing.JButton();
+        jbLimparCampos = new javax.swing.JButton();
+        jbCadastrarPaciente = new javax.swing.JButton();
         jbSair = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -116,9 +104,6 @@ public class JDAtualizarFuncionario extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
-            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -157,16 +142,26 @@ public class JDAtualizarFuncionario extends javax.swing.JDialog {
 
         jtfEmissorRgPessoa.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel17.setText("Estado Civil:");
+
+        jcbEstadoCivilPessoa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solteiro(a)", "Casado(a)", "Divorciado(a)", "Disquitado(a)", "Viúvo(a)", "Outros" }));
+
+        jcbEscolaridade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sem Formação", "Fundamental", "Médio", "Superior" }));
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel14.setText("Escolaridade:");
+
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel12.setText("Cargo:");
+        jLabel12.setText("Profissão:");
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel21.setText("Email:");
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel23.setText("Número:");
+        jLabel23.setText("Prontuário:");
 
-        jtfNumFuncionario.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jtfProntuarioPaciente.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         try {
             jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -175,10 +170,6 @@ public class JDAtualizarFuncionario extends javax.swing.JDialog {
         }
         jFormattedTextField1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
-        jLabel14.setText("Status:");
-
-        jcbStatusFuncionario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ativo", "Inativo" }));
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -186,85 +177,90 @@ public class JDAtualizarFuncionario extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel21)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfEmailPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jFormattedTextField1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jcbSexoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jcbStatusFuncionario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jcbEscolaridade, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfRgPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfEmissorRgPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jcbEstadoCivilPessoa, 0, 127, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel23)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfProntuarioPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfNomePessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(jtfNomePessoa))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfCpfPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfCargoFuncionario))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel23)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtfNumFuncionario))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel16)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtfCpfPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtfRgPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel15)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtfEmissorRgPessoa))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addGap(18, 18, 18)
-                                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jcbSexoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(jtfProfissaoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel21)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfEmailPessoa)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel23)
-                    .addComponent(jcbSexoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfNumFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jtfCargoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)
-                        .addComponent(jtfNomePessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(jtfCpfPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(jtfRgPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15)
-                    .addComponent(jtfEmissorRgPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jtfNomePessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel23)
+                            .addComponent(jtfProntuarioPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14)
+                            .addComponent(jcbEscolaridade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcbSexoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel17)
+                            .addComponent(jcbEstadoCivilPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addComponent(jtfRgPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel15)
+                            .addComponent(jtfEmissorRgPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
                     .addComponent(jtfEmailPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14)
-                    .addComponent(jcbStatusFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfProfissaoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16)
+                    .addComponent(jtfCpfPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -414,14 +410,21 @@ public class JDAtualizarFuncionario extends javax.swing.JDialog {
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
-        jbAtualizarFuncionario.setText("Salvar");
-        jbAtualizarFuncionario.addActionListener(new java.awt.event.ActionListener() {
+        jbLimparCampos.setText("Limpar");
+        jbLimparCampos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbAtualizarFuncionarioActionPerformed(evt);
+                jbLimparCamposActionPerformed(evt);
             }
         });
 
-        jbSair.setText("Cancelar");
+        jbCadastrarPaciente.setText("Cadastrar");
+        jbCadastrarPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCadastrarPacienteActionPerformed(evt);
+            }
+        });
+
+        jbSair.setText("Fechar");
         jbSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbSairActionPerformed(evt);
@@ -436,7 +439,9 @@ public class JDAtualizarFuncionario extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jbSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jbAtualizarFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbLimparCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jbCadastrarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -444,7 +449,8 @@ public class JDAtualizarFuncionario extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbAtualizarFuncionario)
+                    .addComponent(jbLimparCampos)
+                    .addComponent(jbCadastrarPaciente)
                     .addComponent(jbSair))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -461,7 +467,7 @@ public class JDAtualizarFuncionario extends javax.swing.JDialog {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addContainerGap())
@@ -488,12 +494,12 @@ public class JDAtualizarFuncionario extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -526,21 +532,17 @@ public class JDAtualizarFuncionario extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
+    
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         //título da janela
-        this.setTitle("Atualizar Funciomário");
+        this.setTitle("Cadastrar Paciente");
         //localização da janela (centro do monitor)
         this.setLocationRelativeTo(null);
-        
-        this.jtfNumFuncionario.setEditable(false);
-        
         //ícone da janela
         URL url = this.getClass().getResource("nurse-16.png");
         Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(url);
         this.setIconImage(iconeTitulo);
         
-        this.preencherCamposFuncionario();
     }//GEN-LAST:event_formWindowOpened
 
     private void jbSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSairActionPerformed
@@ -553,8 +555,8 @@ public class JDAtualizarFuncionario extends javax.swing.JDialog {
         
         obs - é preciso implementar a verificação de preenchimento dos campos!!!!
     
-     */
-    private void jbAtualizarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtualizarFuncionarioActionPerformed
+    */
+    private void jbCadastrarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarPacienteActionPerformed
         //lendo a data do jformattedTextField e guardando em uma string        
         String aux = this.jFormattedTextField1.getText();
 
@@ -571,9 +573,8 @@ public class JDAtualizarFuncionario extends javax.swing.JDialog {
         //tranformando o objeto Calendar em Date (Date é o formato aceito pelo banco)
         Date dataNascimentoPessoa = new Date(calendar.getTimeInMillis());
 
-        //instanciando a pessoa a ser cadastrada no banco(deve ser gravada primeiro!!)
+        //instanciando a pessoa a ser caastrada no banco(deve ser gravada primeiro!!)
         Pessoa pessoa = new Pessoa.Builder()
-                .idPessoa(this.funcionario.getPessoa().getIdPessoa())
                 .nomePessoa(this.jtfNomePessoa.getText())
                 .sexoPessoa(this.jcbSexoPessoa.getSelectedItem().toString().charAt(0))
                 .rgPessoa(this.jtfRgPessoa.getText())
@@ -585,13 +586,13 @@ public class JDAtualizarFuncionario extends javax.swing.JDialog {
         //bloco que executa a instrução SQL e captura uma possível exceção
         try {
             //armazenando o resultado da query SQL que cadastra uma pessoa
-            boolean atualizarPessoa = SistemaControle.pessoaControle().atualizarPessoa(pessoa);
+            boolean cadastrarPessoa = DAOManager.pessoaControle().cadastrarPessoa(pessoa);
 
             //caso o cadastro tenha sido realizado com sucesso, damos continuidade à gravação dos demais dados
             //(endereco, telefone, email, paciente)
-            if (atualizarPessoa) {
+            if (cadastrarPessoa) {
                 //recuperando do banco o idPessoa (primaryKey auto_increment) que foi gravada no banco
-                pessoa.setIdPessoa(SistemaControle
+                pessoa.setIdPessoa(DAOManager
                         .pessoaControle()
                         .getUltimoIdCadastrado("pessoa", "idPessoa")
                 );
@@ -610,42 +611,48 @@ public class JDAtualizarFuncionario extends javax.swing.JDialog {
 
                 //instanciando o objeto Telefone a partir dos dados digitados pelo usuário
                 Telefone telefone = new Telefone(pessoa.getIdPessoa(),
-                        this.jtfTelefoneResidencial.getText(),
-                        this.jtfTelefoneComercial.getText(),
+                        this.jtfTelefoneResidencial.getText(), 
+                        this.jtfTelefoneComercial.getText(), 
                         this.jtfTelefoneCelular.getText()
                 );
 
                 //instanciando o objeto Email a partir dos dados digitados pelo usuário                
-                Email email = new Email(pessoa.getIdPessoa(),
+                Email email = new Email(pessoa.getIdPessoa(), 
                         this.jtfEmailPessoa.getText()
                 );
+                
+                //instanciando o objeto Paciente a partir dos dados digitados pelo usuário
 
-                //instanciando o objeto Funcionario a partir dos dados digitados pelo usuário
-                this.funcionario = new Funcionario(pessoa,
-                        this.jtfCargoFuncionario.getText());
-
+                Paciente paciente = new Paciente.Builder()
+                        .prontuarioPaciente(Integer.parseInt(this.jtfProntuarioPaciente.getText()))
+                        .pessoa(pessoa)
+                        .estadoCivilPaciente(this.jcbEstadoCivilPessoa.getSelectedItem().toString())
+                        .profissaoPaciente(this.jtfProfissaoPessoa.getText())
+                        .escolaridadePaciente(this.jcbEscolaridade.getSelectedItem().toString())
+                        .contruir();
+                
                 //declarando e instanciando o ArrayList que receberá a lista das queries que serão executadas "em bloco"
                 ArrayList<String> queryList = new ArrayList<>();
 
                 //gerando as queries e adicionando as mesmas à lista
-                queryList.add(SistemaControle.enderecoControle().gerarQueryAtualizarEndereco(endereco));
-                queryList.add(SistemaControle.telefoneControle().gerarQueryAtualizarTelefone(telefone));
-                queryList.add(SistemaControle.emailControle().gerarQueryAtualizarEmail(email));
-                queryList.add(SistemaControle.funcionarioControle().gerarQueryAtualizarFuncionario(funcionario));
+                queryList.add(DAOManager.enderecoControle().gerarQueryCadastrarEndereco(endereco));
+                queryList.add(DAOManager.telefoneControle().gerarQueryCadastrarTelefone(telefone));
+                queryList.add(DAOManager.emailControle().gerarQueryCadastrarEmail(email));
+                queryList.add(DAOManager.pacienteControle().gerarQuerycadastrarPaciente(paciente));
 
                 //executando as varias queries em um bloco
-                boolean excuteTransaction = SistemaControle.funcionarioControle().excuteTransaction(queryList);
-
+                boolean excuteTransaction = DAOManager.pacienteControle().excuteTransaction(queryList);
+                
                 //exibindo as mensagens de sucesso ou erro da execução do bloco de queries SQL
                 if (excuteTransaction) {
-                    JOptionPane.showMessageDialog(this, "Informações alteradas com sucesso!!");
+                    JOptionPane.showMessageDialog(this, "Paciente cadastrado com sucesso!!");
                     //fecha a janela
                     this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(this, "Falha no cadastro! Favor "
                             + "entrar em contato com o suporte.\nInformações sobre o erro: Desconhecidas");
                     //caso o bloco de queries nao tenha sido executado, removemos a pessoa previamente cadastrada
-                    SistemaControle.pessoaControle().apagarPessoa(pessoa.getIdPessoa());
+                    DAOManager.pessoaControle().apagarPessoa(pessoa.getIdPessoa());
                     //fecha a janela
                     this.dispose();
                 }
@@ -656,11 +663,11 @@ public class JDAtualizarFuncionario extends javax.swing.JDialog {
             //fecha a janela
             this.dispose();
         }
-    }//GEN-LAST:event_jbAtualizarFuncionarioActionPerformed
+    }//GEN-LAST:event_jbCadastrarPacienteActionPerformed
 
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_formWindowClosed
+    private void jbLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimparCamposActionPerformed
+        this.limparCampos();
+    }//GEN-LAST:event_jbLimparCamposActionPerformed
 
     /**
      * @param args the command line arguments
@@ -679,13 +686,16 @@ public class JDAtualizarFuncionario extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JDAtualizarFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDCadastrarPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-    
+        //</editor-fold>
+        
+        //</editor-fold>
+
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(() -> {
-            JDAtualizarFuncionario dialog = new JDAtualizarFuncionario(new javax.swing.JFrame(), true);
+            JDCadastrarPaciente dialog = new JDCadastrarPaciente(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
@@ -706,6 +716,7 @@ public class JDAtualizarFuncionario extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
@@ -726,13 +737,14 @@ public class JDAtualizarFuncionario extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JButton jbAtualizarFuncionario;
+    private javax.swing.JButton jbCadastrarPaciente;
+    private javax.swing.JButton jbLimparCampos;
     private javax.swing.JButton jbSair;
+    private javax.swing.JComboBox<String> jcbEscolaridade;
+    private javax.swing.JComboBox<String> jcbEstadoCivilPessoa;
     private javax.swing.JComboBox<String> jcbEstadoEndereco;
     private javax.swing.JComboBox<String> jcbSexoPessoa;
-    private javax.swing.JComboBox<String> jcbStatusFuncionario;
     private javax.swing.JTextField jtfBairroEndereco;
-    private javax.swing.JTextField jtfCargoFuncionario;
     private javax.swing.JTextField jtfCepEndereco;
     private javax.swing.JTextField jtfCidadeEndereco;
     private javax.swing.JTextField jtfCompEndereco;
@@ -741,8 +753,9 @@ public class JDAtualizarFuncionario extends javax.swing.JDialog {
     private javax.swing.JTextField jtfEmissorRgPessoa;
     private javax.swing.JTextField jtfLogradouroEndereco;
     private javax.swing.JTextField jtfNomePessoa;
-    private javax.swing.JTextField jtfNumFuncionario;
     private javax.swing.JTextField jtfNumeroEndereco;
+    private javax.swing.JTextField jtfProfissaoPessoa;
+    private javax.swing.JTextField jtfProntuarioPaciente;
     private javax.swing.JTextField jtfRgPessoa;
     private javax.swing.JTextField jtfTelefoneCelular;
     private javax.swing.JTextField jtfTelefoneComercial;
@@ -751,7 +764,8 @@ public class JDAtualizarFuncionario extends javax.swing.JDialog {
 
     /*
         método que apaga o texto de todos os campos preenchidos do formulário    
-     */
+    */
+  
     private void limparCampos() {
         this.jtfBairroEndereco.setText("");
         this.jtfCepEndereco.setText("");
@@ -763,69 +777,18 @@ public class JDAtualizarFuncionario extends javax.swing.JDialog {
         this.jtfLogradouroEndereco.setText("");
         this.jtfNomePessoa.setText("");
         this.jtfNumeroEndereco.setText("");
-        this.jtfCargoFuncionario.setText("");
-        this.jtfNumFuncionario.setText("");
+        this.jtfProfissaoPessoa.setText("");
+        this.jtfProntuarioPaciente.setText("");
         this.jtfRgPessoa.setText("");
         this.jtfTelefoneResidencial.setText("");
         this.jtfTelefoneComercial.setText("");
         this.jtfTelefoneCelular.setText("");
-
+        
+        this.jcbEscolaridade.setSelectedIndex(0);
+        this.jcbEstadoCivilPessoa.setSelectedIndex(0);
         this.jcbEstadoEndereco.setSelectedIndex(0);
         this.jcbSexoPessoa.setSelectedIndex(0);
-
+        
         this.jFormattedTextField1.setText("");
-    }
-    
-     public void preencherCamposFuncionario() {
-        Pessoa pessoa = this.funcionario.getPessoa();
-        Endereco endereco = pessoa.getEnderecoPessoa();
-        Telefone telefone = pessoa.getTelefonePessoa();
-        Email email = pessoa.getEmailPessoa();
-
-        this.jtfNumFuncionario.setText(String.valueOf(this.funcionario.getIdFuncionario()));
-        this.jtfBairroEndereco.setText(endereco.getBairroEndereco());
-        this.jtfCepEndereco.setText(endereco.getCEPEndereco());
-        this.jtfCidadeEndereco.setText(endereco.getCidadeEndereco());
-        this.jtfCompEndereco.setText(endereco.getComplementoEndereco() + "");
-        this.jtfCpfPessoa.setText(pessoa.getCpfPessoa());
-        this.jtfEmailPessoa.setText(email.getEnderecoEmail());
-        this.jtfEmissorRgPessoa.setText(pessoa.getOrgaoEmissorRGPessoa());
-        this.jtfLogradouroEndereco.setText(endereco.getLogradouroEndereco());
-        this.jtfNomePessoa.setText(pessoa.getNomePessoa());
-        this.jtfNumeroEndereco.setText(endereco.getNumeroEndereco());
-        this.jtfRgPessoa.setText(pessoa.getRgPessoa());
-        this.jtfCargoFuncionario.setText(this.funcionario.getCargoFuncionario());
-        this.jtfTelefoneResidencial.setText(telefone.getTelefoneResidencial());
-        this.jtfTelefoneComercial.setText(telefone.getTelefoneComercial());
-        this.jtfTelefoneCelular.setText(telefone.getTelefoneCelular());
-
-        this.jcbEstadoEndereco.setSelectedItem(endereco.getEstadoEndereco());
-        this.jcbSexoPessoa.setSelectedItem(pessoa.getSexoPessoa());
-
-        Date dataAux = (Date) pessoa.getDataNacimentoPessoa();
-        Calendar calendar = new GregorianCalendar();
-        calendar.setTimeInMillis(dataAux.getTime());
-        String stringAux;
-
-        int dia = calendar.get(Calendar.DATE);
-        int mes = calendar.get(Calendar.MONTH) + 1;
-        int ano = calendar.get(Calendar.YEAR);
-
-        if (dia < 10) {
-            stringAux = "0" + dia;
-        } else {
-            stringAux = "" + dia;
-        }
-
-        if (mes < 10) {
-            stringAux += "0" + mes;
-        } else {
-            stringAux += mes;
-        }
-
-        stringAux += ano;
-
-        this.jFormattedTextField1.setText(stringAux);
-
     }
 }

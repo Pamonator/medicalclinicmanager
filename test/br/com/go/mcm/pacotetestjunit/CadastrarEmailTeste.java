@@ -5,7 +5,7 @@
  */
 package br.com.go.mcm.pacotetestjunit;
 
-import br.com.go.mcm.control.SistemaControle;
+import br.com.go.mcm.dao.DAOManager;
 import br.com.go.mcm.model.Email;
 import java.sql.SQLException;
 import org.junit.After;
@@ -42,10 +42,10 @@ public class CadastrarEmailTeste {
 
     @Test
     public void inserirEmail() throws SQLException {
-        int idPessoa = SistemaControle.pessoaControle().getUltimoIdCadastrado("pessoa", "idPessoa");
+        int idPessoa = DAOManager.pessoaControle().getUltimoIdCadastrado("pessoa", "idPessoa");
         
         Email email = new Email(idPessoa, "blablabla@blablabla.com");
 
-        assertTrue(SistemaControle.emailControle().cadastrarEmail(email));
+        assertTrue(DAOManager.emailControle().cadastrarEmail(email));
     }
 }

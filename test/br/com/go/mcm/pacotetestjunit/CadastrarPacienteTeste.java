@@ -5,7 +5,7 @@
  */
 package br.com.go.mcm.pacotetestjunit;
 
-import br.com.go.mcm.control.SistemaControle;
+import br.com.go.mcm.dao.DAOManager;
 import br.com.go.mcm.model.Email;
 import br.com.go.mcm.model.Endereco;
 import br.com.go.mcm.model.Paciente;
@@ -58,9 +58,9 @@ public class CadastrarPacienteTeste {
                 .dataNacimentoPessoa(dataNascimentoPessoa)
                 .contruir();
 
-        boolean cadastrarPessoa = SistemaControle.pessoaControle().cadastrarPessoa(pessoa);
+        boolean cadastrarPessoa = DAOManager.pessoaControle().cadastrarPessoa(pessoa);
 
-        pessoa.setIdPessoa(SistemaControle
+        pessoa.setIdPessoa(DAOManager
                 .pessoaControle()
                 .getUltimoIdCadastrado("pessoa", "idPessoa")
         );
@@ -90,11 +90,11 @@ public class CadastrarPacienteTeste {
         
         ArrayList<String> queryList = new ArrayList<>();
         
-        queryList.add(SistemaControle.enderecoControle().gerarQueryCadastrarEndereco(endereco));
-        queryList.add(SistemaControle.telefoneControle().gerarQueryCadastrarTelefone(telefone));
-        queryList.add(SistemaControle.emailControle().gerarQueryCadastrarEmail(email));
-        queryList.add(SistemaControle.pacienteControle().gerarQuerycadastrarPaciente(paciente));
+        queryList.add(DAOManager.enderecoControle().gerarQueryCadastrarEndereco(endereco));
+        queryList.add(DAOManager.telefoneControle().gerarQueryCadastrarTelefone(telefone));
+        queryList.add(DAOManager.emailControle().gerarQueryCadastrarEmail(email));
+        queryList.add(DAOManager.pacienteControle().gerarQuerycadastrarPaciente(paciente));
 
-        assertTrue(SistemaControle.pacienteControle().excuteTransaction(queryList));
+        assertTrue(DAOManager.pacienteControle().excuteTransaction(queryList));
     }
 }

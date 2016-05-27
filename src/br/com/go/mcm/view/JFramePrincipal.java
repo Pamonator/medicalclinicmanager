@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.go.mcm.vision;
+package br.com.go.mcm.view;
 
-import br.com.go.mcm.control.SistemaControle;
+import br.com.go.mcm.dao.DAOManager;
 import br.com.go.mcm.model.Endereco;
 import br.com.go.mcm.model.Funcionario;
 import br.com.go.mcm.model.Medico;
@@ -230,6 +230,8 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jtfTelefoneCelularFuncionario = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuIniciar = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jmiCadastrarPaciente = new javax.swing.JMenuItem();
         jmiCadastrarMedico = new javax.swing.JMenuItem();
         jmiCadastrarFuncionario = new javax.swing.JMenuItem();
@@ -255,31 +257,36 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID-Consulta", "Data", "Horario", "Paciente", "Medico"
+                "Data", "Horario", "Paciente", "Medico", "paciente", "medico"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane4.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setMinWidth(0);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(0);
-            jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
             jTable1.getColumnModel().getColumn(1).setResizable(false);
             jTable1.getColumnModel().getColumn(2).setResizable(false);
             jTable1.getColumnModel().getColumn(3).setResizable(false);
+            jTable1.getColumnModel().getColumn(4).setMinWidth(0);
+            jTable1.getColumnModel().getColumn(4).setPreferredWidth(0);
+            jTable1.getColumnModel().getColumn(4).setMaxWidth(0);
+            jTable1.getColumnModel().getColumn(5).setMinWidth(0);
+            jTable1.getColumnModel().getColumn(5).setPreferredWidth(0);
+            jTable1.getColumnModel().getColumn(5).setMaxWidth(0);
         }
 
         jtfPesquisaConsulta.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -1941,6 +1948,12 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         jMenuIniciar.setText("Início");
 
+        jMenuItem1.setText("Agendar Consulta");
+        jMenuIniciar.add(jMenuItem1);
+
+        jMenuItem2.setText("Histórico de Consultas");
+        jMenuIniciar.add(jMenuItem2);
+
         jmiCadastrarPaciente.setText("Cadastrar Paciente");
         jmiCadastrarPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2100,7 +2113,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         //buscando a lista de pacientes no banco
         try {
             //salvando o resultado da busca na lista de pacientes
-            listaPaciente = SistemaControle.pacienteControle().listarPaciente();
+            listaPaciente = DAOManager.pacienteControle().listarPaciente();
         } catch (SQLException ex) {
             //exibindo uma mensagem caso seja disparada uma exceção
             JOptionPane.showMessageDialog(this, "Erro na leitura do banco de dados.\n"
@@ -2221,7 +2234,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         //buscando a lista no banco
         try {
             //salvando o resultado da busca na lista 
-            listaMedico = SistemaControle.medicoControle().listarMedico();
+            listaMedico = DAOManager.medicoControle().listarMedico();
         } catch (SQLException ex) {
             //exibindo uma mensagem caso seja disparada uma exceção
             JOptionPane.showMessageDialog(this, "Erro na leitura do banco de dados.\n"
@@ -2352,7 +2365,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         //buscando a lista no banco
         try {
             //salvando o resultado da busca na lista 
-            listaFuncionario = SistemaControle.funcionarioControle().listarFuncionario();
+            listaFuncionario = DAOManager.funcionarioControle().listarFuncionario();
         } catch (SQLException ex) {
             //exibindo uma mensagem caso seja disparada uma exceção
             JOptionPane.showMessageDialog(this, "Erro na leitura do banco de dados.\n"
@@ -2539,6 +2552,8 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuConfig;
     private javax.swing.JMenu jMenuIniciar;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -2663,7 +2678,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
      */
     private void preencherTabelaPaciente() {
         try {
-            ArrayList<Paciente> listaPaciente = SistemaControle.pacienteControle().listarPaciente();
+            ArrayList<Paciente> listaPaciente = DAOManager.pacienteControle().listarPaciente();
 
             DefaultTableModel tabelaPaciente = (DefaultTableModel) this.jTablePaciente.getModel();
 
@@ -2701,7 +2716,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
     private void preencherTabelaMedico() {
         try {
-            ArrayList<Medico> listaMedico = SistemaControle.medicoControle().listarMedico();
+            ArrayList<Medico> listaMedico = DAOManager.medicoControle().listarMedico();
 
             DefaultTableModel tabelaMedico = (DefaultTableModel) this.jTableMedico.getModel();
 
@@ -2739,7 +2754,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
     private void preencherTabelaFuncionario() {
         try {
-            ArrayList<Funcionario> listaFuncionario = SistemaControle.funcionarioControle().listarFuncionario();
+            ArrayList<Funcionario> listaFuncionario = DAOManager.funcionarioControle().listarFuncionario();
 
             DefaultTableModel tabelaFuncionario = (DefaultTableModel) this.jTableFuncionario.getModel();
 

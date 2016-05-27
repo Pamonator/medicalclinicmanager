@@ -5,7 +5,7 @@
  */
 package br.com.go.mcm.pacotetestjunit;
 
-import br.com.go.mcm.control.SistemaControle;
+import br.com.go.mcm.dao.DAOManager;
 import br.com.go.mcm.model.Telefone;
 import java.sql.SQLException;
 import org.junit.After;
@@ -42,10 +42,10 @@ public class CadastrarTelefoneTeste {
 
     @Test
     public void inserirTelefone() throws SQLException {
-        int idPessoa = SistemaControle.pessoaControle().getUltimoIdCadastrado("pessoa", "idPessoa");
+        int idPessoa = DAOManager.pessoaControle().getUltimoIdCadastrado("pessoa", "idPessoa");
         
         Telefone telefone = new Telefone(idPessoa, "12-3883-0890", null, "(12)98888-7777");
 
-        assertTrue(SistemaControle.telefoneControle().cadastrarTelefone(telefone));
+        assertTrue(DAOManager.telefoneControle().cadastrarTelefone(telefone));
     }
 }

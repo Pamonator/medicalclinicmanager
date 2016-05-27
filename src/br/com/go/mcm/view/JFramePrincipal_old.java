@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.go.mcm.vision;
+package br.com.go.mcm.view;
 
-import br.com.go.mcm.control.SistemaControle;
+import br.com.go.mcm.dao.DAOManager;
 import br.com.go.mcm.model.Endereco;
 import br.com.go.mcm.model.Paciente;
 import br.com.go.mcm.model.Pessoa;
@@ -721,7 +721,7 @@ public class JFramePrincipal_old extends javax.swing.JFrame {
         //buscando a lista de pacientes no banco
         try {
             //salvando o resultado da busca na lista de pacientes
-            listaPaciente = SistemaControle.pacienteControle().listarPaciente();
+            listaPaciente = DAOManager.pacienteControle().listarPaciente();
         } catch (SQLException ex) {
             //exibindo uma mensagem caso seja disparada uma exceção
             JOptionPane.showMessageDialog(this, "Erro na leitura do banco de dados.\n"
@@ -891,7 +891,7 @@ public class JFramePrincipal_old extends javax.swing.JFrame {
      */
     private void preencherTabelaPaciente() {
         try {
-            ArrayList<Paciente> listaPaciente = SistemaControle.pacienteControle().listarPaciente();
+            ArrayList<Paciente> listaPaciente = DAOManager.pacienteControle().listarPaciente();
 
             DefaultTableModel tabelaPaciente = (DefaultTableModel) this.jTablePaciente.getModel();
 
