@@ -5,6 +5,7 @@
  */
 package br.com.go.mcm.model;
 
+import java.sql.Time;
 import java.util.Date;
 
 /**
@@ -13,35 +14,36 @@ import java.util.Date;
  */
 public class Consulta {
 
-    private int idConsulta;
+    //private int idConsulta;
     private Paciente paciente;
     private Medico medico;
     private String statusConsulta;
     private Date dataConsulta;
+    private Time horarioConsulta;
     private String anotacoesConsulta;
     private String examesSolicitados;
     private char isRetorno;
-    
-    private Consulta(Builder builder){
-        this.idConsulta = builder.idConsulta;
+
+    private Consulta(Builder builder) {
+        //this.idConsulta = builder.idConsulta;
         this.paciente = builder.paciente;
         this.medico = builder.medico;
         this.statusConsulta = builder.statusConsulta;
         this.dataConsulta = builder.dataConsulta;
+        this.horarioConsulta = builder.horarioConsulta;
         this.anotacoesConsulta = builder.anotacoesConsulta;
         this.examesSolicitados = builder.examesSolicitados;
         this.isRetorno = builder.isRetorno;
-        
+
     }
 
-    public int getIdConsulta() {
-        return idConsulta;
-    }
-
-    public void setIdConsulta(int idConsulta) {
-        this.idConsulta = idConsulta;
-    }
-
+//    public int getIdConsulta() {
+//        return idConsulta;
+//    }
+//
+//    public void setIdConsulta(int idConsulta) {
+//        this.idConsulta = idConsulta;
+//    }
     public Paciente getPaciente() {
         return paciente;
     }
@@ -64,6 +66,14 @@ public class Consulta {
 
     public void setDataConsulta(Date dataConsulta) {
         this.dataConsulta = dataConsulta;
+    }
+
+    public Time getHorarioConsulta() {
+        return horarioConsulta;
+    }
+
+    public void setHorarioConsulta(Time horarioConsulta) {
+        this.horarioConsulta = horarioConsulta;
     }
 
     public String getAnotacoesConsulta() {
@@ -99,53 +109,65 @@ public class Consulta {
     }
 
     public static class Builder {
-        private int idConsulta;
+
+        //private int idConsulta;
         private Paciente paciente;
         private Medico medico;
         private String statusConsulta;
         private Date dataConsulta;
+        private Time horarioConsulta;
         private String anotacoesConsulta;
         private String examesSolicitados;
         private char isRetorno;
-    
-    
-    public Builder idConsulta(int idConsulta){
-        this.idConsulta = idConsulta;
-        return this;
-    }
-    public Builder paciente(Paciente paciente) {
-        this.paciente = paciente;
-        return this;
-    }
-    public Builder medico(Medico medico){
-        this.medico = medico;
-        return this;
-    }
-    public Builder statusConsulta(String statusConsulta){
-        this.statusConsulta = statusConsulta;
-        return this;
-    }
-    public Builder dataConsulta(Date dataConsulta){
-        this.dataConsulta = dataConsulta;
-        return this;
-    }
-    public Builder anotacoesConsulta(String anotacoesConsulta){
-        this.anotacoesConsulta = anotacoesConsulta;
-        return this;
-    }
-    public Builder examesSolicitados(String examesSolicitados){
-        this.examesSolicitados = examesSolicitados;
-        return this;
-    }
-    
-    public Builder isRetorno(char isRetorno) {
-        this.isRetorno = isRetorno;
-        return this;
-    }
-    
-    public Consulta construir(){
-        return new Consulta(this);
+
+//    public Builder idConsulta(int idConsulta){
+//        this.idConsulta = idConsulta;
+//        return this;
+//    }
+        public Builder paciente(Paciente paciente) {
+            this.paciente = paciente;
+            return this;
+        }
+
+        public Builder medico(Medico medico) {
+            this.medico = medico;
+            return this;
+        }
+
+        public Builder statusConsulta(String statusConsulta) {
+            this.statusConsulta = statusConsulta;
+            return this;
+        }
+
+        public Builder dataConsulta(Date dataConsulta) {
+            this.dataConsulta = dataConsulta;
+            return this;
+        }
+
+        public Builder horarioConsulta(Time horarioConsulta) {
+            this.horarioConsulta = horarioConsulta;
+            return this;
+        }
+
+        public Builder anotacoesConsulta(String anotacoesConsulta) {
+            this.anotacoesConsulta = anotacoesConsulta;
+            return this;
+        }
+
+        public Builder examesSolicitados(String examesSolicitados) {
+            this.examesSolicitados = examesSolicitados;
+            return this;
+        }
+
+        public Builder isRetorno(char isRetorno) {
+            this.isRetorno = isRetorno;
+            return this;
+        }
+
+        public Consulta construir() {
+            return new Consulta(this);
+        }
+
     }
 
-}
 }

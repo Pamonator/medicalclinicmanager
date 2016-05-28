@@ -24,11 +24,17 @@ public class MySqlControle {
      */
     public Connection getConnection() throws SQLException {
         try {
+            
             Class.forName("org.gjt.mm.mysql.Driver");
-            this.connection = DriverManager.getConnection("jdbc:mysql://localhost/MedicalClinicManager", "root", "");
+            
+            this.connection = DriverManager.getConnection("jdbc:mysql://localhost/MedicalClinicManager", "root", "");            
+            
             return this.connection;
+            
         } catch (ClassNotFoundException ex) {
+            
             throw new SQLException(ex.getMessage());
+            
         }
     }
 
@@ -37,7 +43,9 @@ public class MySqlControle {
      * @throws java.sql.SQLException
      */
     public void closeConnection() throws SQLException {
+        
         this.connection.close();
+        
     }     
     
 }

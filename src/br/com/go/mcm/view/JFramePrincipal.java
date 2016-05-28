@@ -47,7 +47,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jTabbedPane = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
+        jPanelConsulta = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -230,8 +230,8 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jtfTelefoneCelularFuncionario = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuIniciar = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jmiAgendarConsulta = new javax.swing.JMenuItem();
+        jmiHistoricoConsulta = new javax.swing.JMenuItem();
         jmiCadastrarPaciente = new javax.swing.JMenuItem();
         jmiCadastrarMedico = new javax.swing.JMenuItem();
         jmiCadastrarFuncionario = new javax.swing.JMenuItem();
@@ -251,7 +251,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         jTabbedPane.setBackground(new java.awt.Color(51, 153, 255));
 
-        jPanel1.setBackground(new java.awt.Color(51, 153, 255));
+        jPanelConsulta.setBackground(new java.awt.Color(51, 153, 255));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -594,38 +594,38 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelConsultaLayout = new javax.swing.GroupLayout(jPanelConsulta);
+        jPanelConsulta.setLayout(jPanelConsultaLayout);
+        jPanelConsultaLayout.setHorizontalGroup(
+            jPanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelConsultaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelConsultaLayout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelConsultaLayout.createSequentialGroup()
                         .addComponent(jPanel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jPanelConsultaLayout.setVerticalGroup(
+            jPanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelConsultaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jTabbedPane.addTab("Consulta", jPanel1);
+        jTabbedPane.addTab("Consulta", jPanelConsulta);
 
         jPanelPaciente.setBackground(new java.awt.Color(51, 153, 255));
 
@@ -1948,11 +1948,16 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         jMenuIniciar.setText("Início");
 
-        jMenuItem1.setText("Agendar Consulta");
-        jMenuIniciar.add(jMenuItem1);
+        jmiAgendarConsulta.setText("Agendar Consulta");
+        jmiAgendarConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiAgendarConsultaActionPerformed(evt);
+            }
+        });
+        jMenuIniciar.add(jmiAgendarConsulta);
 
-        jMenuItem2.setText("Histórico de Consultas");
-        jMenuIniciar.add(jMenuItem2);
+        jmiHistoricoConsulta.setText("Histórico de Consultas");
+        jMenuIniciar.add(jmiHistoricoConsulta);
 
         jmiCadastrarPaciente.setText("Cadastrar Paciente");
         jmiCadastrarPaciente.addActionListener(new java.awt.event.ActionListener() {
@@ -2448,6 +2453,10 @@ public class JFramePrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jbEditarConsultaActionPerformed
 
+    private void jmiAgendarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAgendarConsultaActionPerformed
+        
+    }//GEN-LAST:event_jmiAgendarConsultaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2552,10 +2561,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuConfig;
     private javax.swing.JMenu jMenuIniciar;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
@@ -2581,6 +2587,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JPanel jPanelConsulta;
     private javax.swing.JPanel jPanelFuncionario;
     private javax.swing.JPanel jPanelMedico;
     private javax.swing.JPanel jPanelPaciente;
@@ -2606,9 +2613,11 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jcbSexoPessoa;
     private javax.swing.JComboBox<String> jcbSexoPessoa1;
     private javax.swing.JComboBox<String> jcbSexoPessoa2;
+    private javax.swing.JMenuItem jmiAgendarConsulta;
     private javax.swing.JMenuItem jmiCadastrarFuncionario;
     private javax.swing.JMenuItem jmiCadastrarMedico;
     private javax.swing.JMenuItem jmiCadastrarPaciente;
+    private javax.swing.JMenuItem jmiHistoricoConsulta;
     private javax.swing.JMenuItem jmiSair;
     private javax.swing.JTextField jtfBairroEndereco;
     private javax.swing.JTextField jtfBairroEndereco1;
