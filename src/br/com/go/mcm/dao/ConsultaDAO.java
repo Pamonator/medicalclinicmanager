@@ -22,45 +22,47 @@ import java.util.List;
 public class ConsultaDAO extends QueryHelper {
 
     public String gerarQueryAgendarConsulta(Consulta consulta) {
-        this.query = "INSERT INTO consulta (prontuarioPaciente, crmMedico, dataConsulta, "
-                + "diagnosticoConsulta, exameSolicitado, isRetorno) VALUES ("
+        
+        this.query = "INSERT INTO consulta (dataConsulta, horarioConsulta, "
+                + "prontuarioPaciente, crmMedico, dataConsulta, isRetorno) VALUES ('"
+                + consulta.getDataConsulta() + "', '"
+                + consulta.getHorarioConsulta() + "', "
                 + consulta.getPaciente().getProntuarioPaciente() + ", '"
                 + consulta.getMedico().getCrmMedico() + "', '"
-                + consulta.getDataConsulta() + "', '" + consulta.getAnotacoesConsulta() + "', '"
-                + consulta.getExamesSolicitados() + "', '"
-                +consulta.getIsRetorno() + "');";
+                + consulta.getDataConsulta() + "', '" 
+                + consulta.getIsRetorno() + "');";
 
         return this.query;
     }
 
     public String gerarQueryAtualizarAgendarConsulta(Consulta consulta) {
+        
         this.query = "UPDATE consulta SET prontuarioPaciente = " + consulta.getPaciente().getProntuarioPaciente() + ", "
-                + "crmMedico = '" + consulta.getMedico() + "', dataConsulta = '" + consulta.getDataConsulta() + "', "
-                + "diagnosticoConsulta = '" + consulta.getAnotacoesConsulta() + "', "
-                + "exameSolicitado = '" + consulta.getExamesSolicitados() + "', "
                 + "statusConsulta = '" + consulta.getStatusConsulta() + "', "
-                + "isRetorno = '" + consulta.getIsRetorno() + "', ";
+                + "isRetorno = '" + consulta.getIsRetorno() + "', "
+                + "WHERE dataConsulta = '" + consulta.getDataConsulta() + "' "
+                + "AND horarioConsulta = '" + consulta.getHorarioConsulta() + "' "
+                + "AND crmMedico = '" + consulta.getMedico().getCrmMedico() + "'";
 
         return this.query;
     }
 
     public boolean agendarConsulta(Consulta consulta) throws SQLException {
         
-        this.query = "INSERT INTO consulta (prontuarioPaciente, crmMedico, dataConsulta, "
-                + "diagnosticoConsulta, exameSolicitado, isRetorno) VALUES (?, ? ,? ,? ,? ,?)";
+        this.query = "INSERT INTO consulta (dataConsulta, horarioConsulta,"
+                + " prontuarioPaciente, crmMedico, isRetorno) VALUES (?, ? ,? ,? ,?)";
         
-        this.prepStatement = this.mySqlControle.getConnection().prepareCall(query);
+        this.prepStatement = this.mySqlControle.getConnection().prepareCall(this.query);
         
-        this.prepStatement.setInt(1, consulta.getPaciente().getProntuarioPaciente());
-        this.prepStatement.setString(2, consulta.getMedico().getCrmMedico());
-        this.prepStatement.setDate(3, (Date) consulta.getDataConsulta());
-               
-        
+        this.prepStatement.setDate(1, (Date) consulta.getDataConsulta());
+        this.prepStatement.setTime(2, consulta.getHorarioConsulta());
+        this.prepStatement.setInt(3, consulta.getPaciente().getProntuarioPaciente());
+        this.prepStatement.setString(4, consulta.getMedico().getCrmMedico());
+        this.prepStatement.setString(5, String.valueOf(consulta.getIsRetorno()));       
         
         return this.prepStatement.executeUpdate() > 0;
         
-    }
-    
+    }    
     
     public Consulta buscarConsulta() throws SQLException {
          
@@ -80,7 +82,7 @@ public class ConsultaDAO extends QueryHelper {
                 + "ON pesquisaMedico.crmMedico = c.crmMedico "
                 + "WHERE ? = ";  
         
-        this.prepStatement = this.mySqlControle.getConnection().prepareStatement(query);
+        this.prepStatement = this.mySqlControle.getConnection().prepareStatement(this.query);
         
         this.resultSet = this.prepStatement.executeQuery();
         
@@ -121,11 +123,9 @@ public class ConsultaDAO extends QueryHelper {
             medico.setPessoa(pessoaMedico);
             
             consulta = new Consulta.Builder()
-                    //.idConsulta(this.resultSet.getInt("idConsulta"))
-                    .statusConsulta(this.resultSet.getString("statusConsulta"))
                     .dataConsulta(this.resultSet.getDate("dataConsulta"))
-                    .examesSolicitados(this.resultSet.getString("examesSolicitados"))
-                    .anotacoesConsulta(this.resultSet.getString("diagnostico"))
+                    .horarioConsulta(this.resultSet.getTime("horarioConsulta"))
+                    .statusConsulta(this.resultSet.getString("statusConsulta"))                    
                     .isRetorno(this.resultSet.getString("isRetorno").charAt(0))
                     .paciente(paciente)
                     .medico(medico)
@@ -138,8 +138,6 @@ public class ConsultaDAO extends QueryHelper {
 
     public List<Consulta> listarConsultaAgendada() throws SQLException {
         
-        List<Consulta> listaConsulta = new ArrayList<>();       
-        
         this.query = "SELECT * FROM consultaAgendada c" 
                 + "JOIN (SELECT pe.idPessoa as idPaciente, pe.nomePessoa as nomePaciente, p.prontuarioPaciente, "
                 + "t.telefoneResidencial, t.telefoneComercial, t.telefoneCelular FROM telefone t " 
@@ -151,9 +149,36 @@ public class ConsultaDAO extends QueryHelper {
                 + "t.telefoneCelular as tclMedico FROM telefone t " 
                 + "NATURAL JOIN pessoa pes " 
                 + "NATURAL JOIN medico m) as pesquisaMedico " 
-                + "ON pesquisaMedico.crmMedico = c.crmMedico ";    
+                + "ON pesquisaMedico.crmMedico = c.crmMedico ";
         
-        this.prepStatement = this.mySqlControle.getConnection().prepareStatement(query);
+        return this.listarConsulta();
+
+    }
+    
+    public List<Consulta> listarHistoricoConsulta() throws SQLException {
+        
+        this.query = "SELECT * FROM historicoConsulta c" 
+                + "JOIN (SELECT pe.idPessoa as idPaciente, pe.nomePessoa as nomePaciente, p.prontuarioPaciente, "
+                + "t.telefoneResidencial, t.telefoneComercial, t.telefoneCelular FROM telefone t " 
+                + "NATURAL JOIN pessoa pe " 
+                + "NATURAL JOIN paciente p) as pesquisaPaciente " 
+                + "ON pesquisaPaciente.prontuarioPaciente = c.prontuarioPaciente " 
+                + "JOIN (SELECT pes.idPessoa as idMedico, pes.nomePessoa as nomeMedico, m.crmMedico, "
+                + "m.especialidadeMedico, t.telefoneResidencial as trMedico, t.telefoneComercial as tcmMedico, " 
+                + "t.telefoneCelular as tclMedico FROM telefone t " 
+                + "NATURAL JOIN pessoa pes " 
+                + "NATURAL JOIN medico m) as pesquisaMedico " 
+                + "ON pesquisaMedico.crmMedico = c.crmMedico ";
+        
+        return this.listarConsulta();
+
+    }
+    
+    private List<Consulta> listarConsulta() throws SQLException {
+        
+        List<Consulta> listaConsulta = new ArrayList<>();
+        
+        this.prepStatement = this.mySqlControle.getConnection().prepareStatement(this.query);
         
         this.resultSet = this.prepStatement.executeQuery();
         
@@ -194,22 +219,61 @@ public class ConsultaDAO extends QueryHelper {
             medico.setPessoa(pessoaMedico);
             
             Consulta consulta = new Consulta.Builder()
-                    //.idConsulta(this.resultSet.getInt("idConsulta"))
-                    .statusConsulta(this.resultSet.getString("statusConsulta"))
                     .dataConsulta(this.resultSet.getDate("dataConsulta"))
-                    .examesSolicitados(this.resultSet.getString("examesSolicitados"))
-                    .anotacoesConsulta(this.resultSet.getString("diagnostico"))
+                    .horarioConsulta(this.resultSet.getTime("horarioConsulta"))
+                    .statusConsulta(this.resultSet.getString("statusConsulta"))                    
                     .isRetorno(this.resultSet.getString("isRetorno").charAt(0))
                     .paciente(paciente)
                     .medico(medico)
-                    .construir();
+                    .construir();   
                     
            listaConsulta.add(consulta);
                     
         }
 
         return listaConsulta;
-
+        
     }
-
+    
+    public List<Consulta> listarAgendaMedico(String nomeMedico) throws SQLException {
+        
+        this.query = "SELECT * FROM consultaAgendada c " 
+                + "JOIN (SELECT pe.idPessoa as idPaciente, pe.nomePessoa as nomePaciente, p.prontuarioPaciente, "
+                + "t.telefoneResidencial, t.telefoneComercial, t.telefoneCelular FROM telefone t " 
+                + "NATURAL JOIN pessoa pe " 
+                + "NATURAL JOIN paciente p) as pesquisaPaciente " 
+                + "ON pesquisaPaciente.prontuarioPaciente = c.prontuarioPaciente " 
+                + "JOIN (SELECT pes.idPessoa as idMedico, pes.nomePessoa as nomeMedico, m.crmMedico, "
+                + "m.especialidadeMedico, t.telefoneResidencial as trMedico, t.telefoneComercial as tcmMedico, " 
+                + "t.telefoneCelular as tclMedico FROM telefone t " 
+                + "NATURAL JOIN pessoa pes " 
+                + "NATURAL JOIN medico m) as pesquisaMedico " 
+                + "ON pesquisaMedico.crmMedico = c.crmMedico "
+                + "WHERE nomeMedico = '" + nomeMedico + "'";
+               
+        return this.listarConsulta();
+        
+    }
+    
+     public List<Consulta> listarAgendaDiaMedico(String nomeMedico, Date data) throws SQLException {
+         
+         this.query = "SELECT * FROM consultaAgendada c " 
+                + "JOIN (SELECT pe.idPessoa as idPaciente, pe.nomePessoa as nomePaciente, p.prontuarioPaciente, "
+                + "t.telefoneResidencial, t.telefoneComercial, t.telefoneCelular FROM telefone t " 
+                + "NATURAL JOIN pessoa pe " 
+                + "NATURAL JOIN paciente p) as pesquisaPaciente " 
+                + "ON pesquisaPaciente.prontuarioPaciente = c.prontuarioPaciente " 
+                + "JOIN (SELECT pes.idPessoa as idMedico, pes.nomePessoa as nomeMedico, m.crmMedico, "
+                + "m.especialidadeMedico, t.telefoneResidencial as trMedico, t.telefoneComercial as tcmMedico, " 
+                + "t.telefoneCelular as tclMedico FROM telefone t " 
+                + "NATURAL JOIN pessoa pes " 
+                + "NATURAL JOIN medico m) as pesquisaMedico " 
+                + "ON pesquisaMedico.crmMedico = c.crmMedico "
+                + "WHERE nomeMedico = '" + nomeMedico + "' "
+                + "AND dataConsulta = '" + data + "'";
+               
+        return this.listarConsulta();
+         
+     }
+             
 }

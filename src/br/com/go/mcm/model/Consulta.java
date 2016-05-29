@@ -15,24 +15,20 @@ import java.util.Date;
 public class Consulta {
 
     //private int idConsulta;
-    private Paciente paciente;
-    private Medico medico;
-    private String statusConsulta;
     private Date dataConsulta;
     private Time horarioConsulta;
-    private String anotacoesConsulta;
-    private String examesSolicitados;
+    private Paciente paciente;
+    private Medico medico;
+    private String statusConsulta;    
     private char isRetorno;
 
     private Consulta(Builder builder) {
         //this.idConsulta = builder.idConsulta;
-        this.paciente = builder.paciente;
-        this.medico = builder.medico;
-        this.statusConsulta = builder.statusConsulta;
         this.dataConsulta = builder.dataConsulta;
         this.horarioConsulta = builder.horarioConsulta;
-        this.anotacoesConsulta = builder.anotacoesConsulta;
-        this.examesSolicitados = builder.examesSolicitados;
+        this.paciente = builder.paciente;
+        this.medico = builder.medico;
+        this.statusConsulta = builder.statusConsulta;        
         this.isRetorno = builder.isRetorno;
 
     }
@@ -44,6 +40,7 @@ public class Consulta {
 //    public void setIdConsulta(int idConsulta) {
 //        this.idConsulta = idConsulta;
 //    }
+    
     public Paciente getPaciente() {
         return paciente;
     }
@@ -76,28 +73,12 @@ public class Consulta {
         this.horarioConsulta = horarioConsulta;
     }
 
-    public String getAnotacoesConsulta() {
-        return anotacoesConsulta;
-    }
-
-    public void setAnotacoesConsulta(String anotacoesConsulta) {
-        this.anotacoesConsulta = anotacoesConsulta;
-    }
-
     public Medico getMedico() {
         return medico;
     }
 
     public void setMedico(Medico medico) {
         this.medico = medico;
-    }
-
-    public String getExamesSolicitados() {
-        return examesSolicitados;
-    }
-
-    public void setExamesSolicitados(String examesSolicitados) {
-        this.examesSolicitados = examesSolicitados;
     }
 
     public char getIsRetorno() {
@@ -111,19 +92,28 @@ public class Consulta {
     public static class Builder {
 
         //private int idConsulta;
-        private Paciente paciente;
-        private Medico medico;
-        private String statusConsulta;
         private Date dataConsulta;
         private Time horarioConsulta;
-        private String anotacoesConsulta;
-        private String examesSolicitados;
+        private Paciente paciente;
+        private Medico medico;
+        private String statusConsulta;      
         private char isRetorno;
 
 //    public Builder idConsulta(int idConsulta){
 //        this.idConsulta = idConsulta;
 //        return this;
 //    }
+        
+         public Builder dataConsulta(Date dataConsulta) {
+            this.dataConsulta = dataConsulta;
+            return this;
+        }
+
+        public Builder horarioConsulta(Time horarioConsulta) {
+            this.horarioConsulta = horarioConsulta;
+            return this;
+        }
+        
         public Builder paciente(Paciente paciente) {
             this.paciente = paciente;
             return this;
@@ -138,27 +128,7 @@ public class Consulta {
             this.statusConsulta = statusConsulta;
             return this;
         }
-
-        public Builder dataConsulta(Date dataConsulta) {
-            this.dataConsulta = dataConsulta;
-            return this;
-        }
-
-        public Builder horarioConsulta(Time horarioConsulta) {
-            this.horarioConsulta = horarioConsulta;
-            return this;
-        }
-
-        public Builder anotacoesConsulta(String anotacoesConsulta) {
-            this.anotacoesConsulta = anotacoesConsulta;
-            return this;
-        }
-
-        public Builder examesSolicitados(String examesSolicitados) {
-            this.examesSolicitados = examesSolicitados;
-            return this;
-        }
-
+    
         public Builder isRetorno(char isRetorno) {
             this.isRetorno = isRetorno;
             return this;

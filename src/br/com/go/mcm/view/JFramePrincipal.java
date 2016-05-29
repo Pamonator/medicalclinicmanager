@@ -6,6 +6,7 @@
 package br.com.go.mcm.view;
 
 import br.com.go.mcm.dao.DAOManager;
+import br.com.go.mcm.model.Consulta;
 import br.com.go.mcm.model.Endereco;
 import br.com.go.mcm.model.Funcionario;
 import br.com.go.mcm.model.Medico;
@@ -19,6 +20,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -50,10 +55,12 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jPanelConsulta = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableConsulta = new javax.swing.JTable();
         jtfPesquisaConsulta = new javax.swing.JTextField();
         jLabel57 = new javax.swing.JLabel();
         jbEditarConsulta = new javax.swing.JButton();
+        jcbListaMedico = new javax.swing.JComboBox<>();
+        jLabel58 = new javax.swing.JLabel();
         jPanel22 = new javax.swing.JPanel();
         jPanel23 = new javax.swing.JPanel();
         jtfCepEndereco1 = new javax.swing.JTextField();
@@ -255,38 +262,37 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Data", "Horario", "Paciente", "Medico", "paciente", "medico"
+                "Data", "Horario", "Paciente", "paciente", "medico"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane4.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setMinWidth(0);
-            jTable1.getColumnModel().getColumn(4).setPreferredWidth(0);
-            jTable1.getColumnModel().getColumn(4).setMaxWidth(0);
-            jTable1.getColumnModel().getColumn(5).setMinWidth(0);
-            jTable1.getColumnModel().getColumn(5).setPreferredWidth(0);
-            jTable1.getColumnModel().getColumn(5).setMaxWidth(0);
+        jTableConsulta.getTableHeader().setReorderingAllowed(false);
+        jScrollPane4.setViewportView(jTableConsulta);
+        if (jTableConsulta.getColumnModel().getColumnCount() > 0) {
+            jTableConsulta.getColumnModel().getColumn(0).setResizable(false);
+            jTableConsulta.getColumnModel().getColumn(1).setResizable(false);
+            jTableConsulta.getColumnModel().getColumn(2).setResizable(false);
+            jTableConsulta.getColumnModel().getColumn(3).setMinWidth(0);
+            jTableConsulta.getColumnModel().getColumn(3).setPreferredWidth(0);
+            jTableConsulta.getColumnModel().getColumn(3).setMaxWidth(0);
+            jTableConsulta.getColumnModel().getColumn(4).setMinWidth(0);
+            jTableConsulta.getColumnModel().getColumn(4).setPreferredWidth(0);
+            jTableConsulta.getColumnModel().getColumn(4).setMaxWidth(0);
         }
 
         jtfPesquisaConsulta.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -308,6 +314,15 @@ public class JFramePrincipal extends javax.swing.JFrame {
             }
         });
 
+        jcbListaMedico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dr." }));
+        jcbListaMedico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbListaMedicoActionPerformed(evt);
+            }
+        });
+
+        jLabel58.setText("Dr(a):");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -321,14 +336,23 @@ public class JFramePrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel57)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbEditarConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jbEditarConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel58)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jcbListaMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jcbListaMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel58))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jtfPesquisaConsulta)
@@ -2050,6 +2074,8 @@ public class JFramePrincipal extends javax.swing.JFrame {
         this.jMenuAbout.setVisible(true);
         this.jmiCadastrarFuncionario.setVisible(true);
         this.jPanelFuncionario.setVisible(true);
+        //carregando a lista de médico cadastrados na caixa de seleção do painel de consultas
+        this.preencherListaMedico();
         //setando o ícone da janela
         URL url = this.getClass().getResource("nurse-16.png");
         Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(url);
@@ -2118,7 +2144,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         //buscando a lista de pacientes no banco
         try {
             //salvando o resultado da busca na lista de pacientes
-            listaPaciente = DAOManager.pacienteControle().listarPaciente();
+            listaPaciente = DAOManager.pacienteDAO().listarPaciente();
         } catch (SQLException ex) {
             //exibindo uma mensagem caso seja disparada uma exceção
             JOptionPane.showMessageDialog(this, "Erro na leitura do banco de dados.\n"
@@ -2239,7 +2265,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         //buscando a lista no banco
         try {
             //salvando o resultado da busca na lista 
-            listaMedico = DAOManager.medicoControle().listarMedico();
+            listaMedico = DAOManager.medicoDAO().listarMedico();
         } catch (SQLException ex) {
             //exibindo uma mensagem caso seja disparada uma exceção
             JOptionPane.showMessageDialog(this, "Erro na leitura do banco de dados.\n"
@@ -2306,16 +2332,23 @@ public class JFramePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbEditarMedicoActionPerformed
 
     private void jmiCadastrarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCadastrarMedicoActionPerformed
+        
         JDCadastrarMedico cadastrarMedico = new JDCadastrarMedico(this, true);
+        
         cadastrarMedico.setVisible(true);
 
         this.preencherTabelaMedico();
+        
+        this.preencherListaMedico();
 
     }//GEN-LAST:event_jmiCadastrarMedicoActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        
         JDSobre jDialogSobre = new JDSobre(this, true);
+        
         jDialogSobre.setVisible(true);
+        
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jTableFuncionarioMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableFuncionarioMouseReleased
@@ -2370,7 +2403,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         //buscando a lista no banco
         try {
             //salvando o resultado da busca na lista 
-            listaFuncionario = DAOManager.funcionarioControle().listarFuncionario();
+            listaFuncionario = DAOManager.funcionarioDAO().listarFuncionario();
         } catch (SQLException ex) {
             //exibindo uma mensagem caso seja disparada uma exceção
             JOptionPane.showMessageDialog(this, "Erro na leitura do banco de dados.\n"
@@ -2454,8 +2487,30 @@ public class JFramePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbEditarConsultaActionPerformed
 
     private void jmiAgendarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAgendarConsultaActionPerformed
-        
+
     }//GEN-LAST:event_jmiAgendarConsultaActionPerformed
+
+    private void jcbListaMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbListaMedicoActionPerformed
+        
+        if (this.jcbListaMedico.getSelectedIndex() >= 0) {
+            
+            String nomeMedico = this.jcbListaMedico.getItemAt(this.jcbListaMedico.getSelectedIndex());
+            
+            try {
+                //pegar todas as conultas marcadas para o dia de hoje do médico escolhido
+                List<Consulta> listaConsulta = DAOManager.consultaDAO().listarAgendaMedico(nomeMedico);
+                
+                this.preencherTabelaConsulta(listaConsulta);
+                
+            } catch (SQLException ex) {
+                
+                JOptionPane.showMessageDialog(this, "Erro de leitura dos dados. Favor entrar em"
+                    + "contato com o suporte.\nInformação sobre o erro:" + ex.getMessage());
+                
+            }         
+            
+        }
+    }//GEN-LAST:event_jcbListaMedicoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2540,6 +2595,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel60;
@@ -2596,7 +2652,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableConsulta;
     private javax.swing.JTable jTableFuncionario;
     private javax.swing.JTable jTableMedico;
     private javax.swing.JTable jTablePaciente;
@@ -2610,6 +2666,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jcbEstadoEndereco1;
     private javax.swing.JComboBox<String> jcbEstadoEnderecoFuncionario;
     private javax.swing.JComboBox<String> jcbEstadoEnderecoMedico;
+    private javax.swing.JComboBox<String> jcbListaMedico;
     private javax.swing.JComboBox<String> jcbSexoPessoa;
     private javax.swing.JComboBox<String> jcbSexoPessoa1;
     private javax.swing.JComboBox<String> jcbSexoPessoa2;
@@ -2687,7 +2744,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
      */
     private void preencherTabelaPaciente() {
         try {
-            ArrayList<Paciente> listaPaciente = DAOManager.pacienteControle().listarPaciente();
+            ArrayList<Paciente> listaPaciente = DAOManager.pacienteDAO().listarPaciente();
 
             DefaultTableModel tabelaPaciente = (DefaultTableModel) this.jTablePaciente.getModel();
 
@@ -2696,8 +2753,11 @@ public class JFramePrincipal extends javax.swing.JFrame {
             String dataAux;
 
             for (int i = 0; i < listaPaciente.size(); i++) {
+                
                 Calendar calendar = new GregorianCalendar();
+                
                 calendar.setTime(listaPaciente.get(i).getPessoa().getDataCadastroPessoa());
+                
                 dataAux = calendar.get(Calendar.DAY_OF_MONTH) + "/"
                         + (calendar.get(Calendar.MONTH) + 1) + "/"
                         + calendar.get(Calendar.YEAR);
@@ -2708,6 +2768,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                     dataAux,
                     listaPaciente.get(i)
                 });
+                
             }
 
             //setando o novo modelo da tabela
@@ -2725,7 +2786,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
     private void preencherTabelaMedico() {
         try {
-            ArrayList<Medico> listaMedico = DAOManager.medicoControle().listarMedico();
+            ArrayList<Medico> listaMedico = DAOManager.medicoDAO().listarMedico();
 
             DefaultTableModel tabelaMedico = (DefaultTableModel) this.jTableMedico.getModel();
 
@@ -2734,8 +2795,11 @@ public class JFramePrincipal extends javax.swing.JFrame {
             String dataAux;
 
             for (int i = 0; i < listaMedico.size(); i++) {
+                
                 Calendar calendar = new GregorianCalendar();
+                
                 calendar.setTime(listaMedico.get(i).getPessoa().getDataCadastroPessoa());
+                
                 dataAux = calendar.get(Calendar.DAY_OF_MONTH) + "/"
                         + (calendar.get(Calendar.MONTH) + 1) + "/"
                         + calendar.get(Calendar.YEAR);
@@ -2746,6 +2810,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                     dataAux,
                     listaMedico.get(i)
                 });
+                
             }
 
             //setando o novo modelo da tabela
@@ -2763,7 +2828,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
     private void preencherTabelaFuncionario() {
         try {
-            ArrayList<Funcionario> listaFuncionario = DAOManager.funcionarioControle().listarFuncionario();
+            ArrayList<Funcionario> listaFuncionario = DAOManager.funcionarioDAO().listarFuncionario();
 
             DefaultTableModel tabelaFuncionario = (DefaultTableModel) this.jTableFuncionario.getModel();
 
@@ -2772,8 +2837,11 @@ public class JFramePrincipal extends javax.swing.JFrame {
             String dataAux;
 
             for (int i = 0; i < listaFuncionario.size(); i++) {
+                
                 Calendar calendar = new GregorianCalendar();
+                
                 calendar.setTime(listaFuncionario.get(i).getPessoa().getDataCadastroPessoa());
+                
                 dataAux = calendar.get(Calendar.DAY_OF_MONTH) + "/"
                         + (calendar.get(Calendar.MONTH) + 1) + "/"
                         + calendar.get(Calendar.YEAR);
@@ -2784,6 +2852,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                     dataAux,
                     listaFuncionario.get(i)
                 });
+                
             }
 
             //setando o novo modelo da tabela
@@ -2796,6 +2865,66 @@ public class JFramePrincipal extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Erro de leitura dos dados. Favor entrar em"
                     + "contato com o suporte.\nInformação sobre o erro:" + ex.getMessage());
+        }
+    }
+
+    private void preencherListaMedico() {
+
+        List<Medico> listaMedico;
+        
+        this.jcbListaMedico.removeAllItems();
+
+        try {
+
+            listaMedico = DAOManager.medicoDAO().listarMedico();
+
+            if (!listaMedico.isEmpty()) {
+
+                listaMedico.stream().forEach((Medico medico) -> {
+                    
+                    JFramePrincipal.this.jcbListaMedico.addItem(medico.getPessoa().getNomePessoa());
+                    
+                });
+                
+            }
+
+        } catch (SQLException ex) {
+
+            JOptionPane.showMessageDialog(this, "Erro de leitura dos dados. Favor entrar em"
+                    + "contato com o suporte.\nInformação sobre o erro:" + ex.getMessage());
+
+        }
+
+    }
+
+    private void preencherTabelaConsulta(List<Consulta> listaConsulta) {
+                
+        if (!listaConsulta.isEmpty()) {
+            
+            DefaultTableModel tabelaConsulta = (DefaultTableModel) this.jTableConsulta.getModel();
+            
+            tabelaConsulta.setNumRows(0);
+            
+            for (int i = 0; i < listaConsulta.size(); i++) {
+                
+                Consulta consulta = listaConsulta.get(i);
+                
+                tabelaConsulta.addRow(new Object[] {
+                    consulta.getDataConsulta(),
+                    consulta.getHorarioConsulta(),
+                    consulta.getPaciente().getPessoa().getNomePessoa(),
+                    consulta.getPaciente(),
+                    consulta.getMedico()
+                });
+                       
+            }
+            
+            this.jTableConsulta.setModel(tabelaConsulta);
+            
+            this.jTableConsulta.setRowSelectionAllowed(true);
+            
+            this.jTableConsulta.setColumnSelectionAllowed(false);
+            
         }
     }
 }

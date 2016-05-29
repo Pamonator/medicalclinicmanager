@@ -574,7 +574,7 @@ public class JDAtualizarPaciente extends javax.swing.JDialog {
                 .contruir();
 
         try {
-            boolean atualizarPessoa = DAOManager.pessoaControle().atualizarPessoa(pessoa);
+            boolean atualizarPessoa = DAOManager.pessoaDAO().atualizarPessoa(pessoa);
 
             if (atualizarPessoa) {
                 Endereco endereco = new Endereco.Builder()
@@ -608,12 +608,12 @@ public class JDAtualizarPaciente extends javax.swing.JDialog {
 
                 ArrayList<String> queryList = new ArrayList<>();
 
-                queryList.add(DAOManager.enderecoControle().gerarQueryAtualizarEndereco(endereco));
-                queryList.add(DAOManager.telefoneControle().gerarQueryAtualizarTelefone(telefone));
-                queryList.add(DAOManager.emailControle().gerarQueryAtualizarEmail(email));
-                queryList.add(DAOManager.pacienteControle().gerarQueryAtualizarPaciente(this.paciente));
+                queryList.add(DAOManager.enderecoDAO().gerarQueryAtualizarEndereco(endereco));
+                queryList.add(DAOManager.telefoneDAO().gerarQueryAtualizarTelefone(telefone));
+                queryList.add(DAOManager.emailDAO().gerarQueryAtualizarEmail(email));
+                queryList.add(DAOManager.pacienteDAO().gerarQueryAtualizarPaciente(this.paciente));
 
-                boolean excuteTransaction = DAOManager.pacienteControle().excuteTransaction(queryList);
+                boolean excuteTransaction = DAOManager.pacienteDAO().excuteTransaction(queryList);
 
                 if (excuteTransaction) {
                     JOptionPane.showMessageDialog(this, "Informações alteradas com sucesso!!");
@@ -621,7 +621,7 @@ public class JDAtualizarPaciente extends javax.swing.JDialog {
                 } else {
                     JOptionPane.showMessageDialog(this, "Falha no cadastro! Favor "
                             + "entrar em contato com o suporte.\nInformações sobre o erro: Desconhecidas");
-                    DAOManager.pessoaControle().apagarPessoa(pessoa.getIdPessoa());
+                    DAOManager.pessoaDAO().apagarPessoa(pessoa.getIdPessoa());
                     this.dispose();
                 }
             }

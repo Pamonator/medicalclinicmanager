@@ -58,10 +58,10 @@ public class CadastrarPacienteTeste {
                 .dataNacimentoPessoa(dataNascimentoPessoa)
                 .contruir();
 
-        boolean cadastrarPessoa = DAOManager.pessoaControle().cadastrarPessoa(pessoa);
+        boolean cadastrarPessoa = DAOManager.pessoaDAO().cadastrarPessoa(pessoa);
 
         pessoa.setIdPessoa(DAOManager
-                .pessoaControle()
+                .pessoaDAO()
                 .getUltimoIdCadastrado("pessoa", "idPessoa")
         );
         
@@ -90,11 +90,11 @@ public class CadastrarPacienteTeste {
         
         ArrayList<String> queryList = new ArrayList<>();
         
-        queryList.add(DAOManager.enderecoControle().gerarQueryCadastrarEndereco(endereco));
-        queryList.add(DAOManager.telefoneControle().gerarQueryCadastrarTelefone(telefone));
-        queryList.add(DAOManager.emailControle().gerarQueryCadastrarEmail(email));
-        queryList.add(DAOManager.pacienteControle().gerarQuerycadastrarPaciente(paciente));
+        queryList.add(DAOManager.enderecoDAO().gerarQueryCadastrarEndereco(endereco));
+        queryList.add(DAOManager.telefoneDAO().gerarQueryCadastrarTelefone(telefone));
+        queryList.add(DAOManager.emailDAO().gerarQueryCadastrarEmail(email));
+        queryList.add(DAOManager.pacienteDAO().gerarQuerycadastrarPaciente(paciente));
 
-        assertTrue(DAOManager.pacienteControle().excuteTransaction(queryList));
+        assertTrue(DAOManager.pacienteDAO().excuteTransaction(queryList));
     }
 }

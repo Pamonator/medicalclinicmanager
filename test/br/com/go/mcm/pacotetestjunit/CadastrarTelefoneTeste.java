@@ -42,10 +42,10 @@ public class CadastrarTelefoneTeste {
 
     @Test
     public void inserirTelefone() throws SQLException {
-        int idPessoa = DAOManager.pessoaControle().getUltimoIdCadastrado("pessoa", "idPessoa");
+        int idPessoa = DAOManager.pessoaDAO().getUltimoIdCadastrado("pessoa", "idPessoa");
         
         Telefone telefone = new Telefone(idPessoa, "12-3883-0890", null, "(12)98888-7777");
 
-        assertTrue(DAOManager.telefoneControle().cadastrarTelefone(telefone));
+        assertTrue(DAOManager.telefoneDAO().cadastrarTelefone(telefone));
     }
 }

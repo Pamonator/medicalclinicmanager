@@ -526,7 +526,7 @@ public class JDCadastrarFuncionario extends javax.swing.JDialog {
         this.jtfNumFuncionario.setEditable(false);
 
         try {
-            int idFuncionario = DAOManager.funcionarioControle()
+            int idFuncionario = DAOManager.funcionarioDAO()
                     .getUltimoIdCadastrado("funcionario", "idFuncionario") + 1;
 
             this.jtfNumFuncionario.setText(String.valueOf(idFuncionario));
@@ -580,14 +580,14 @@ public class JDCadastrarFuncionario extends javax.swing.JDialog {
         //bloco que executa a instrução SQL e captura uma possível exceção
         try {
             //armazenando o resultado da query SQL que cadastra uma pessoa
-            boolean cadastrarPessoa = DAOManager.pessoaControle().cadastrarPessoa(pessoa);
+            boolean cadastrarPessoa = DAOManager.pessoaDAO().cadastrarPessoa(pessoa);
 
             //caso o cadastro tenha sido realizado com sucesso, damos continuidade à gravação dos demais dados
             //(endereco, telefone, email, paciente)
             if (cadastrarPessoa) {
                 //recuperando do banco o idPessoa (primaryKey auto_increment) que foi gravada no banco
                 pessoa.setIdPessoa(DAOManager
-                        .pessoaControle()
+                        .pessoaDAO()
                         .getUltimoIdCadastrado("pessoa", "idPessoa")
                 );
 
@@ -623,13 +623,13 @@ public class JDCadastrarFuncionario extends javax.swing.JDialog {
                 ArrayList<String> queryList = new ArrayList<>();
 
                 //gerando as queries e adicionando as mesmas à lista
-                queryList.add(DAOManager.enderecoControle().gerarQueryCadastrarEndereco(endereco));
-                queryList.add(DAOManager.telefoneControle().gerarQueryCadastrarTelefone(telefone));
-                queryList.add(DAOManager.emailControle().gerarQueryCadastrarEmail(email));
-                queryList.add(DAOManager.funcionarioControle().gerarQueryCadastrarFuncionario(funcionario));
+                queryList.add(DAOManager.enderecoDAO().gerarQueryCadastrarEndereco(endereco));
+                queryList.add(DAOManager.telefoneDAO().gerarQueryCadastrarTelefone(telefone));
+                queryList.add(DAOManager.emailDAO().gerarQueryCadastrarEmail(email));
+                queryList.add(DAOManager.funcionarioDAO().gerarQueryCadastrarFuncionario(funcionario));
 
                 //executando as varias queries em um bloco
-                boolean excuteTransaction = DAOManager.funcionarioControle().excuteTransaction(queryList);
+                boolean excuteTransaction = DAOManager.funcionarioDAO().excuteTransaction(queryList);
 
                 //exibindo as mensagens de sucesso ou erro da execução do bloco de queries SQL
                 if (excuteTransaction) {
@@ -640,7 +640,7 @@ public class JDCadastrarFuncionario extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(this, "Falha no cadastro! Favor "
                             + "entrar em contato com o suporte.\nInformações sobre o erro: Desconhecidas");
                     //caso o bloco de queries nao tenha sido executado, removemos a pessoa previamente cadastrada
-                    DAOManager.pessoaControle().apagarPessoa(pessoa.getIdPessoa());
+                    DAOManager.pessoaDAO().apagarPessoa(pessoa.getIdPessoa());
                     //fecha a janela
                     this.dispose();
                 }

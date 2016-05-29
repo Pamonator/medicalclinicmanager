@@ -53,6 +53,6 @@ public class CadastrarPessoaTeste {
                 .dataNacimentoPessoa(dataNascimentoPessoa)
                 .contruir();
         
-        Assert.assertTrue(DAOManager.pessoaControle().cadastrarPessoa(pessoa));
+        Assert.assertTrue(DAOManager.pessoaDAO().cadastrarPessoa(pessoa));
     }
 }

@@ -42,7 +42,7 @@ public class CadastrarEnderecoTeste {
 
     @Test
     public void inserirEndereco() throws SQLException {
-        int idPessoa = DAOManager.pessoaControle().getUltimoIdCadastrado("pessoa", "idPessoa");
+        int idPessoa = DAOManager.pessoaDAO().getUltimoIdCadastrado("pessoa", "idPessoa");
         
         Endereco endereco = new Endereco.Builder()
                 .idPessoa(idPessoa)
@@ -55,6 +55,6 @@ public class CadastrarEnderecoTeste {
                 .CEPEndereco("11660-001")
                 .construir();
 
-        assertTrue(DAOManager.enderecoControle().cadastrarEndereco(endereco));
+        assertTrue(DAOManager.enderecoDAO().cadastrarEndereco(endereco));
     }
 }

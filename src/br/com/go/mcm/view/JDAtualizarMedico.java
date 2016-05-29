@@ -596,14 +596,14 @@ public class JDAtualizarMedico extends javax.swing.JDialog {
         //bloco que executa a instrução SQL e captura uma possível exceção
         try {
             //armazenando o resultado da query SQL que cadastra uma pessoa
-            boolean cadastrarPessoa = DAOManager.pessoaControle().atualizarPessoa(pessoa);
+            boolean cadastrarPessoa = DAOManager.pessoaDAO().atualizarPessoa(pessoa);
 
             //caso o cadastro tenha sido realizado com sucesso, damos continuidade à gravação dos demais dados
             //(endereco, telefone, email, paciente)
             if (cadastrarPessoa) {
                 //recuperando do banco o idPessoa (primaryKey auto_increment) que foi gravada no banco
                 pessoa.setIdPessoa(DAOManager
-                        .pessoaControle()
+                        .pessoaDAO()
                         .getUltimoIdCadastrado("pessoa", "idPessoa")
                 );
 
@@ -642,13 +642,13 @@ public class JDAtualizarMedico extends javax.swing.JDialog {
                 ArrayList<String> queryList = new ArrayList<>();
 
                 //gerando as queries e adicionando as mesmas à lista
-                queryList.add(DAOManager.enderecoControle().gerarQueryAtualizarEndereco(endereco));
-                queryList.add(DAOManager.telefoneControle().gerarQueryAtualizarTelefone(telefone));
-                queryList.add(DAOManager.emailControle().gerarQueryAtualizarEmail(email));
-                queryList.add(DAOManager.medicoControle().gerarQueryAtualizarMedico(medico));
+                queryList.add(DAOManager.enderecoDAO().gerarQueryAtualizarEndereco(endereco));
+                queryList.add(DAOManager.telefoneDAO().gerarQueryAtualizarTelefone(telefone));
+                queryList.add(DAOManager.emailDAO().gerarQueryAtualizarEmail(email));
+                queryList.add(DAOManager.medicoDAO().gerarQueryAtualizarMedico(medico));
 
                 //executando as varias queries em um bloco
-                boolean excuteTransaction = DAOManager.medicoControle().excuteTransaction(queryList);
+                boolean excuteTransaction = DAOManager.medicoDAO().excuteTransaction(queryList);
 
                 //exibindo as mensagens de sucesso ou erro da execução do bloco de queries SQL
                 if (excuteTransaction) {
@@ -659,7 +659,7 @@ public class JDAtualizarMedico extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(this, "Falha no cadastro! Favor "
                             + "entrar em contato com o suporte.\nInformações sobre o erro: Desconhecidas");
                     //caso o bloco de queries nao tenha sido executado, removemos a pessoa previamente cadastrada
-                    DAOManager.pessoaControle().apagarPessoa(pessoa.getIdPessoa());
+                    DAOManager.pessoaDAO().apagarPessoa(pessoa.getIdPessoa());
                     //fecha a janela
                     this.dispose();
                 }

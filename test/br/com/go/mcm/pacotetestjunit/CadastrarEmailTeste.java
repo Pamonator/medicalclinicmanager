@@ -42,10 +42,10 @@ public class CadastrarEmailTeste {
 
     @Test
     public void inserirEmail() throws SQLException {
-        int idPessoa = DAOManager.pessoaControle().getUltimoIdCadastrado("pessoa", "idPessoa");
+        int idPessoa = DAOManager.pessoaDAO().getUltimoIdCadastrado("pessoa", "idPessoa");
         
         Email email = new Email(idPessoa, "blablabla@blablabla.com");
 
-        assertTrue(DAOManager.emailControle().cadastrarEmail(email));
+        assertTrue(DAOManager.emailDAO().cadastrarEmail(email));
     }
 }
