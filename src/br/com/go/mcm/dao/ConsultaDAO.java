@@ -12,6 +12,7 @@ import br.com.go.mcm.model.Pessoa;
 import br.com.go.mcm.model.Telefone;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,11 +65,11 @@ public class ConsultaDAO extends QueryHelper {
         
     }    
     
-    public Consulta buscarConsulta() throws SQLException {
+    public Consulta buscarConsulta(Date dataConsulta, Time horarioConsulta) throws SQLException {
          
         Consulta consulta = null;       
         
-        this.query = "SELECT * FROM consulta c" 
+        this.query = "SELECT * FROM consulta c " 
                 + "JOIN (SELECT pe.idPessoa as idPaciente, pe.nomePessoa as nomePaciente, p.prontuarioPaciente, "
                 + "t.telefoneResidencial, t.telefoneComercial, t.telefoneCelular FROM telefone t " 
                 + "NATURAL JOIN pessoa pe " 
@@ -80,9 +81,12 @@ public class ConsultaDAO extends QueryHelper {
                 + "NATURAL JOIN pessoa pes " 
                 + "NATURAL JOIN medico m) as pesquisaMedico " 
                 + "ON pesquisaMedico.crmMedico = c.crmMedico "
-                + "WHERE ? = ";  
+                + "WHERE dataConsulta = ? AND horarioConsulta = ?";  
         
         this.prepStatement = this.mySqlControle.getConnection().prepareStatement(this.query);
+        
+        this.prepStatement.setDate(1, dataConsulta);
+        this.prepStatement.setTime(2, horarioConsulta);
         
         this.resultSet = this.prepStatement.executeQuery();
         
