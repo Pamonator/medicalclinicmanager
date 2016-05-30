@@ -180,6 +180,8 @@ public class ConsultaDAO extends QueryHelper {
         
         this.prepStatement = this.mySqlControle.getConnection().prepareStatement(this.query);
         
+        //System.out.println(this.prepStatement.toString());
+        
         this.resultSet = this.prepStatement.executeQuery();
         
         while (this.resultSet.next()) {
