@@ -477,8 +477,6 @@ public class JDAgendarConsulta extends javax.swing.JDialog {
             }
 
             try {
-                
-                boolean salvarConsulta;
 
                 if (!this.jcbStatusConsulta.isEnabled()) {
                     
@@ -490,7 +488,7 @@ public class JDAgendarConsulta extends javax.swing.JDialog {
 
                 if (agendarConsulta) {
 
-                    JOptionPane.showMessageDialog(this, "Consulta salva com sucesso!");
+                    JOptionPane.showMessageDialog(this, "Informações salvas com sucesso!");
 
                     this.dispose();
 
