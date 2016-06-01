@@ -15,6 +15,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -67,14 +69,14 @@ public class JDAgendarConsulta extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jrbIsRetorno = new javax.swing.JRadioButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jcbStatusConsulta = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jtfNomeMedico = new javax.swing.JTextField();
         jtfDataConsulta = new javax.swing.JTextField();
         jtfHorarioConsulta = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButtonSalvar = new javax.swing.JButton();
+        jButtonCancelar = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jtfPesquisaPaciente = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -104,11 +106,11 @@ public class JDAgendarConsulta extends javax.swing.JDialog {
         jrbIsRetorno.setText("Retorno");
         jrbIsRetorno.setToolTipText("Selecione se a consulta é um retorno.");
 
-        jComboBox1.setBackground(new java.awt.Color(51, 153, 255));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "nova consulta", "faltou", "desmarcada", "finalizada" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        jcbStatusConsulta.setBackground(new java.awt.Color(51, 153, 255));
+        jcbStatusConsulta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "agendada", "faltou", "desmarcada", "finalizada" }));
+        jcbStatusConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                jcbStatusConsultaActionPerformed(evt);
             }
         });
 
@@ -144,7 +146,7 @@ public class JDAgendarConsulta extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jcbStatusConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -161,23 +163,28 @@ public class JDAgendarConsulta extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jrbIsRetorno)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcbStatusConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addContainerGap())
         );
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton1.setBackground(new java.awt.Color(51, 153, 255));
-        jButton1.setForeground(new java.awt.Color(51, 153, 255));
-        jButton1.setText("Salvar");
-
-        jButton2.setBackground(new java.awt.Color(51, 153, 255));
-        jButton2.setForeground(new java.awt.Color(51, 153, 255));
-        jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSalvar.setBackground(new java.awt.Color(51, 153, 255));
+        jButtonSalvar.setForeground(new java.awt.Color(51, 153, 255));
+        jButtonSalvar.setText("Salvar");
+        jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonSalvarActionPerformed(evt);
+            }
+        });
+
+        jButtonCancelar.setBackground(new java.awt.Color(51, 153, 255));
+        jButtonCancelar.setForeground(new java.awt.Color(51, 153, 255));
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
             }
         });
 
@@ -187,9 +194,9 @@ public class JDAgendarConsulta extends javax.swing.JDialog {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -197,8 +204,8 @@ public class JDAgendarConsulta extends javax.swing.JDialog {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButtonSalvar)
+                    .addComponent(jButtonCancelar))
                 .addContainerGap())
         );
 
@@ -235,11 +242,14 @@ public class JDAgendarConsulta extends javax.swing.JDialog {
         jScrollPane2.setViewportView(jTablePaciente);
         if (jTablePaciente.getColumnModel().getColumnCount() > 0) {
             jTablePaciente.getColumnModel().getColumn(0).setResizable(false);
-            jTablePaciente.getColumnModel().getColumn(0).setPreferredWidth(35);
+            jTablePaciente.getColumnModel().getColumn(0).setPreferredWidth(5);
             jTablePaciente.getColumnModel().getColumn(1).setResizable(false);
             jTablePaciente.getColumnModel().getColumn(2).setResizable(false);
+            jTablePaciente.getColumnModel().getColumn(2).setPreferredWidth(50);
             jTablePaciente.getColumnModel().getColumn(3).setResizable(false);
+            jTablePaciente.getColumnModel().getColumn(3).setPreferredWidth(40);
             jTablePaciente.getColumnModel().getColumn(4).setResizable(false);
+            jTablePaciente.getColumnModel().getColumn(4).setPreferredWidth(40);
             jTablePaciente.getColumnModel().getColumn(5).setMinWidth(0);
             jTablePaciente.getColumnModel().getColumn(5).setPreferredWidth(0);
             jTablePaciente.getColumnModel().getColumn(5).setMaxWidth(0);
@@ -336,9 +346,41 @@ public class JDAgendarConsulta extends javax.swing.JDialog {
             //horario da consulta
             this.jtfHorarioConsulta.setText(this.consulta.getHorarioConsulta().toString());
 
+            if (consulta.getIsRetorno() == 'S') {
+
+                this.jrbIsRetorno.setSelected(true);
+
+            }
+
+            this.jcbStatusConsulta.setSelectedItem(consulta.getStatusConsulta());
+
+            if (this.consulta.getPaciente() != null) {
+
+                DefaultTableModel tabelaPaciente = (DefaultTableModel) this.jTablePaciente.getModel();
+
+                tabelaPaciente.setNumRows(0);
+
+                tabelaPaciente.addRow(new Object[]{
+                    consulta.getPaciente().getProntuarioPaciente(),
+                    consulta.getPaciente().getPessoa().getNomePessoa(),
+                    consulta.getPaciente().getPessoa().getCpfPessoa(),
+                    consulta.getPaciente().getPessoa().getTelefonePessoa().getTelefoneResidencial(),
+                    consulta.getPaciente().getPessoa().getTelefonePessoa().getTelefoneCelular(),
+                    consulta.getPaciente()
+                });
+
+            } else {
+
+                this.jcbStatusConsulta.setSelectedIndex(0);
+
+                this.jcbStatusConsulta.setEnabled(false);
+
+                this.preencherTabelaPaciente();
+
+            }
+
         }
 
-        this.preencherTabelaPaciente();
 
     }//GEN-LAST:event_formWindowOpened
 
@@ -388,7 +430,7 @@ public class JDAgendarConsulta extends javax.swing.JDialog {
                         listaPaciente.get(i).getPessoa().getTelefonePessoa().getTelefoneCelular(),
                         listaPaciente.get(i)
                     });
-                    
+
                 }
 
                 //setando o novo modelo da tabela paciente
@@ -402,13 +444,70 @@ public class JDAgendarConsulta extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jtfPesquisaPacientejtfPesquisaPacienteKeyReleased
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void jcbStatusConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbStatusConsultaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_jcbStatusConsultaActionPerformed
+
+    private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
+
+        if (this.jTablePaciente.getRowCount() > 1) {
+
+            JOptionPane.showMessageDialog(this, "Favor escolher o paciente "
+                    + "através do campo de pesquisa.");
+
+        } else { //agendar a consulta - duh!
+
+            Paciente paciente = (Paciente) this.jTablePaciente.getValueAt(0, 5);
+
+            this.consulta.setStatusConsulta(this.jcbStatusConsulta.getSelectedItem().toString());
+
+            this.consulta.setPaciente(paciente);
+
+            if (this.jrbIsRetorno.isSelected()) {
+
+                this.consulta.setIsRetorno('S');
+
+            } else {
+
+                this.consulta.setIsRetorno('N');
+            }
+
+            try {
+                
+                boolean salvarConsulta;
+
+                if (!this.jcbStatusConsulta.isEnabled()) {
+                    
+                     //salvar a consulta no historico e apagar            
+
+                } 
+                
+                boolean agendarConsulta  = DAOManager.consultaDAO().agendarConsulta(consulta);
+
+                if (agendarConsulta) {
+
+                    JOptionPane.showMessageDialog(this, "Consulta salva com sucesso!");
+
+                    this.dispose();
+
+                }
+
+            } catch (SQLException ex) {
+
+                JOptionPane.showMessageDialog(this, "Erro de gravação de dados."
+                        + "\nFavor entrar em contato com o suporte"
+                        + "\nInformações sobre o erro: " + ex.getMessage()
+                );
+
+            }
+
+        }
+
+    }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -451,9 +550,8 @@ public class JDAgendarConsulta extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton jButtonCancelar;
+    private javax.swing.JButton jButtonSalvar;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -467,6 +565,7 @@ public class JDAgendarConsulta extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTablePaciente;
+    private javax.swing.JComboBox<String> jcbStatusConsulta;
     private javax.swing.JRadioButton jrbIsRetorno;
     private javax.swing.JTextField jtfDataConsulta;
     private javax.swing.JTextField jtfHorarioConsulta;

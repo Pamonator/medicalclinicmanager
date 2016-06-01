@@ -330,10 +330,12 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jScrollPane4.setViewportView(jTableConsulta);
         if (jTableConsulta.getColumnModel().getColumnCount() > 0) {
             jTableConsulta.getColumnModel().getColumn(0).setResizable(false);
+            jTableConsulta.getColumnModel().getColumn(0).setPreferredWidth(20);
             jTableConsulta.getColumnModel().getColumn(1).setResizable(false);
             jTableConsulta.getColumnModel().getColumn(2).setResizable(false);
             jTableConsulta.getColumnModel().getColumn(3).setResizable(false);
             jTableConsulta.getColumnModel().getColumn(4).setResizable(false);
+            jTableConsulta.getColumnModel().getColumn(4).setPreferredWidth(1);
             jTableConsulta.getColumnModel().getColumn(5).setMinWidth(0);
             jTableConsulta.getColumnModel().getColumn(5).setPreferredWidth(0);
             jTableConsulta.getColumnModel().getColumn(5).setMaxWidth(0);
@@ -2295,33 +2297,73 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
                 Time horarioConsulta = new Time(hour, minute, second);
 
-                Consulta consulta;
+                Consulta consulta = null;
 
+                String nomePaciente = this.jTableConsulta.getValueAt(selectedRow, 1).toString();
+
+                String nomeMedico = this.jcbListaMedico.getItemAt(this.jcbListaMedico.getSelectedIndex());
+
+                if (!nomePaciente.equalsIgnoreCase("")) {
+
+                    try {
+
+                        consulta = DAOManager.consultaDAO().buscarConsulta(
+                                new Date(this.dataConsulta.getTimeInMillis()), horarioConsulta, nomeMedico);
+
+                    } catch (SQLException ex) {
+
+                        JOptionPane.showMessageDialog(this, "Erro de leitura dos dados. Favor entrar em"
+                                + "contato com o suporte.\nInformação sobre o erro:" + ex.getMessage());
+                    }
+
+                } else {
+
+                    this.dataConsulta = this.jDateChooser.getCalendar();                   
+
+                    Medico medico = null;
+                    
+                    try {
+                        
+                        medico = DAOManager.medicoDAO().buscarMedico(nomeMedico);
+                        
+                    } catch (SQLException ex) {
+                        
+                        JOptionPane.showMessageDialog(this, "Erro de leitura dos dados. Favor entrar em"
+                                + "contato com o suporte.\nInformação sobre o erro:" + ex.getMessage());
+                        
+                    }
+                          
+                    consulta = new Consulta.Builder()
+                            .dataConsulta(new Date((dataConsulta.get(Calendar.YEAR) - 1900),
+                                    dataConsulta.get(Calendar.MONDAY),
+                                    dataConsulta.get(Calendar.DAY_OF_MONTH)))
+                            .horarioConsulta(horarioConsulta)
+                            .medico(medico)
+                            .construir();
+
+                }
+
+                JDAgendarConsulta jDAgendarConsulta = new JDAgendarConsulta(this, true, consulta);
+
+                jDAgendarConsulta.setVisible(true);
+
+                //pegar todas as conultas marcadas para determinado médico da data escolhida no jdatachooser
+                List<Consulta> listaConsulta = null;
+                
                 try {
-
-                    consulta = DAOManager.consultaDAO().buscarConsulta(
-                            new Date(this.dataConsulta.getTimeInMillis()), horarioConsulta);
-
-                    JDAgendarConsulta jDAgendarConsulta = new JDAgendarConsulta(this, true, consulta);
-
-                    jDAgendarConsulta.setVisible(true);
-
-                    String nomeMedico = this.jcbListaMedico.getItemAt(this.jcbListaMedico.getSelectedIndex());
-
-                    //pegar todas as conultas marcadas para determinado médico da data escolhida no jdatachooser
-                    List<Consulta> listaConsulta = DAOManager.consultaDAO().listarAgendaDiaMedico(nomeMedico,
+                    listaConsulta = DAOManager.consultaDAO().listarAgendaDiaMedico(nomeMedico,
                             new Date((dataConsulta.get(Calendar.YEAR) - 1900),
                                     dataConsulta.get(Calendar.MONDAY),
                                     dataConsulta.get(Calendar.DAY_OF_MONTH))
                     );
-
-                    this.preencherTabelaConsulta(listaConsulta);
-
                 } catch (SQLException ex) {
-
+                    
                     JOptionPane.showMessageDialog(this, "Erro de leitura dos dados. Favor entrar em"
-                            + "contato com o suporte.\nInformação sobre o erro:" + ex.getMessage());
+                                + "contato com o suporte.\nInformação sobre o erro:" + ex.getMessage());
+                    
                 }
+
+                this.preencherTabelaConsulta(listaConsulta);
 
             }
 
@@ -2330,11 +2372,11 @@ public class JFramePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableConsultaMouseClicked
 
     private void jmiHistoricoConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiHistoricoConsultaActionPerformed
-       
+
         JDHistoricoConsulta jDHistoricoConsulta = new JDHistoricoConsulta(this, true);
-        
-        jDHistoricoConsulta.setVisible(true);        
-        
+
+        jDHistoricoConsulta.setVisible(true);
+
     }//GEN-LAST:event_jmiHistoricoConsultaActionPerformed
 
     /**
@@ -2536,7 +2578,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     *   Método que preenche a tabela paciente
      */
     private void preencherTabelaPaciente() {
-        
+
         try {
             ArrayList<Paciente> listaPaciente = DAOManager.pacienteDAO().listarPaciente();
 

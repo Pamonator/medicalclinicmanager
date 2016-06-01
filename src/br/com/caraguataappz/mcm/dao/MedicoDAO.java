@@ -77,9 +77,71 @@ public class MedicoDAO extends QueryHelper {
         return this.prepStatement;
     }
 
-    public Medico buscarMedico(String executarBusca) throws SQLException {
-
-        return null;
+    public Medico buscarMedico(String nomeMedico) throws SQLException {
+        
+        this.query = this.query = "SELECT * FROM medico "
+                + "NATURAL JOIN pessoa p "
+                + "NATURAL JOIN endereco "
+                + "NATURAL JOIN telefone "
+                + "NATURAL JOIN email "
+                + "WHERE p.nomePessoa = '" + nomeMedico + "'";
+        
+        this.prepStatement = this.mySqlControle.getConnection().prepareStatement(this.query);
+        
+        this.resultSet = this.executeQuerySelect();
+        
+        Medico medico = null;
+        
+        if (resultSet.next()) {
+            //começando pelo endereco do paciente
+            //this.resultSet.get + o tipo de dado, int, string, date
+            // + o nome da coluna que contém o dado na tabela
+            Endereco endereco = new Endereco.Builder()
+                    .idPessoa(this.resultSet.getInt("idPessoa"))
+                    .logradouroEndereco(this.resultSet.getString("logradouroEndereco"))
+                    .numeroEndereco(this.resultSet.getString("numeroEndereco"))
+                    .complementoEndereco(this.resultSet.getString("complementoEndereco") + "")
+                    .bairroEndereco(this.resultSet.getString("bairroEndereco"))
+                    .cidadeEndereco(this.resultSet.getString("cidadeEndereco"))
+                    .estadoEndereco(this.resultSet.getString("estadoEndereco"))
+                    .CEPEndereco(this.resultSet.getString("cepEndereco"))
+                    .construir(); 
+            
+            //instanciando o telefone
+            Telefone telefone = new Telefone(this.resultSet.getInt("idPessoa"),
+                    this.resultSet.getString("telefoneResidencial"),
+                    this.resultSet.getString("telefoneComercial"),
+                    this.resultSet.getString("telefoneCelular"));
+            
+            //instanciuand o email
+            Email email = new Email(this.resultSet.getInt("idPessoa"), 
+                    this.resultSet.getString("enderecoEmail"));
+            
+            //instanciand a pessoa
+            Pessoa pessoa = new Pessoa.Builder()
+                    .idPessoa(this.resultSet.getInt("idPessoa"))
+                    .enderecoPessoa(endereco)
+                    .telefonePessoa(telefone)
+                    .emailPessoa(email)
+                    .dataCadastroPessoa(this.resultSet.getDate("dataCadastroPessoa"))
+                    .nomePessoa(this.resultSet.getString("nomePessoa"))
+                    .sexoPessoa(this.resultSet.getString("sexoPessoa").charAt(0))
+                    .rgPessoa(this.resultSet.getString("rgPessoa"))
+                    .orgaoEmissorRGPessoa(this.resultSet.getString("orgaoEmissorRgPessoa"))
+                    .cpfPessoa(this.resultSet.getString("cpfPessoa"))
+                    .dataNacimentoPessoa(this.resultSet.getDate("dataNascimentoPessoa"))
+                    .contruir();
+            
+            //e finalmente, instanciando o medico
+            medico = new Medico(this.resultSet.getString("crmMedico"),
+                    this.resultSet.getString("especialidadeMedico"),
+                    pessoa,
+                    this.resultSet.getString("statusMedico").charAt(0)
+            );           
+            
+        } 
+        
+        return medico;
     }
 
     public ArrayList<Medico> listarMedico() throws SQLException {

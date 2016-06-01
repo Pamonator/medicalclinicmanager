@@ -64,14 +64,29 @@ public class ConsultaDAO extends QueryHelper {
         return this.prepStatement.executeUpdate() > 0;
         
     }    
+        
+    public boolean atualizarConsulta(Consulta consulta) throws SQLException {
+        
+        this.query = "UPDATE consulta SET prontuarioPaciente = " + consulta.getPaciente().getProntuarioPaciente() + ", "
+                + "statusConsulta = '" + consulta.getStatusConsulta() + "', "
+                + "isRetorno = '" + consulta.getIsRetorno() + "', "
+                + "WHERE dataConsulta = '" + consulta.getDataConsulta() + "' "
+                + "AND horarioConsulta = '" + consulta.getHorarioConsulta() + "' "
+                + "AND crmMedico = '" + consulta.getMedico().getCrmMedico() + "'";
+        
+        this.prepStatement = this.mySqlControle.getConnection().prepareCall(this.query);    
+        
+        return this.prepStatement.executeUpdate() > 0;
+        
+    }    
     
-    public Consulta buscarConsulta(Date dataConsulta, Time horarioConsulta) throws SQLException {
+    public Consulta buscarConsulta(Date dataConsulta, Time horarioConsulta, String nomeMedico) throws SQLException {
          
         Consulta consulta = null;       
         
         this.query = "SELECT * FROM consulta c " 
                 + "JOIN (SELECT pe.idPessoa as idPaciente, pe.nomePessoa as nomePaciente, p.prontuarioPaciente, "
-                + "t.telefoneResidencial, t.telefoneComercial, t.telefoneCelular FROM telefone t " 
+                + "pe.cpfPessoa, t.telefoneResidencial, t.telefoneComercial, t.telefoneCelular FROM telefone t " 
                 + "NATURAL JOIN pessoa pe " 
                 + "NATURAL JOIN paciente p) as pesquisaPaciente " 
                 + "ON pesquisaPaciente.prontuarioPaciente = c.prontuarioPaciente " 
@@ -81,7 +96,8 @@ public class ConsultaDAO extends QueryHelper {
                 + "NATURAL JOIN pessoa pes " 
                 + "NATURAL JOIN medico m) as pesquisaMedico " 
                 + "ON pesquisaMedico.crmMedico = c.crmMedico "
-                + "WHERE dataConsulta = ? AND horarioConsulta = ?";  
+                + "WHERE dataConsulta = ? AND horarioConsulta = ? "
+                + "AND nomeMedico = '" + nomeMedico + "'";  
         
         this.prepStatement = this.mySqlControle.getConnection().prepareStatement(this.query);
         
@@ -99,12 +115,14 @@ public class ConsultaDAO extends QueryHelper {
             telefonePaciente.setTelefoneCelular(this.resultSet.getString("telefoneCelular"));
             
             Pessoa pessoaPaciente = new Pessoa.Builder()
+                    .cpfPessoa(this.resultSet.getString("cpfPessoa"))
                     .idPessoa(this.resultSet.getInt("idPaciente"))
                     .nomePessoa(this.resultSet.getString("nomePaciente"))
                     .telefonePessoa(telefonePaciente)
                     .contruir();  
             
             Paciente paciente = new Paciente.Builder()
+                    .prontuarioPaciente(this.resultSet.getInt("prontuarioPaciente"))
                     .pessoa(pessoaPaciente)
                     .contruir();
             
@@ -172,7 +190,10 @@ public class ConsultaDAO extends QueryHelper {
                 + "t.telefoneCelular as tclMedico FROM telefone t " 
                 + "NATURAL JOIN pessoa pes " 
                 + "NATURAL JOIN medico m) as pesquisaMedico " 
-                + "ON pesquisaMedico.crmMedico = c.crmMedico ";
+                + "ON pesquisaMedico.crmMedico = c.crmMedico "
+                + "WHERE c.dataConsulta < CURDATE() "
+                + "GROUP BY nomeMedico "
+                + "ORDER BY dataConsulta, horariioConsulta";
         
         return this.listarConsulta();
 
