@@ -193,7 +193,7 @@ public class ConsultaDAO extends QueryHelper {
                 + "ON pesquisaMedico.crmMedico = c.crmMedico "
                 + "WHERE c.dataConsulta = '" + dataConsulta + "' "
                 + "AND nomeMedico = '" + nomeMedico + "' "
-                + "GROUP BY nomeMedico "
+                //+ "GROUP BY nomeMedico "
                 + "ORDER BY horarioConsulta";
         
         return this.listarConsulta();
@@ -322,7 +322,7 @@ public class ConsultaDAO extends QueryHelper {
     public boolean gravarHistoricoConsulta(Consulta consulta) throws SQLException {
         
         this.query = "INSERT INTO historicoConsulta (dataConsulta, horarioConsulta,"
-                + " prontuarioPaciente, crmMedico, isRetorno) VALUES (?, ? ,? ,? ,?)";
+                + " prontuarioPaciente, crmMedico, statusConsulta, isRetorno) VALUES (?, ? ,? ,?, ? ,?)";
         
         this.prepStatement = this.mySqlControle.getConnection().prepareCall(this.query);
         
@@ -330,7 +330,8 @@ public class ConsultaDAO extends QueryHelper {
         this.prepStatement.setTime(2, consulta.getHorarioConsulta());
         this.prepStatement.setInt(3, consulta.getPaciente().getProntuarioPaciente());
         this.prepStatement.setString(4, consulta.getMedico().getCrmMedico());
-        this.prepStatement.setString(5, String.valueOf(consulta.getIsRetorno()));       
+        this.prepStatement.setString(5, consulta.getStatusConsulta());
+        this.prepStatement.setString(6, String.valueOf(consulta.getIsRetorno()));       
         
         return this.prepStatement.executeUpdate() > 0;
         

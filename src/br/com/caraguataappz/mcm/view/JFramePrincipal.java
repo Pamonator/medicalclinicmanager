@@ -1742,13 +1742,13 @@ public class JFramePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiHistoricoConsultaActionPerformed
 
     private void jDateChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooserPropertyChange
-        
+
         if (this.jDateChooser.getDateEditor().getDate() != null) {
-            
+
             String nomeMedico = this.jcbListaMedico.getItemAt(this.jcbListaMedico.getSelectedIndex());
 
             this.dataConsulta = jDateChooser.getCalendar();
-            
+
             List<Consulta> listaConsulta = null;
 
             try {
@@ -1767,11 +1767,11 @@ public class JFramePrincipal extends javax.swing.JFrame {
                         + "contato com o suporte.\nInformação sobre o erro:" + ex.getMessage());
 
             }
-            
+
             this.preencherTabelaConsulta(listaConsulta);
-            
+
         }
-        
+
     }//GEN-LAST:event_jDateChooserPropertyChange
 
     /**
@@ -2039,11 +2039,11 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
     private void preencherTabelaConsulta(List<Consulta> listaConsulta) {
 
+        DefaultTableModel tabelaConsulta = (DefaultTableModel) this.jTableConsulta.getModel();
+
+        tabelaConsulta.setNumRows(0);
+
         if (!listaConsulta.isEmpty()) {
-
-            DefaultTableModel tabelaConsulta = (DefaultTableModel) this.jTableConsulta.getModel();
-
-            tabelaConsulta.setNumRows(0);
 
             for (int i = 0; i < listaHorario.length; i++) {
 
@@ -2071,13 +2071,22 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
             }
 
-            //Consulta consulta = listaConsulta.get(i);
-            this.jTableConsulta.setModel(tabelaConsulta);
+        } else {
 
-            this.jTableConsulta.setRowSelectionAllowed(true);
+            for (String horarioConsulta : listaHorario) {
 
-            this.jTableConsulta.setColumnSelectionAllowed(false);
+                tabelaConsulta.addRow(new Object[]{horarioConsulta, "", "", "", "", null, null});
+
+            }
 
         }
+
+        //Consulta consulta = listaConsulta.get(i);
+        this.jTableConsulta.setModel(tabelaConsulta);
+
+        this.jTableConsulta.setRowSelectionAllowed(true);
+
+        this.jTableConsulta.setColumnSelectionAllowed(false);
+
     }
 }
