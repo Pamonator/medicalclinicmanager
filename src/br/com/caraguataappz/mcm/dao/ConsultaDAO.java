@@ -53,7 +53,7 @@ public class ConsultaDAO extends QueryHelper {
         this.query = "INSERT INTO consulta (dataConsulta, horarioConsulta,"
                 + " prontuarioPaciente, crmMedico, isRetorno) VALUES (?, ? ,? ,? ,?)";
         
-        this.prepStatement = this.mySqlControle.getConnection().prepareCall(this.query);
+        this.prepStatement = this.mySqlControle.getConnection().prepareStatement(this.query);
         
         this.prepStatement.setDate(1, (Date) consulta.getDataConsulta());
         this.prepStatement.setTime(2, consulta.getHorarioConsulta());
@@ -160,7 +160,7 @@ public class ConsultaDAO extends QueryHelper {
 
     public List<Consulta> listarConsultaAgendada() throws SQLException {
         
-        this.query = "SELECT * FROM consultaAgendada c" 
+        this.query = "SELECT * FROM consultaAgendada c " 
                 + "JOIN (SELECT pe.idPessoa as idPaciente, pe.nomePessoa as nomePaciente, p.prontuarioPaciente, "
                 + "t.telefoneResidencial, t.telefoneComercial, t.telefoneCelular FROM telefone t " 
                 + "NATURAL JOIN pessoa pe " 
@@ -177,9 +177,9 @@ public class ConsultaDAO extends QueryHelper {
 
     }
     
-    public List<Consulta> listarHistoricoConsulta() throws SQLException {
+    public List<Consulta> listarHistoricoConsulta(String nomeMedico, Date dataConsulta) throws SQLException {
         
-        this.query = "SELECT * FROM historicoConsulta c" 
+        this.query = "SELECT * FROM historicoConsulta c " 
                 + "JOIN (SELECT pe.idPessoa as idPaciente, pe.nomePessoa as nomePaciente, p.prontuarioPaciente, "
                 + "t.telefoneResidencial, t.telefoneComercial, t.telefoneCelular FROM telefone t " 
                 + "NATURAL JOIN pessoa pe " 
@@ -191,9 +191,10 @@ public class ConsultaDAO extends QueryHelper {
                 + "NATURAL JOIN pessoa pes " 
                 + "NATURAL JOIN medico m) as pesquisaMedico " 
                 + "ON pesquisaMedico.crmMedico = c.crmMedico "
-                + "WHERE c.dataConsulta < CURDATE() "
+                + "WHERE c.dataConsulta = '" + dataConsulta + "' "
+                + "AND nomeMedico = '" + nomeMedico + "' "
                 + "GROUP BY nomeMedico "
-                + "ORDER BY dataConsulta, horariioConsulta";
+                + "ORDER BY horarioConsulta";
         
         return this.listarConsulta();
 
@@ -302,5 +303,39 @@ public class ConsultaDAO extends QueryHelper {
         return this.listarConsulta();
          
      }
+
+    public boolean apagarConsulta(Consulta consulta) throws SQLException {
+        
+        this.query = "DELETE FROM consulta WHERE dataConsulta = ? "
+                + "AND horarioConsulta = ? AND crmMedico = ?";
+        
+        this.prepStatement = this.mySqlControle.getConnection().prepareStatement(this.query);
+        
+        this.prepStatement.setDate(1, (Date) consulta.getDataConsulta());
+        this.prepStatement.setTime(2, consulta.getHorarioConsulta());
+        this.prepStatement.setString(3, consulta.getMedico().getCrmMedico());
+        
+        return this.prepStatement.executeUpdate() > 0;
+        
+    }
+
+    public boolean gravarHistoricoConsulta(Consulta consulta) throws SQLException {
+        
+        this.query = "INSERT INTO historicoConsulta (dataConsulta, horarioConsulta,"
+                + " prontuarioPaciente, crmMedico, isRetorno) VALUES (?, ? ,? ,? ,?)";
+        
+        this.prepStatement = this.mySqlControle.getConnection().prepareCall(this.query);
+        
+        this.prepStatement.setDate(1, (Date) consulta.getDataConsulta());
+        this.prepStatement.setTime(2, consulta.getHorarioConsulta());
+        this.prepStatement.setInt(3, consulta.getPaciente().getProntuarioPaciente());
+        this.prepStatement.setString(4, consulta.getMedico().getCrmMedico());
+        this.prepStatement.setString(5, String.valueOf(consulta.getIsRetorno()));       
+        
+        return this.prepStatement.executeUpdate() > 0;
+        
+    }
              
+    
+    
 }

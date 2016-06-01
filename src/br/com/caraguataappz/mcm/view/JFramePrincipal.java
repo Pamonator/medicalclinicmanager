@@ -8,14 +8,12 @@ package br.com.caraguataappz.mcm.view;
 import br.com.caraguataappz.mcm.dao.DAOManager;
 import br.com.caraguataappz.mcm.model.Consulta;
 import br.com.caraguataappz.mcm.model.Endereco;
-import br.com.caraguataappz.mcm.model.Funcionario;
 import br.com.caraguataappz.mcm.model.Medico;
 import br.com.caraguataappz.mcm.model.Paciente;
 import br.com.caraguataappz.mcm.model.Pessoa;
 import br.com.caraguataappz.mcm.model.Telefone;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -24,8 +22,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -66,7 +62,10 @@ public class JFramePrincipal extends javax.swing.JFrame {
             "16:00:00",
             "16:30:00",
             "17:00:00",
-            "17:30:00"};
+            "17:30:00",
+            "18:00:00",
+            "18:30:00"
+        };
 
         initComponents();
 
@@ -84,8 +83,6 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jTabbedPane = new javax.swing.JTabbedPane();
         jPanelConsulta = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jtfPesquisaConsulta = new javax.swing.JTextField();
-        jLabel57 = new javax.swing.JLabel();
         jLabel62 = new javax.swing.JLabel();
         jDateChooser = new com.toedter.calendar.JDateChooser();
         jLabel58 = new javax.swing.JLabel();
@@ -188,57 +185,10 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jtfTelefoneComercialMedico = new javax.swing.JTextField();
         jLabel40 = new javax.swing.JLabel();
         jtfTelefoneCelularMedico = new javax.swing.JTextField();
-        jPanelFuncionario = new javax.swing.JPanel();
-        jPanel15 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTableFuncionario = new javax.swing.JTable();
-        jtfPesquisaFuncionario = new javax.swing.JTextField();
-        jbEditarFuncionario = new javax.swing.JButton();
-        jLabel34 = new javax.swing.JLabel();
-        jPanel16 = new javax.swing.JPanel();
-        jLabel36 = new javax.swing.JLabel();
-        jtfDataNascimentoFuncionario = new javax.swing.JTextField();
-        jcbSexoPessoa2 = new javax.swing.JComboBox<>();
-        jLabel41 = new javax.swing.JLabel();
-        jtfRgFuncionario = new javax.swing.JTextField();
-        jLabel42 = new javax.swing.JLabel();
-        jLabel43 = new javax.swing.JLabel();
-        jLabel44 = new javax.swing.JLabel();
-        jLabel45 = new javax.swing.JLabel();
-        jtfCargoFuncionario = new javax.swing.JTextField();
-        jLabel46 = new javax.swing.JLabel();
-        jtfEmailFuncionario = new javax.swing.JTextField();
-        jtfEmissorRgFuncionario = new javax.swing.JTextField();
-        jtfCpfFuncionario = new javax.swing.JTextField();
-        jPanel17 = new javax.swing.JPanel();
-        jPanel18 = new javax.swing.JPanel();
-        jtfCepEnderecoFuncionario = new javax.swing.JTextField();
-        jLabel47 = new javax.swing.JLabel();
-        jtfLogradouroEndederecoFuncionario = new javax.swing.JTextField();
-        jLabel48 = new javax.swing.JLabel();
-        jtfNumEnderecoFuncionario = new javax.swing.JTextField();
-        jLabel49 = new javax.swing.JLabel();
-        jtfCompEnderecoFuncionario = new javax.swing.JTextField();
-        jLabel50 = new javax.swing.JLabel();
-        jtfBairroEnderecoFuncionario = new javax.swing.JTextField();
-        jLabel51 = new javax.swing.JLabel();
-        jtfCidadeEnderecoFuncionario = new javax.swing.JTextField();
-        jLabel52 = new javax.swing.JLabel();
-        jLabel53 = new javax.swing.JLabel();
-        jcbEstadoEnderecoFuncionario = new javax.swing.JComboBox<>();
-        jPanel19 = new javax.swing.JPanel();
-        jPanel20 = new javax.swing.JPanel();
-        jLabel54 = new javax.swing.JLabel();
-        jLabel55 = new javax.swing.JLabel();
-        jtfTelefoneResidencialFuncionario = new javax.swing.JTextField();
-        jtfTelefoneComercialFuncionario = new javax.swing.JTextField();
-        jLabel56 = new javax.swing.JLabel();
-        jtfTelefoneCelularFuncionario = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuIniciar = new javax.swing.JMenu();
         jmiCadastrarPaciente = new javax.swing.JMenuItem();
         jmiCadastrarMedico = new javax.swing.JMenuItem();
-        jmiCadastrarFuncionario = new javax.swing.JMenuItem();
         jmiHistoricoConsulta = new javax.swing.JMenuItem();
         jmiSair = new javax.swing.JMenuItem();
         jMenuConfig = new javax.swing.JMenu();
@@ -260,20 +210,15 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jtfPesquisaConsulta.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jtfPesquisaConsulta.setToolTipText("Faça aqui sua busca por uma consulta.");
-        jtfPesquisaConsulta.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jtfPesquisaConsultaKeyReleased(evt);
-            }
-        });
-
-        jLabel57.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/go/mcm/img/search-7-16.png"))); // NOI18N
-
         jLabel62.setText("Data da Consulta:");
 
         jDateChooser.setBackground(new java.awt.Color(51, 153, 255));
         jDateChooser.setForeground(new java.awt.Color(51, 153, 255));
+        jDateChooser.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateChooserPropertyChange(evt);
+            }
+        });
 
         jLabel58.setText("Dr(a):");
 
@@ -287,6 +232,8 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         jTableConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -351,11 +298,6 @@ public class JFramePrincipal extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel57)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfPesquisaConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 708, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel62)
@@ -377,12 +319,8 @@ public class JFramePrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jcbListaMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel58)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtfPesquisaConsulta, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-                    .addComponent(jLabel57, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -1298,439 +1236,6 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         jTabbedPane.addTab("Medico", jPanelMedico);
 
-        jPanelFuncionario.setBackground(new java.awt.Color(51, 153, 255));
-
-        jPanel15.setBackground(new java.awt.Color(255, 255, 255));
-
-        jTableFuncionario.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Número:", "Nome:", "Data Casdastro:", "Funcionario"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTableFuncionario.getTableHeader().setReorderingAllowed(false);
-        jTableFuncionario.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jTableFuncionarioMouseReleased(evt);
-            }
-        });
-        jScrollPane3.setViewportView(jTableFuncionario);
-        if (jTableFuncionario.getColumnModel().getColumnCount() > 0) {
-            jTableFuncionario.getColumnModel().getColumn(0).setResizable(false);
-            jTableFuncionario.getColumnModel().getColumn(1).setResizable(false);
-            jTableFuncionario.getColumnModel().getColumn(2).setResizable(false);
-            jTableFuncionario.getColumnModel().getColumn(3).setMinWidth(0);
-            jTableFuncionario.getColumnModel().getColumn(3).setPreferredWidth(0);
-            jTableFuncionario.getColumnModel().getColumn(3).setMaxWidth(0);
-        }
-
-        jtfPesquisaFuncionario.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jtfPesquisaFuncionario.setToolTipText("buscar por nome ou prontuário");
-        jtfPesquisaFuncionario.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jtfPesquisaFuncionarioKeyReleased(evt);
-            }
-        });
-
-        jbEditarFuncionario.setBackground(new java.awt.Color(51, 153, 255));
-        jbEditarFuncionario.setForeground(new java.awt.Color(51, 153, 255));
-        jbEditarFuncionario.setText("Editar Funcionario");
-        jbEditarFuncionario.setBorder(null);
-        jbEditarFuncionario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbEditarFuncionarioActionPerformed(evt);
-            }
-        });
-
-        jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/go/mcm/img/search-7-16.png"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addComponent(jtfPesquisaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel34)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jbEditarFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jtfPesquisaFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(jbEditarFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        jPanel16.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel36.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel36.setText("Data de Nascimento:");
-
-        jtfDataNascimentoFuncionario.setEditable(false);
-        jtfDataNascimentoFuncionario.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-
-        jcbSexoPessoa2.setBackground(new java.awt.Color(51, 153, 255));
-        jcbSexoPessoa2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino" }));
-
-        jLabel41.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel41.setText("Sexo:");
-
-        jtfRgFuncionario.setEditable(false);
-        jtfRgFuncionario.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-
-        jLabel42.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel42.setForeground(new java.awt.Color(15, 15, 15));
-        jLabel42.setText("RG:");
-
-        jLabel43.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel43.setText("Orgão Emissor do RG:");
-
-        jLabel44.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel44.setText("CPF:");
-
-        jLabel45.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel45.setText("Cargo:");
-
-        jtfCargoFuncionario.setEditable(false);
-        jtfCargoFuncionario.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-
-        jLabel46.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel46.setText("Email:");
-
-        jtfEmailFuncionario.setEditable(false);
-        jtfEmailFuncionario.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-
-        jtfEmissorRgFuncionario.setEditable(false);
-        jtfEmissorRgFuncionario.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-
-        jtfCpfFuncionario.setEditable(false);
-        jtfCpfFuncionario.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-
-        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
-        jPanel16.setLayout(jPanel16Layout);
-        jPanel16Layout.setHorizontalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addComponent(jLabel46)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfEmailFuncionario))
-                    .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addComponent(jLabel41)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jcbSexoPessoa2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel42)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfRgFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addComponent(jLabel45)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfCargoFuncionario))
-                    .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addComponent(jLabel43)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfEmissorRgFuncionario))
-                    .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addComponent(jLabel44)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfCpfFuncionario))
-                    .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addComponent(jLabel36)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfDataNascimentoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel16Layout.setVerticalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfDataNascimentoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel42)
-                        .addComponent(jtfRgFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel41)
-                        .addComponent(jcbSexoPessoa2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel43)
-                    .addComponent(jtfEmissorRgFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel44)
-                    .addComponent(jtfCpfFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfCargoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel46)
-                    .addComponent(jtfEmailFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel17.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel17.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-
-        jPanel18.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel18.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço"));
-
-        jtfCepEnderecoFuncionario.setEditable(false);
-        jtfCepEnderecoFuncionario.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-
-        jLabel47.setText("Logradouro:");
-
-        jtfLogradouroEndederecoFuncionario.setEditable(false);
-        jtfLogradouroEndederecoFuncionario.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-
-        jLabel48.setText("Número:");
-
-        jtfNumEnderecoFuncionario.setEditable(false);
-        jtfNumEnderecoFuncionario.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-
-        jLabel49.setText("Complemento:");
-
-        jtfCompEnderecoFuncionario.setEditable(false);
-        jtfCompEnderecoFuncionario.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-
-        jLabel50.setText("Bairro:");
-
-        jtfBairroEnderecoFuncionario.setEditable(false);
-        jtfBairroEnderecoFuncionario.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-
-        jLabel51.setText("Cidade:");
-
-        jtfCidadeEnderecoFuncionario.setEditable(false);
-        jtfCidadeEnderecoFuncionario.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-
-        jLabel52.setText("CEP:");
-
-        jLabel53.setText("Estado:");
-
-        jcbEstadoEnderecoFuncionario.setBackground(new java.awt.Color(51, 153, 255));
-        jcbEstadoEnderecoFuncionario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
-
-        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
-        jPanel18.setLayout(jPanel18Layout);
-        jPanel18Layout.setHorizontalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel18Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel47, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
-                    .addComponent(jLabel48, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel50, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel51, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel52, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtfBairroEnderecoFuncionario)
-                    .addComponent(jtfCidadeEnderecoFuncionario)
-                    .addGroup(jPanel18Layout.createSequentialGroup()
-                        .addComponent(jtfCepEnderecoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel53)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jcbEstadoEnderecoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jPanel18Layout.createSequentialGroup()
-                                .addComponent(jtfNumEnderecoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel49)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtfCompEnderecoFuncionario))
-                            .addComponent(jtfLogradouroEndederecoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
-        );
-        jPanel18Layout.setVerticalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel18Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel47)
-                    .addComponent(jtfLogradouroEndederecoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel49)
-                        .addComponent(jtfCompEnderecoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel48)
-                        .addComponent(jtfNumEnderecoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel50)
-                    .addComponent(jtfBairroEnderecoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel51)
-                    .addComponent(jtfCidadeEnderecoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel52)
-                    .addComponent(jtfCepEnderecoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel53)
-                    .addComponent(jcbEstadoEnderecoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        );
-
-        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
-        jPanel17.setLayout(jPanel17Layout);
-        jPanel17Layout.setHorizontalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel17Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel17Layout.setVerticalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel17Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel19.setBackground(new java.awt.Color(255, 255, 255));
-
-        jPanel20.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel20.setBorder(javax.swing.BorderFactory.createTitledBorder("Telefones"));
-
-        jLabel54.setText("Residencial:");
-
-        jLabel55.setText("Comercial:");
-
-        jtfTelefoneResidencialFuncionario.setEditable(false);
-        jtfTelefoneResidencialFuncionario.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-
-        jtfTelefoneComercialFuncionario.setEditable(false);
-        jtfTelefoneComercialFuncionario.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-
-        jLabel56.setText("Celular:");
-
-        jtfTelefoneCelularFuncionario.setEditable(false);
-        jtfTelefoneCelularFuncionario.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-
-        javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
-        jPanel20.setLayout(jPanel20Layout);
-        jPanel20Layout.setHorizontalGroup(
-            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel20Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel54, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel55, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel56, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtfTelefoneComercialFuncionario)
-                    .addComponent(jtfTelefoneResidencialFuncionario)
-                    .addComponent(jtfTelefoneCelularFuncionario))
-                .addContainerGap())
-        );
-        jPanel20Layout.setVerticalGroup(
-            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel54)
-                    .addComponent(jtfTelefoneResidencialFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel55)
-                    .addComponent(jtfTelefoneComercialFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel56)
-                    .addComponent(jtfTelefoneCelularFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
-        jPanel19.setLayout(jPanel19Layout);
-        jPanel19Layout.setHorizontalGroup(
-            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel19Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel19Layout.setVerticalGroup(
-            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel19Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout jPanelFuncionarioLayout = new javax.swing.GroupLayout(jPanelFuncionario);
-        jPanelFuncionario.setLayout(jPanelFuncionarioLayout);
-        jPanelFuncionarioLayout.setHorizontalGroup(
-            jPanelFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelFuncionarioLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanelFuncionarioLayout.setVerticalGroup(
-            jPanelFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelFuncionarioLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanelFuncionarioLayout.createSequentialGroup()
-                        .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanelFuncionarioLayout.createSequentialGroup()
-                        .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(12, Short.MAX_VALUE))
-        );
-
-        jTabbedPane.addTab("Funcionario", jPanelFuncionario);
-
         getContentPane().add(jTabbedPane, java.awt.BorderLayout.PAGE_START);
 
         jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
@@ -1752,14 +1257,6 @@ public class JFramePrincipal extends javax.swing.JFrame {
             }
         });
         jMenuIniciar.add(jmiCadastrarMedico);
-
-        jmiCadastrarFuncionario.setText("Cadastrar Funcionário");
-        jmiCadastrarFuncionario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiCadastrarFuncionarioActionPerformed(evt);
-            }
-        });
-        jMenuIniciar.add(jmiCadastrarFuncionario);
 
         jmiHistoricoConsulta.setText("Histórico de Consultas");
         jmiHistoricoConsulta.addActionListener(new java.awt.event.ActionListener() {
@@ -1829,15 +1326,11 @@ public class JFramePrincipal extends javax.swing.JFrame {
         this.preencherTabelaPaciente();
         //chamando o método que preenche a tabela de medicos
         this.preencherTabelaMedico();
-        //chamando o método que preenche a tabela de funcionarios
-        this.preencherTabelaFuncionario();
         //setando a operação padrão quando a janela é fechada
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         //escondendo os menus ainda nao implementados
         this.jMenuConfig.setVisible(false);
         this.jMenuAbout.setVisible(true);
-        this.jmiCadastrarFuncionario.setVisible(true);
-        this.jPanelFuncionario.setVisible(true);
         //carregando a lista de médico cadastrados na caixa de seleção do painel de consultas
         this.preencherListaMedico();
         //setando o ícone da janela
@@ -2114,137 +1607,6 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void jTableFuncionarioMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableFuncionarioMouseReleased
-        //recebendo o índice da linha selecionada pelo usuário
-        int selectedRow = this.jTableFuncionario.getSelectedRow();
-
-        //verificando se realmente alguma linha foi selecionada, o índice começa em 0
-        if (selectedRow > - 1) {
-            //passando por referência o objeto paciente armazenado na última coluna da tabela Paciente
-            Funcionario funcionario = (Funcionario) this.jTableFuncionario.getValueAt(selectedRow, 3);
-
-            ////passando por referência o objeto pessoa contido no objeto paciente
-            Pessoa pessoa = funcionario.getPessoa();
-
-            ////preenchendo os campos da pessoa
-            this.jtfDataNascimentoFuncionario.setText(pessoa.getDataNacimentoPessoa().toString());
-            this.jtfRgFuncionario.setText(pessoa.getRgPessoa());
-            this.jtfEmissorRgFuncionario.setText(pessoa.getOrgaoEmissorRGPessoa());
-            this.jtfCpfFuncionario.setText(pessoa.getCpfPessoa());
-            this.jtfCargoFuncionario.setText(funcionario.getCargoFuncionario());
-            this.jtfEmailFuncionario.setText(pessoa.getEmailPessoa().getEnderecoEmail());
-
-            //passando por referência o objeto endereco contido no objeto paciente
-            Endereco endereco = pessoa.getEnderecoPessoa();
-
-            //preenchendo os campos do endereço
-            this.jtfLogradouroEndederecoFuncionario.setText(endereco.getLogradouroEndereco());
-            this.jtfNumEnderecoFuncionario.setText(endereco.getNumeroEndereco());
-            this.jtfCompEnderecoFuncionario.setText(endereco.getComplementoEndereco() + "");
-            this.jtfBairroEnderecoFuncionario.setText(endereco.getBairroEndereco());
-            this.jtfCidadeEnderecoFuncionario.setText(endereco.getCidadeEndereco());
-            this.jtfCepEnderecoFuncionario.setText(endereco.getCEPEndereco());
-            this.jcbEstadoEnderecoFuncionario.setSelectedItem(endereco.getEstadoEndereco());
-
-            //passando por referência o objeto telefone contido no objeto paciente
-            Telefone telefone = pessoa.getTelefonePessoa();
-
-            //preenchendo os campos do telefone
-            this.jtfTelefoneResidencialFuncionario.setText(telefone.getTelefoneResidencial());
-            this.jtfTelefoneComercialFuncionario.setText(telefone.getTelefoneComercial());
-            this.jtfTelefoneCelularFuncionario.setText(telefone.getTelefoneCelular());
-        }
-    }//GEN-LAST:event_jTableFuncionarioMouseReleased
-
-    private void jtfPesquisaFuncionarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPesquisaFuncionarioKeyReleased
-        //salvando em uma String o texto digitado no campo de pesquisa
-        String campoPesquisa = this.jtfPesquisaFuncionario.getText();
-
-        //declarando uma lista de pacientes e passando o valor null;
-        ArrayList<Funcionario> listaFuncionario = null;
-
-        //buscando a lista no banco
-        try {
-            //salvando o resultado da busca na lista 
-            listaFuncionario = DAOManager.funcionarioDAO().listarFuncionario();
-        } catch (SQLException ex) {
-            //exibindo uma mensagem caso seja disparada uma exceção
-            JOptionPane.showMessageDialog(this, "Erro na leitura do banco de dados.\n"
-                    + "Por favor, entre em contato com o suporte.\n"
-                    + "Informações sobre o erro: " + ex.getMessage());
-        }
-
-        //verificando se a lista foi preenchida ou se continua vazia (null)
-        if (listaFuncionario != null) {
-            //pegando o modelo da tabela Medico
-            DefaultTableModel tabelaFuncionario
-                    = (DefaultTableModel) this.jTableFuncionario.getModel();
-
-            //setando o número de linhas da tabela para zero
-            tabelaFuncionario.setNumRows(0);
-
-            //loop que varre a lista de pacientes e busca. em cada paciente da lista, pelo texto digitado no campo de pesquisa
-            for (int i = 0; i < listaFuncionario.size(); i++) {
-                Funcionario funcionario = listaFuncionario.get(i);
-
-                String numFuncionario = String.valueOf(funcionario.getIdFuncionario());
-                String nomeFuncionario = funcionario.getPessoa().getNomePessoa().toLowerCase();
-
-                //se o nome do paciente ou o prontuário do mesmo possuem parte ou todo do texto digitado, o paciente é inserido na tabela paciente
-                if (nomeFuncionario.contains(campoPesquisa)
-                        || numFuncionario.contains(campoPesquisa)) {
-
-                    tabelaFuncionario.addRow(new Object[]{
-                        funcionario.getIdFuncionario(),
-                        funcionario.getPessoa().getNomePessoa(),
-                        funcionario.getPessoa().getDataCadastroPessoa(),
-                        funcionario
-                    });
-                }
-
-                //setando o novo modelo da tabela paciente
-                this.jTableMedico.setModel(tabelaFuncionario);
-                //indicando ser possivel selecionar uma linha da tabela
-                this.jTableMedico.setRowSelectionAllowed(true);
-                //indicando NÃO ser possível a selecao de uma coluna da tabela
-                this.jTableMedico.setColumnSelectionAllowed(false);
-            }
-        }
-    }//GEN-LAST:event_jtfPesquisaFuncionarioKeyReleased
-
-    private void jbEditarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditarFuncionarioActionPerformed
-        //lendo o índice da linha selecionada pelo usuário
-        int selectedRow = this.jTableFuncionario.getSelectedRow();
-
-        //verificando se realmente alguma linha foi selecionada, o índice começa em 0
-        if (selectedRow > -1) {
-            //passando por referência o objeto do tipo Funcionario contido na última coluna da tabela
-            Funcionario funcionario = (Funcionario) this.jTableFuncionario.getValueAt(selectedRow, 3);
-
-            JDAtualizarFuncionario jDAtualizarFuncionario;
-            jDAtualizarFuncionario = new JDAtualizarFuncionario(this, true, funcionario);
-
-            jDAtualizarFuncionario.setVisible(true);
-
-            this.preencherTabelaFuncionario();
-        } else {
-            //caso o usuário tenha clicado no botão editar sem antes selecionar um paciente na tabela de paciente
-            //é exibida a mensagem abaixo.
-            JOptionPane.showMessageDialog(this, "Favor escolher o funcionário que deseja editar (:");
-        }
-    }//GEN-LAST:event_jbEditarFuncionarioActionPerformed
-
-    private void jmiCadastrarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCadastrarFuncionarioActionPerformed
-        JDCadastrarFuncionario jDCadastrarFuncionario = new JDCadastrarFuncionario(this, true);
-        jDCadastrarFuncionario.setVisible(true);
-
-        this.preencherTabelaFuncionario();
-    }//GEN-LAST:event_jmiCadastrarFuncionarioActionPerformed
-
-    private void jtfPesquisaConsultaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPesquisaConsultaKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfPesquisaConsultaKeyReleased
-
     private void jcbListaMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbListaMedicoActionPerformed
 
         if (this.jcbListaMedico.getSelectedIndex() >= 0) {
@@ -2318,21 +1680,21 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
                 } else {
 
-                    this.dataConsulta = this.jDateChooser.getCalendar();                   
+                    this.dataConsulta = this.jDateChooser.getCalendar();
 
                     Medico medico = null;
-                    
+
                     try {
-                        
+
                         medico = DAOManager.medicoDAO().buscarMedico(nomeMedico);
-                        
+
                     } catch (SQLException ex) {
-                        
+
                         JOptionPane.showMessageDialog(this, "Erro de leitura dos dados. Favor entrar em"
                                 + "contato com o suporte.\nInformação sobre o erro:" + ex.getMessage());
-                        
+
                     }
-                          
+
                     consulta = new Consulta.Builder()
                             .dataConsulta(new Date((dataConsulta.get(Calendar.YEAR) - 1900),
                                     dataConsulta.get(Calendar.MONDAY),
@@ -2349,7 +1711,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
                 //pegar todas as conultas marcadas para determinado médico da data escolhida no jdatachooser
                 List<Consulta> listaConsulta = null;
-                
+
                 try {
                     listaConsulta = DAOManager.consultaDAO().listarAgendaDiaMedico(nomeMedico,
                             new Date((dataConsulta.get(Calendar.YEAR) - 1900),
@@ -2357,10 +1719,10 @@ public class JFramePrincipal extends javax.swing.JFrame {
                                     dataConsulta.get(Calendar.DAY_OF_MONTH))
                     );
                 } catch (SQLException ex) {
-                    
+
                     JOptionPane.showMessageDialog(this, "Erro de leitura dos dados. Favor entrar em"
-                                + "contato com o suporte.\nInformação sobre o erro:" + ex.getMessage());
-                    
+                            + "contato com o suporte.\nInformação sobre o erro:" + ex.getMessage());
+
                 }
 
                 this.preencherTabelaConsulta(listaConsulta);
@@ -2378,6 +1740,39 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jDHistoricoConsulta.setVisible(true);
 
     }//GEN-LAST:event_jmiHistoricoConsultaActionPerformed
+
+    private void jDateChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooserPropertyChange
+        
+        if (this.jDateChooser.getDateEditor().getDate() != null) {
+            
+            String nomeMedico = this.jcbListaMedico.getItemAt(this.jcbListaMedico.getSelectedIndex());
+
+            this.dataConsulta = jDateChooser.getCalendar();
+            
+            List<Consulta> listaConsulta = null;
+
+            try {
+
+                //pegar todas as conultas marcadas para determinado médico da data escolhida no jdatachooser
+                listaConsulta = DAOManager.consultaDAO().listarAgendaDiaMedico(nomeMedico,
+                        new Date((dataConsulta.get(Calendar.YEAR) - 1900),
+                                dataConsulta.get(Calendar.MONDAY),
+                                dataConsulta.get(Calendar.DAY_OF_MONTH)));
+
+                this.preencherTabelaConsulta(listaConsulta);
+
+            } catch (SQLException ex) {
+
+                JOptionPane.showMessageDialog(this, "Erro de leitura dos dados. Favor entrar em"
+                        + "contato com o suporte.\nInformação sobre o erro:" + ex.getMessage());
+
+            }
+            
+            this.preencherTabelaConsulta(listaConsulta);
+            
+        }
+        
+    }//GEN-LAST:event_jDateChooserPropertyChange
 
     /**
      * @param args the command line arguments
@@ -2437,32 +1832,13 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel44;
-    private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel48;
-    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel50;
-    private javax.swing.JLabel jLabel51;
-    private javax.swing.JLabel jLabel52;
-    private javax.swing.JLabel jLabel53;
-    private javax.swing.JLabel jLabel54;
-    private javax.swing.JLabel jLabel55;
-    private javax.swing.JLabel jLabel56;
-    private javax.swing.JLabel jLabel57;
     private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel62;
@@ -2479,13 +1855,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
-    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -2494,83 +1864,59 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel jPanelConsulta;
-    private javax.swing.JPanel jPanelFuncionario;
     private javax.swing.JPanel jPanelMedico;
     private javax.swing.JPanel jPanelPaciente;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane;
     private javax.swing.JTable jTableConsulta;
-    private javax.swing.JTable jTableFuncionario;
     private javax.swing.JTable jTableMedico;
     private javax.swing.JTable jTablePaciente;
-    private javax.swing.JButton jbEditarFuncionario;
     private javax.swing.JButton jbEditarMedico;
     private javax.swing.JButton jbEditarPaciente;
     private javax.swing.JComboBox<String> jcbEscolaridadePaciente;
     private javax.swing.JComboBox<String> jcbEstadoCivilPessoa;
     private javax.swing.JComboBox<String> jcbEstadoEndereco;
-    private javax.swing.JComboBox<String> jcbEstadoEnderecoFuncionario;
     private javax.swing.JComboBox<String> jcbEstadoEnderecoMedico;
     private javax.swing.JComboBox<String> jcbListaMedico;
     private javax.swing.JComboBox<String> jcbSexoPessoa;
     private javax.swing.JComboBox<String> jcbSexoPessoa1;
-    private javax.swing.JComboBox<String> jcbSexoPessoa2;
-    private javax.swing.JMenuItem jmiCadastrarFuncionario;
     private javax.swing.JMenuItem jmiCadastrarMedico;
     private javax.swing.JMenuItem jmiCadastrarPaciente;
     private javax.swing.JMenuItem jmiHistoricoConsulta;
     private javax.swing.JMenuItem jmiSair;
     private javax.swing.JTextField jtfBairroEndereco;
-    private javax.swing.JTextField jtfBairroEnderecoFuncionario;
     private javax.swing.JTextField jtfBairroEnderecoMedico;
-    private javax.swing.JTextField jtfCargoFuncionario;
     private javax.swing.JTextField jtfCepEndereco;
-    private javax.swing.JTextField jtfCepEnderecoFuncionario;
     private javax.swing.JTextField jtfCepEnderecoMedico;
     private javax.swing.JTextField jtfCidadeEndereco;
-    private javax.swing.JTextField jtfCidadeEnderecoFuncionario;
     private javax.swing.JTextField jtfCidadeEnderecoMedico;
     private javax.swing.JTextField jtfCompEndereco;
-    private javax.swing.JTextField jtfCompEnderecoFuncionario;
     private javax.swing.JTextField jtfCompEnderecoMedico;
-    private javax.swing.JTextField jtfCpfFuncionario;
     private javax.swing.JTextField jtfCpfMedico;
     private javax.swing.JTextField jtfCpfPessoa;
-    private javax.swing.JTextField jtfDataNascimentoFuncionario;
     private javax.swing.JTextField jtfDataNascimentoMedico;
     private javax.swing.JTextField jtfDataNascimentoPessoa;
-    private javax.swing.JTextField jtfEmailFuncionario;
     private javax.swing.JTextField jtfEmailMedico;
     private javax.swing.JTextField jtfEmailPessoa;
-    private javax.swing.JTextField jtfEmissorRgFuncionario;
     private javax.swing.JTextField jtfEmissorRgMedico;
     private javax.swing.JTextField jtfEmissorRgPessoa;
     private javax.swing.JTextField jtfEspecialidadeMedico;
     private javax.swing.JTextField jtfLogradouroEndedereco;
-    private javax.swing.JTextField jtfLogradouroEndederecoFuncionario;
     private javax.swing.JTextField jtfLogradouroEndederecoMedico;
     private javax.swing.JTextField jtfNumEndereco;
-    private javax.swing.JTextField jtfNumEnderecoFuncionario;
     private javax.swing.JTextField jtfNumEnderecoMedico;
-    private javax.swing.JTextField jtfPesquisaConsulta;
-    private javax.swing.JTextField jtfPesquisaFuncionario;
     private javax.swing.JTextField jtfPesquisaMedico;
     private javax.swing.JTextField jtfPesquisaPaciente;
     private javax.swing.JTextField jtfProfissaoPaciente;
-    private javax.swing.JTextField jtfRgFuncionario;
     private javax.swing.JTextField jtfRgMedico;
     private javax.swing.JTextField jtfRgPessoa;
     private javax.swing.JTextField jtfTelefoneCelular;
-    private javax.swing.JTextField jtfTelefoneCelularFuncionario;
     private javax.swing.JTextField jtfTelefoneCelularMedico;
     private javax.swing.JTextField jtfTelefoneComercial;
-    private javax.swing.JTextField jtfTelefoneComercialFuncionario;
     private javax.swing.JTextField jtfTelefoneComercialMedico;
     private javax.swing.JTextField jtfTelefoneResidencial;
-    private javax.swing.JTextField jtfTelefoneResidencialFuncionario;
     private javax.swing.JTextField jtfTelefoneResidencialMedico;
     // End of variables declaration//GEN-END:variables
 
@@ -2655,48 +2001,6 @@ public class JFramePrincipal extends javax.swing.JFrame {
             this.jTableMedico.setRowSelectionAllowed(true);
             //indicando NÃO ser possível a selecao de uma coluna da tabela
             this.jTableMedico.setColumnSelectionAllowed(false);
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Erro de leitura dos dados. Favor entrar em"
-                    + "contato com o suporte.\nInformação sobre o erro:" + ex.getMessage());
-        }
-    }
-
-    private void preencherTabelaFuncionario() {
-        try {
-            ArrayList<Funcionario> listaFuncionario = DAOManager.funcionarioDAO().listarFuncionario();
-
-            DefaultTableModel tabelaFuncionario = (DefaultTableModel) this.jTableFuncionario.getModel();
-
-            tabelaFuncionario.setNumRows(0);
-
-            String dataAux;
-
-            for (int i = 0; i < listaFuncionario.size(); i++) {
-
-                Calendar calendar = new GregorianCalendar();
-
-                calendar.setTime(listaFuncionario.get(i).getPessoa().getDataCadastroPessoa());
-
-                dataAux = calendar.get(Calendar.DAY_OF_MONTH) + "/"
-                        + (calendar.get(Calendar.MONTH) + 1) + "/"
-                        + calendar.get(Calendar.YEAR);
-
-                tabelaFuncionario.addRow(new Object[]{
-                    listaFuncionario.get(i).getIdFuncionario(),
-                    listaFuncionario.get(i).getPessoa().getNomePessoa(),
-                    dataAux,
-                    listaFuncionario.get(i)
-                });
-
-            }
-
-            //setando o novo modelo da tabela
-            this.jTableFuncionario.setModel(tabelaFuncionario);
-            //indicando ser possivel selecionar uma linha da tabela
-            this.jTableFuncionario.setRowSelectionAllowed(true);
-            //indicando NÃO ser possível a selecao de uma coluna da tabela
-            this.jTableFuncionario.setColumnSelectionAllowed(false);
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Erro de leitura dos dados. Favor entrar em"

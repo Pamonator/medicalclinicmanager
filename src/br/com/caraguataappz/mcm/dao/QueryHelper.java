@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -75,6 +77,8 @@ public abstract class QueryHelper {
             return resultSet.getInt(primaryKeyField);
         }
 
+        this.mySqlControle.closeConnection();
+        
         return 0;
     }
 
@@ -143,5 +147,47 @@ public abstract class QueryHelper {
             JOptionPane.showMessageDialog(null, ex.getMessage());
             return false;
         }
+    }
+    
+    public boolean startTransaction() {
+        
+        boolean startTransaction;
+        
+        try {
+            
+            this.mySqlControle.getConnection().setAutoCommit(false);
+            
+            startTransaction = true;
+            
+        } catch (SQLException ex) {
+            
+            startTransaction = false;
+            
+        }
+
+        return startTransaction;
+        
+    }
+    
+    public boolean commit() {
+        
+        boolean commit;
+        
+        try { 
+            
+            this.mySqlControle.getConnection().commit();
+            
+            this.mySqlControle.closeConnection();
+            
+            commit = true;
+            
+        } catch (SQLException ex) {
+            
+            commit = false;
+            
+        }
+        
+        return commit;
+        
     }
 }

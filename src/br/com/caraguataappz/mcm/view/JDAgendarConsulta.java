@@ -11,6 +11,7 @@ import br.com.caraguataappz.mcm.model.Paciente;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -478,15 +479,36 @@ public class JDAgendarConsulta extends javax.swing.JDialog {
 
             try {
 
-                if (!this.jcbStatusConsulta.isEnabled()) {
-                    
-                     //salvar a consulta no historico e apagar            
+                boolean salvarConsulta = false;
 
-                } 
-                
-                boolean agendarConsulta  = DAOManager.consultaDAO().agendarConsulta(consulta);
+                if (this.jcbStatusConsulta.getSelectedItem().toString().equalsIgnoreCase("agendada")) {
 
-                if (agendarConsulta) {
+                    Consulta consultaAux;
+
+                    consultaAux = DAOManager.consultaDAO().buscarConsulta(
+                            (Date) this.consulta.getDataConsulta(),
+                            this.consulta.getHorarioConsulta(),
+                            this.consulta.getMedico().getCrmMedico()
+                    );
+
+                    if (consultaAux != null) {
+
+                        salvarConsulta = DAOManager.consultaDAO().atualizarConsulta(this.consulta);
+
+                    } else {
+
+                        salvarConsulta = DAOManager.consultaDAO().agendarConsulta(this.consulta);
+
+                    }
+
+                } else if (DAOManager.consultaDAO().gravarHistoricoConsulta(this.consulta)) {
+
+                    salvarConsulta = DAOManager.consultaDAO().apagarConsulta(this.consulta);
+
+                }
+
+                // salvarConsulta  = DAOManager.consultaDAO().agendarConsulta(consulta);
+                if (salvarConsulta) {
 
                     JOptionPane.showMessageDialog(this, "Informações salvas com sucesso!");
 

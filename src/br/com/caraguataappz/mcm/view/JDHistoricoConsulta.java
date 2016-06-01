@@ -8,8 +8,12 @@ package br.com.caraguataappz.mcm.view;
 import br.com.caraguataappz.mcm.dao.DAOManager;
 import br.com.caraguataappz.mcm.model.Consulta;
 import br.com.caraguataappz.mcm.model.Medico;
+import com.toedter.calendar.JDayChooser;
+import java.awt.Component;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -57,8 +61,11 @@ public class JDHistoricoConsulta extends javax.swing.JDialog {
             "16:00:00",
             "16:30:00",
             "17:00:00",
-            "17:30:00"};
-
+            "17:30:00",
+            "18:00:00",
+            "18:30:00"
+        };
+        
         this.calendar = new GregorianCalendar();
 
         initComponents();
@@ -122,6 +129,8 @@ public class JDHistoricoConsulta extends javax.swing.JDialog {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null}
             },
             new String [] {
@@ -138,11 +147,6 @@ public class JDHistoricoConsulta extends javax.swing.JDialog {
         });
         jTableConsulta.setToolTipText("Clique duas vezes no horário que deseja agendar/editar.");
         jTableConsulta.getTableHeader().setReorderingAllowed(false);
-        jTableConsulta.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableConsultaMouseClicked(evt);
-            }
-        });
         jScrollPane4.setViewportView(jTableConsulta);
         if (jTableConsulta.getColumnModel().getColumnCount() > 0) {
             jTableConsulta.getColumnModel().getColumn(0).setResizable(false);
@@ -195,7 +199,7 @@ public class JDHistoricoConsulta extends javax.swing.JDialog {
                         .addComponent(jcbListaMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel58)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -212,7 +216,7 @@ public class JDHistoricoConsulta extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -223,30 +227,8 @@ public class JDHistoricoConsulta extends javax.swing.JDialog {
 
     private void jcbListaMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbListaMedicoActionPerformed
 
-        if (this.jcbListaMedico.getSelectedIndex() >= 0) {
+        this.buscarListaConsulta();
 
-            String nomeMedico = this.jcbListaMedico.getItemAt(this.jcbListaMedico.getSelectedIndex());
-
-            this.calendar = jDateChooser.getCalendar();
-
-            try {
-
-                //pegar todas as conultas marcadas para determinado médico da data escolhida no jdatachooser
-                List<Consulta> listaConsulta = DAOManager.consultaDAO().listarAgendaDiaMedico(nomeMedico,
-                        new Date((calendar.get(Calendar.YEAR) - 1900),
-                                calendar.get(Calendar.MONDAY),
-                                calendar.get(Calendar.DAY_OF_MONTH)));
-
-                this.preencherTabelaConsulta(listaConsulta);
-
-            } catch (SQLException ex) {
-
-                JOptionPane.showMessageDialog(this, "Erro de leitura dos dados. Favor entrar em"
-                        + "contato com o suporte.\nInformação sobre o erro:" + ex.getMessage());
-
-            }
-
-        }
     }//GEN-LAST:event_jcbListaMedicoActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -265,22 +247,14 @@ public class JDHistoricoConsulta extends javax.swing.JDialog {
 
     }//GEN-LAST:event_formWindowOpened
 
-    private void jTableConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableConsultaMouseClicked
+    private void jDateChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooserPropertyChange
         
-        int clickCount = evt.getClickCount();
-        
-        if (clickCount > 1) {
+        if (this.jDateChooser.getDateEditor().getDate() != null) {
             
-            Consulta consulta = new Consulta.Builder().construir();
-            
-            
+            this.buscarListaConsulta();
             
         }
         
-    }//GEN-LAST:event_jTableConsultaMouseClicked
-
-    private void jDateChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooserPropertyChange
-        System.out.println("success!!");
     }//GEN-LAST:event_jDateChooserPropertyChange
 
     /**
@@ -335,13 +309,11 @@ public class JDHistoricoConsulta extends javax.swing.JDialog {
 
     private void preencherTabelaConsulta(List<Consulta> listaConsulta) {
 
-        //System.out.println(listaConsulta.isEmpty());
+        DefaultTableModel tabelaConsulta = (DefaultTableModel) this.jTableConsulta.getModel();
+
+        tabelaConsulta.setNumRows(0);
 
         if (!listaConsulta.isEmpty()) {
-
-            DefaultTableModel tabelaConsulta = (DefaultTableModel) this.jTableConsulta.getModel();
-
-            tabelaConsulta.setNumRows(0);
 
             for (int i = 0; i < listaHorario.length; i++) {
 
@@ -358,6 +330,7 @@ public class JDHistoricoConsulta extends javax.swing.JDialog {
                             consulta.getPaciente().getPessoa().getNomePessoa(),
                             consulta.getPaciente().getPessoa().getTelefonePessoa().getTelefoneCelular(),
                             consulta.getIsRetorno(),
+                            consulta.getStatusConsulta(),
                             consulta.getPaciente(),
                             consulta.getMedico()
                         });
@@ -368,14 +341,22 @@ public class JDHistoricoConsulta extends javax.swing.JDialog {
 
             }
 
-            //Consulta consulta = listaConsulta.get(i);
-            this.jTableConsulta.setModel(tabelaConsulta);
+        } else {
 
-            this.jTableConsulta.setRowSelectionAllowed(true);
+            for (String horario : listaHorario) {
 
-            this.jTableConsulta.setColumnSelectionAllowed(false);
+                tabelaConsulta.addRow(new Object[]{horario, "", "", "", null, null});
+
+            }
 
         }
+
+        //Consulta consulta = listaConsulta.get(i);
+        this.jTableConsulta.setModel(tabelaConsulta);
+
+        this.jTableConsulta.setRowSelectionAllowed(true);
+
+        this.jTableConsulta.setColumnSelectionAllowed(false);
 
     }
 
@@ -403,6 +384,35 @@ public class JDHistoricoConsulta extends javax.swing.JDialog {
 
             JOptionPane.showMessageDialog(this, "Erro de leitura dos dados. Favor entrar em"
                     + "contato com o suporte.\nInformação sobre o erro:" + ex.getMessage());
+
+        }
+
+    }
+
+    private void buscarListaConsulta() {
+
+        String nomeMedico = this.jcbListaMedico.getItemAt(this.jcbListaMedico.getSelectedIndex());
+
+        this.calendar = jDateChooser.getCalendar();
+
+        if (this.calendar != null) {
+
+            try {
+
+                //pegar todas as conultas marcadas para determinado médico da data escolhida no jdatachooser
+                List<Consulta> listaConsulta = DAOManager.consultaDAO().listarHistoricoConsulta(nomeMedico,
+                        new Date((calendar.get(Calendar.YEAR) - 1900),
+                                calendar.get(Calendar.MONDAY),
+                                calendar.get(Calendar.DAY_OF_MONTH)));
+
+                this.preencherTabelaConsulta(listaConsulta);
+
+            } catch (SQLException ex) {
+
+                JOptionPane.showMessageDialog(this, "Erro de leitura dos dados. Favor entrar em"
+                        + "contato com o suporte.\nInformação sobre o erro:" + ex.getMessage());
+
+            }
 
         }
 
