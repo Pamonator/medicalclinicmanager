@@ -5,6 +5,7 @@
  */
 package br.com.caraguataappz.mcm.view;
 
+import br.com.caraguataappz.mcm.controller.ControllerManager;
 import br.com.caraguataappz.mcm.dao.DAOManager;
 import br.com.caraguataappz.mcm.model.Email;
 import br.com.caraguataappz.mcm.model.Endereco;
@@ -35,7 +36,7 @@ public class JDCadastrarPaciente extends javax.swing.JDialog {
      */
     public JDCadastrarPaciente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        initComponents();         
+        initComponents();
     }
 
     /**
@@ -532,7 +533,7 @@ public class JDCadastrarPaciente extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
+
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         //título da janela
         this.setTitle("Cadastrar Paciente");
@@ -542,7 +543,7 @@ public class JDCadastrarPaciente extends javax.swing.JDialog {
         URL url = this.getClass().getResource("nurse-16.png");
         Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(url);
         this.setIconImage(iconeTitulo);
-        
+
     }//GEN-LAST:event_formWindowOpened
 
     private void jbSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSairActionPerformed
@@ -555,8 +556,9 @@ public class JDCadastrarPaciente extends javax.swing.JDialog {
         
         obs - é preciso implementar a verificação de preenchimento dos campos!!!!
     
-    */
+     */
     private void jbCadastrarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarPacienteActionPerformed
+
         //lendo a data do jformattedTextField e guardando em uma string        
         String aux = this.jFormattedTextField1.getText();
 
@@ -611,18 +613,17 @@ public class JDCadastrarPaciente extends javax.swing.JDialog {
 
                 //instanciando o objeto Telefone a partir dos dados digitados pelo usuário
                 Telefone telefone = new Telefone(pessoa.getIdPessoa(),
-                        this.jtfTelefoneResidencial.getText(), 
-                        this.jtfTelefoneComercial.getText(), 
+                        this.jtfTelefoneResidencial.getText(),
+                        this.jtfTelefoneComercial.getText(),
                         this.jtfTelefoneCelular.getText()
                 );
 
                 //instanciando o objeto Email a partir dos dados digitados pelo usuário                
-                Email email = new Email(pessoa.getIdPessoa(), 
+                Email email = new Email(pessoa.getIdPessoa(),
                         this.jtfEmailPessoa.getText()
                 );
-                
-                //instanciando o objeto Paciente a partir dos dados digitados pelo usuário
 
+                //instanciando o objeto Paciente a partir dos dados digitados pelo usuário
                 Paciente paciente = new Paciente.Builder()
                         .prontuarioPaciente(Integer.parseInt(this.jtfProntuarioPaciente.getText()))
                         .pessoa(pessoa)
@@ -630,7 +631,7 @@ public class JDCadastrarPaciente extends javax.swing.JDialog {
                         .profissaoPaciente(this.jtfProfissaoPessoa.getText())
                         .escolaridadePaciente(this.jcbEscolaridade.getSelectedItem().toString())
                         .contruir();
-                
+
                 //declarando e instanciando o ArrayList que receberá a lista das queries que serão executadas "em bloco"
                 ArrayList<String> queryList = new ArrayList<>();
 
@@ -642,7 +643,7 @@ public class JDCadastrarPaciente extends javax.swing.JDialog {
 
                 //executando as varias queries em um bloco
                 boolean excuteTransaction = DAOManager.pacienteDAO().excuteTransaction(queryList);
-                
+
                 //exibindo as mensagens de sucesso ou erro da execução do bloco de queries SQL
                 if (excuteTransaction) {
                     JOptionPane.showMessageDialog(this, "Paciente cadastrado com sucesso!!");
@@ -663,6 +664,7 @@ public class JDCadastrarPaciente extends javax.swing.JDialog {
             //fecha a janela
             this.dispose();
         }
+
     }//GEN-LAST:event_jbCadastrarPacienteActionPerformed
 
     private void jbLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimparCamposActionPerformed
@@ -690,7 +692,7 @@ public class JDCadastrarPaciente extends javax.swing.JDialog {
         }
         //</editor-fold>
         //</editor-fold>
-        
+
         //</editor-fold>
 
         /* Create and display the dialog */
@@ -764,8 +766,7 @@ public class JDCadastrarPaciente extends javax.swing.JDialog {
 
     /*
         método que apaga o texto de todos os campos preenchidos do formulário    
-    */
-  
+     */
     private void limparCampos() {
         this.jtfBairroEndereco.setText("");
         this.jtfCepEndereco.setText("");
@@ -783,12 +784,12 @@ public class JDCadastrarPaciente extends javax.swing.JDialog {
         this.jtfTelefoneResidencial.setText("");
         this.jtfTelefoneComercial.setText("");
         this.jtfTelefoneCelular.setText("");
-        
+
         this.jcbEscolaridade.setSelectedIndex(0);
         this.jcbEstadoCivilPessoa.setSelectedIndex(0);
         this.jcbEstadoEndereco.setSelectedIndex(0);
         this.jcbSexoPessoa.setSelectedIndex(0);
-        
+
         this.jFormattedTextField1.setText("");
     }
 }

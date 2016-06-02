@@ -233,7 +233,7 @@ public class JDHistoricoConsulta extends javax.swing.JDialog {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         //título da janela
-        this.setTitle("Agenda de Consultas");
+        this.setTitle("Histórico de Consultas");
         //localização da janela (centro do monitor)
         this.setLocationRelativeTo(null);
         //ícone da janela
