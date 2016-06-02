@@ -5,10 +5,8 @@
  */
 package br.com.caraguataappz.mcm.controller;
 
-import br.com.caraguataappz.mcm.dao.DAOManager;
-import br.com.caraguataappz.mcm.helper.CPFValidator;
+import br.com.caraguataappz.mcm.dao.PacienteDAO;
 import br.com.caraguataappz.mcm.model.Paciente;
-import javax.swing.JTable;
 
 /**
  *
@@ -16,14 +14,12 @@ import javax.swing.JTable;
  */
 public class PacienteController {
 
-    private final Paciente paciente = null;
-    private final JTable tabelaPaciente = null;
-    private final CPFValidator cPFValidator;
-
+    private final PacienteDAO pacienteDAO;
+    
     public PacienteController() {
-
-        this.cPFValidator = new CPFValidator();
-
+        
+        this.pacienteDAO = new PacienteDAO();
+        
     }
 
     public boolean cadastraPaciente(Paciente paciente) throws Exception {
@@ -32,7 +28,7 @@ public class PacienteController {
 
         if (this.isPacienteValid(paciente)) {
 
-            cadastrarPaciente = DAOManager.pacienteDAO().cadastrarPaciente(paciente);
+            cadastrarPaciente = this.pacienteDAO.cadastrarPaciente(paciente);
 
         }
 
@@ -40,27 +36,9 @@ public class PacienteController {
 
     }
 
-    private boolean isPacienteValid(Paciente paciente) throws Exception {
+    private boolean isPacienteValid(Paciente paciente) throws Exception {        
 
-        boolean pacienteCpfValid = this.isPacienteCpfValid(
-                paciente.getPessoa().getCpfPessoa());
-
-        if (!pacienteCpfValid) {
-
-            throw new Exception("O CPF informado não é válido!");
-
-        }
-
-        boolean nomePessoa = paciente.getPessoa().getNomePessoa().equals("");
-
-        if (!nomePessoa) {
-
-            throw new Exception("Favor preencher o nome do "
-                    + "paciente que deseja cadastrar.");
-
-        }
-
-        boolean profissaoPaciente = paciente.getProfissaoPaciente().equals("");
+        boolean profissaoPaciente = paciente.getProfissaoPaciente().trim().equals("");
 
         if (!profissaoPaciente) {
 
@@ -69,14 +47,12 @@ public class PacienteController {
 
         }
 
+        
+        
+        
+        
         return true;
 
-    }
-
-    private boolean isPacienteCpfValid(String cpfPessoa) {
-
-        return this.cPFValidator.isCpfValid(cpfPessoa);
-
-    }
+    }   
 
 }

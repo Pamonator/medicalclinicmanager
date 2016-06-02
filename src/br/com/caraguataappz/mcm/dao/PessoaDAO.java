@@ -18,7 +18,7 @@ public class PessoaDAO extends QueryHelper {
     /**
      * Método responsável pela persistência de um objeto do tipo Pessoa
      * junto ao banco de dados.
-     * @param pessoa - o objeto do tipo Paciente a ser gravado no banco
+     * @param pessoa - o objeto do tipo Pessoa a ser gravado no banco
      * @return True se os dados foram gravados corretamente ou 
      * False se a gravação falhar
      * @throws SQLException
@@ -35,7 +35,7 @@ public class PessoaDAO extends QueryHelper {
         this.prepStatement.setString(3, pessoa.getRgPessoa());
         this.prepStatement.setString(4, pessoa.getOrgaoEmissorRGPessoa());
         this.prepStatement.setString(5, pessoa.getCpfPessoa());
-        this.prepStatement.setDate(6, (Date) pessoa.getDataNacimentoPessoa());
+        this.prepStatement.setDate(6, (Date) pessoa.getDataNacimentoPessoa());       
 
         return this.executeUpdate();
     }
@@ -43,7 +43,7 @@ public class PessoaDAO extends QueryHelper {
     /**
      * Método responsável pela atualização dos
      * dados de uma pessoa previamente cadastrada no banco de dados.
-     * @param pessoa - o objeto do tipo Paciente a ser gravado no banco
+     * @param pessoa - o objeto do tipo Pessoa a ser gravado no banco
      * @return True se os dados foram gravados corretamente ou 
      * False se a gravação falhar
      * @throws SQLException

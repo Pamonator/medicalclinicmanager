@@ -560,21 +560,26 @@ public class JDCadastrarPaciente extends javax.swing.JDialog {
     private void jbCadastrarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarPacienteActionPerformed
 
         //lendo a data do jformattedTextField e guardando em uma string        
-        String aux = this.jFormattedTextField1.getText();
+        String data = this.jFormattedTextField1.getText();
 
-        //dividindo a string, removendo o símbolo "/" da formatação da data
-        String[] split = aux.split("/");
+        boolean dataValida = ControllerManager.pessoaController().isDataValid(data);
 
-        //instanciando um objeto do tipo Calendar com a data digitada no formulário
-        Calendar calendar;
-        calendar = new GregorianCalendar(Integer.parseInt(split[2]),
-                Integer.parseInt(split[1]) - 1,
-                Integer.parseInt(split[0])
-        );
+        if (dataValida) {
 
-        //tranformando o objeto Calendar em Date (Date é o formato aceito pelo banco)
-        Date dataNascimentoPessoa = new Date(calendar.getTimeInMillis());
+            //dividindo a string, removendo o símbolo "/" da formatação da data
+            String[] split = data.split("/");
 
+            //instanciando um objeto do tipo Calendar com a data digitada no formulário
+            Calendar calendar;
+            calendar = new GregorianCalendar(Integer.parseInt(split[2]),
+                    Integer.parseInt(split[1]) - 1,
+                    Integer.parseInt(split[0])
+            );
+
+            //tranformando o objeto Calendar em Date (Date é o formato aceito pelo banco)
+            Date dataNascimentoPessoa = new Date(calendar.getTimeInMillis());
+
+        } 
         //instanciando a pessoa a ser caastrada no banco(deve ser gravada primeiro!!)
         Pessoa pessoa = new Pessoa.Builder()
                 .nomePessoa(this.jtfNomePessoa.getText())
@@ -582,13 +587,13 @@ public class JDCadastrarPaciente extends javax.swing.JDialog {
                 .rgPessoa(this.jtfRgPessoa.getText())
                 .orgaoEmissorRGPessoa(this.jtfEmissorRgPessoa.getText())
                 .cpfPessoa(this.jtfCpfPessoa.getText())
-                .dataNacimentoPessoa(dataNascimentoPessoa)
+                //.dataNacimentoPessoa(dataNascimentoPessoa)
                 .contruir();
 
         //bloco que executa a instrução SQL e captura uma possível exceção
         try {
             //armazenando o resultado da query SQL que cadastra uma pessoa
-            boolean cadastrarPessoa = DAOManager.pessoaDAO().cadastrarPessoa(pessoa);
+            boolean cadastrarPessoa = ControllerManager.pessoaController().cadastrarPessoa(pessoa);
 
             //caso o cadastro tenha sido realizado com sucesso, damos continuidade à gravação dos demais dados
             //(endereco, telefone, email, paciente)
@@ -658,11 +663,10 @@ public class JDCadastrarPaciente extends javax.swing.JDialog {
                     this.dispose();
                 }
             }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Erro de gravação dos dados. Favor entrar em"
-                    + "contato com o suporte.\nInformação sobre o erro:" + ex.getMessage());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
             //fecha a janela
-            this.dispose();
+            //this.dispose();
         }
 
     }//GEN-LAST:event_jbCadastrarPacienteActionPerformed

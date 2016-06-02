@@ -11,12 +11,24 @@ package br.com.caraguataappz.mcm.controller;
  */
 public class ControllerManager {
     
-    public static PacienteController pacienteController() {
+    public static PessoaController pessoaController() {
         
-        return new PacienteController();
-        
-        
+        return new PessoaController();
         
     }
+    
+    public static EmailController emailcontroler() {
+        
+        return new EmailController();
+        
+    }
+    
+    public static PacienteController pacienteController() {
+        
+        return new PacienteController();       
+        
+    }
+    
+    
     
 }
