@@ -25,7 +25,9 @@ public class CpfValidatorTest {
          
          boolean isValid = cPFValidator.isCpfValid("28425568870");
          
-         System.out.println(isValid);
+         assertTrue(isValid);
+         
+         isValid = cPFValidator.isCpfValid("119.762.728-66");        
          
          assertTrue(isValid);
      
