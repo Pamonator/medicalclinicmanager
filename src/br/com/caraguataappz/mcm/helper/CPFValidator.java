@@ -23,7 +23,7 @@ public class CPFValidator {
 
         this.removerCaracteres();
 
-        isCpfValid = this.isCpfTamanhoValido() && this.isCpfDigitosIguais();
+        isCpfValid = this.isCpfTamanhoValido() && !this.isCpfDigitosIguais();
 
         if (isCpfValid) {
 

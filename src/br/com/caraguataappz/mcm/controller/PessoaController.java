@@ -50,19 +50,20 @@ public class PessoaController {
 
     public boolean isPessoaValid(Pessoa pessoa) throws Exception {
 
-//        boolean isNotValid = cPFValidator.isCpfValid(pessoa.getCpfPessoa());
-//
-//        if (!isNotValid) {
-//
-//            throw new Exception("O CPF informado não é válido!");
-//
-//        }
-        boolean isNotValid = pessoa.getNomePessoa().trim().equals("");
+        boolean isNotValid = cPFValidator.isCpfValid(pessoa.getCpfPessoa());
+
+        if (!isNotValid) {
+
+            throw new Exception("O CPF informado não é válido!");
+
+        }
+        
+        isNotValid = pessoa.getNomePessoa().trim().equals("");
 
         if (isNotValid) {
 
-            throw new Exception("Favor preencher o nome do "
-                    + "paciente que deseja cadastrar.");
+            throw new Exception("Favor preencher o nome da "
+                    + "pessoa que deseja cadastrar.");
 
         }
 
