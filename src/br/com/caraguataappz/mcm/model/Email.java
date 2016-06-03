@@ -17,6 +17,10 @@ public class Email {
     public Email() {
     }
 
+    public Email(String enderecoEmail) {
+        this.enderecoEmail = enderecoEmail;
+    }
+
     public Email(int idPessoa, String enderecoEmail) {
         this.idPessoa = idPessoa;
         this.enderecoEmail = enderecoEmail;

@@ -5,7 +5,7 @@
  */
 package br.com.caraguataappz.mcm.controller;
 
-import br.com.caraguataappz.mcm.dao.PacienteDAO;
+import br.com.caraguataappz.mcm.dao.DAOManager;
 import br.com.caraguataappz.mcm.model.Paciente;
 
 /**
@@ -14,45 +14,55 @@ import br.com.caraguataappz.mcm.model.Paciente;
  */
 public class PacienteController {
 
-    private final PacienteDAO pacienteDAO;
-    
+    private final DAOManager daoManager;
+
     public PacienteController() {
-        
-        this.pacienteDAO = new PacienteDAO();
-        
-    }
 
-    public boolean cadastraPaciente(Paciente paciente) throws Exception {
-
-        boolean cadastrarPaciente = false;
-
-        if (this.isPacienteValid(paciente)) {
-
-            cadastrarPaciente = this.pacienteDAO.cadastrarPaciente(paciente);
-
-        }
-
-        return cadastrarPaciente;
+        this.daoManager = new DAOManager();
 
     }
 
-    private boolean isPacienteValid(Paciente paciente) throws Exception {        
+//    public boolean cadastrarPaciente(Paciente paciente) throws Exception {
+//
+//        boolean cadastrarPaciente = false;
+//
+//        
+//
+//            cadastrarPaciente = this.daoManager.cadastrar(paciente);
+//
+//      
+//
+//        return cadastrarPaciente;
+//
+//    }
+//
+//    public boolean atualizarPaciente(Paciente paciente) throws Exception {
+//
+//        boolean atualizarPaciente = false;
+//
+//        if (this.isPacienteValid(paciente)) {
+//
+//            atualizarPaciente = this.daoManager.atualizar(paciente);
+//
+//        }
+//
+//        return atualizarPaciente;
+//
+//    }
 
-        boolean profissaoPaciente = paciente.getProfissaoPaciente().trim().equals("");
+    public boolean isPacienteValid(Paciente paciente) throws Exception {
 
-        if (!profissaoPaciente) {
+        boolean isNotValid = paciente.getProfissaoPaciente().trim().equals("");
 
-            throw new Exception("Favor preencher a profissão do "
+        if (isNotValid) {
+
+            throw new Exception("Favor informar a profissão do "
                     + "paciente que deseja cadastrar.");
 
         }
 
-        
-        
-        
-        
         return true;
 
-    }   
+    }
 
 }

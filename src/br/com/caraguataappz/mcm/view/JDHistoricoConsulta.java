@@ -8,12 +8,8 @@ package br.com.caraguataappz.mcm.view;
 import br.com.caraguataappz.mcm.dao.DAOManager;
 import br.com.caraguataappz.mcm.model.Consulta;
 import br.com.caraguataappz.mcm.model.Medico;
-import com.toedter.calendar.JDayChooser;
-import java.awt.Component;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -65,7 +61,7 @@ public class JDHistoricoConsulta extends javax.swing.JDialog {
             "18:00:00",
             "18:30:00"
         };
-        
+
         this.calendar = new GregorianCalendar();
 
         initComponents();
@@ -248,13 +244,13 @@ public class JDHistoricoConsulta extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void jDateChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooserPropertyChange
-        
+
         if (this.jDateChooser.getDateEditor().getDate() != null) {
-            
+
             this.buscarListaConsulta();
-            
+
         }
-        
+
     }//GEN-LAST:event_jDateChooserPropertyChange
 
     /**
@@ -315,39 +311,19 @@ public class JDHistoricoConsulta extends javax.swing.JDialog {
 
         if (!listaConsulta.isEmpty()) {
 
-            for (int i = 0; i < listaHorario.length; i++) {
-
-                tabelaConsulta.addRow(new Object[]{listaHorario[i], "", "", "", null, null});
-
-                for (Consulta consulta : listaConsulta) {
-
-                    if (consulta.getHorarioConsulta().toString().equalsIgnoreCase(this.listaHorario[i])) {
-
-                        tabelaConsulta.removeRow(i);
-
-                        tabelaConsulta.insertRow(i, new Object[]{
-                            consulta.getHorarioConsulta(),
-                            consulta.getPaciente().getPessoa().getNomePessoa(),
-                            consulta.getPaciente().getPessoa().getTelefonePessoa().getTelefoneCelular(),
-                            consulta.getIsRetorno(),
-                            consulta.getStatusConsulta(),
-                            consulta.getPaciente(),
-                            consulta.getMedico()
-                        });
-
-                    }
-
-                }
-
-            }
-
-        } else {
-
-            for (String horario : listaHorario) {
-
-                tabelaConsulta.addRow(new Object[]{horario, "", "", "", null, null});
-
-            }
+            listaConsulta.stream().forEach((consulta) -> {
+                
+                tabelaConsulta.addRow(new Object[]{
+                    consulta.getHorarioConsulta(),
+                    consulta.getPaciente().getPessoa().getNomePessoa(),
+                    consulta.getPaciente().getPessoa().getTelefonePessoa().getTelefoneCelular(),
+                    consulta.getIsRetorno(),
+                    consulta.getStatusConsulta(),
+                    consulta.getPaciente(),
+                    consulta.getMedico()
+                });
+                
+            });
 
         }
 

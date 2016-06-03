@@ -21,7 +21,7 @@ public class IsInteger {
             
         } catch (Exception e) {
             
-            throw new Exception("O valor digitado não é um valor inteiro!");
+            throw new Exception("O prontuário do paciente só pode conter números!");
             
         }
         

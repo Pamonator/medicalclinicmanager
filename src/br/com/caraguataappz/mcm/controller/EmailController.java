@@ -12,12 +12,11 @@ import br.com.caraguataappz.mcm.model.Email;
  * @author gilca
  */
 public class EmailController {
-    
-    
+
     public boolean isEmailValid(Email email) throws Exception {
-        
-        boolean emailValid = false;
-        
+
+        boolean emailValid;
+
         String emailPaciente = email.getEnderecoEmail();
 
         if (emailPaciente.trim().equals("")) {
@@ -33,13 +32,14 @@ public class EmailController {
                 throw new Exception("Favor informar um email válido!");
 
             }
+
         }
-        
+
         return emailValid;
-        
+
     }
 
-    private boolean isEnderecoEmailValid(String enderecoEmail) {
+    public boolean isEnderecoEmailValid(String enderecoEmail) {
 
         boolean enderecoEmailValid = false;
 
@@ -51,6 +51,6 @@ public class EmailController {
 
         return enderecoEmailValid;
 
-    }    
-    
+    }
+
 }
