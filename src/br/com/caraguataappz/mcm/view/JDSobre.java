@@ -56,7 +56,7 @@ public class JDSobre extends javax.swing.JDialog {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Versão: 0.5.1.08062016 alpha");
+        jLabel2.setText("Versão: 1.0.1");
 
         jLabel3.setFont(new java.awt.Font("Bradley Hand ITC", 3, 24)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
