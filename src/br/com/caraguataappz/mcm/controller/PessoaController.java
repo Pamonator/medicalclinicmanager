@@ -40,7 +40,7 @@ public class PessoaController {
         boolean atualizarPessoa = false;
 
         if (this.isPessoaValid(pessoa)) {
-
+//
             atualizarPessoa = this.pessoaDAO.atualizarPessoa(pessoa);
 
         }
@@ -50,15 +50,7 @@ public class PessoaController {
 
     public boolean isPessoaValid(Pessoa pessoa) throws Exception {
 
-        boolean isNotValid = cPFValidator.isCpfValid(pessoa.getCpfPessoa());
-
-        if (!isNotValid) {
-
-            throw new Exception("O CPF informado não é válido!");
-
-        }
-        
-        isNotValid = pessoa.getNomePessoa().trim().equals("");
+        boolean isNotValid = pessoa.getNomePessoa().trim().equals("");
 
         if (isNotValid) {
 
@@ -66,6 +58,14 @@ public class PessoaController {
                     + "pessoa que deseja cadastrar.");
 
         }
+
+//        isNotValid = !(pessoa.getDataNacimentoPessoa().getTime() > 0);
+//
+//        if (isNotValid) {
+//
+//            throw new Exception("Favor informar a data de nascimento.");
+//
+//        }
 
         isNotValid = pessoa.getRgPessoa().trim().equals("");
 
@@ -84,11 +84,11 @@ public class PessoaController {
 
         }
 
-        isNotValid = pessoa.getDataNacimentoPessoa().getTime() > 0;
+        isNotValid = cPFValidator.isCpfValid(pessoa.getCpfPessoa());
 
-        if (isNotValid) {
+        if (!isNotValid) {
 
-            throw new Exception("Favor informar a data de nascimento.");
+            throw new Exception("O CPF informado não é válido!");
 
         }
 

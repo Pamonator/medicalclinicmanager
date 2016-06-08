@@ -114,7 +114,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jcbSexoPessoa" min="-2" max="-2" attributes="0"/>
+                              <Component id="jcbSexoMedico" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
@@ -174,7 +174,7 @@
                                   <Component id="jtfNomePessoa" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel23" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jtfCrmMedico" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jcbSexoPessoa" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jcbSexoMedico" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -233,7 +233,7 @@
                 <Property name="text" type="java.lang.String" value="Data Nascimento:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jcbSexoPessoa">
+            <Component class="javax.swing.JComboBox" name="jcbSexoMedico">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="2">

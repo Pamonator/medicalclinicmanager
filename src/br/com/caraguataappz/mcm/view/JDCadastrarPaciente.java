@@ -17,12 +17,9 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
 import java.sql.Date;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -577,6 +574,8 @@ public class JDCadastrarPaciente extends javax.swing.JDialog {
         } else {
             //lendo a data do jformattedTextField e guardando em uma string        
             String data = this.jFormattedTextField1.getText();
+            
+            System.out.println(data);
 
             boolean dataValida;
 
@@ -668,11 +667,11 @@ public class JDCadastrarPaciente extends javax.swing.JDialog {
                         pessoa.setIdPessoa(idPessoa);
 
                         endereco.setIdPessoa(idPessoa);
-                        
+
                         telefone.setIdPessoa(idPessoa);
-                        
+
                         email.setIdPessoa(idPessoa);
-                        
+
                         paciente.getPessoa().setIdPessoa(idPessoa);
 
                         //declarando e instanciando o ArrayList que receberá a lista das queries que serão executadas "em bloco"
@@ -715,117 +714,6 @@ public class JDCadastrarPaciente extends javax.swing.JDialog {
             }
 
         }
-
-//        //lendo a data do jformattedTextField e guardando em uma string        
-//        String data = this.jFormattedTextField1.getText();
-//
-//        try {
-//
-//            boolean dataValida = ControllerManager.dataController().isDataValid(data);
-//
-//            if (dataValida) {
-//
-//                //dividindo a string, removendo o símbolo "/" da formatação da data
-//                String[] split = data.split("/");
-//
-//                //instanciando um objeto do tipo Calendar com a data digitada no formulário
-//                Calendar calendar;
-//                calendar = new GregorianCalendar(Integer.parseInt(split[2]),
-//                        Integer.parseInt(split[1]) - 1,
-//                        Integer.parseInt(split[0])
-//                );
-//
-//                //tranformando o objeto Calendar em Date (Date é o formato aceito pelo banco)
-//                Date dataNascimentoPessoa = new Date(calendar.getTimeInMillis());
-//
-//                //instanciando a pessoa a ser caastrada no banco(deve ser gravada primeiro!!)
-//                Pessoa pessoa = new Pessoa.Builder()
-//                        .nomePessoa(this.jtfNomePessoa.getText())
-//                        .sexoPessoa(this.jcbSexoPessoa.getSelectedItem().toString().charAt(0))
-//                        .rgPessoa(this.jtfRgPessoa.getText())
-//                        .orgaoEmissorRGPessoa(this.jtfEmissorRgPessoa.getText())
-//                        .cpfPessoa(this.jtfCpfPessoa.getText())
-//                        .dataNacimentoPessoa(dataNascimentoPessoa)
-//                        .contruir();
-//
-//                //bloco que executa a instrução SQL e captura uma possível exceção
-//                //armazenando o resultado da query SQL que cadastra uma pessoa
-//                boolean cadastrarPessoa = ControllerManager.pessoaController().cadastrarPessoa(pessoa);
-//
-//                //caso o cadastro tenha sido realizado com sucesso, damos continuidade à gravação dos demais dados
-//                //(endereco, telefone, email, paciente)
-//                if (cadastrarPessoa) {
-//                    //recuperando do banco o idPessoa (primaryKey auto_increment) que foi gravada no banco
-//                    pessoa.setIdPessoa(DAOManager
-//                            .pessoaDAO()
-//                            .getUltimoIdCadastrado("pessoa", "idPessoa")
-//                    );
-//
-//                    //instanciando o objeto Endereco a partir dos dados digitados pelo usuário
-//                    Endereco endereco = new Endereco.Builder()
-//                            .idPessoa(pessoa.getIdPessoa())
-//                            .logradouroEndereco(this.jtfLogradouroEndereco.getText())
-//                            .numeroEndereco(this.jtfNumeroEndereco.getText())
-//                            .complementoEndereco(this.jtfCompEndereco.getText())
-//                            .bairroEndereco(this.jtfBairroEndereco.getText())
-//                            .cidadeEndereco(this.jtfCidadeEndereco.getText())
-//                            .estadoEndereco(this.jcbEstadoEndereco.getSelectedItem().toString())
-//                            .CEPEndereco(this.jtfCepEndereco.getText())
-//                            .construir();
-//
-//                    //instanciando o objeto Telefone a partir dos dados digitados pelo usuário
-//                    Telefone telefone = new Telefone(pessoa.getIdPessoa(),
-//                            this.jtfTelefoneResidencial.getText(),
-//                            this.jtfTelefoneComercial.getText(),
-//                            this.jtfTelefoneCelular.getText()
-//                    );
-//
-//                    //instanciando o objeto Email a partir dos dados digitados pelo usuário                
-//                    Email email = new Email(pessoa.getIdPessoa(),
-//                            this.jtfEmailPessoa.getText()
-//                    );
-//
-//                    //instanciando o objeto Paciente a partir dos dados digitados pelo usuário
-//                    Paciente paciente = new Paciente.Builder()
-//                            .prontuarioPaciente(Integer.parseInt(this.jtfProntuarioPaciente.getText()))
-//                            .pessoa(pessoa)
-//                            .estadoCivilPaciente(this.jcbEstadoCivilPessoa.getSelectedItem().toString())
-//                            .profissaoPaciente(this.jtfProfissaoPessoa.getText())
-//                            .escolaridadePaciente(this.jcbEscolaridade.getSelectedItem().toString())
-//                            .contruir();
-//
-//                    //declarando e instanciando o ArrayList que receberá a lista das queries que serão executadas "em bloco"
-//                    ArrayList<String> queryList = new ArrayList<>();
-//
-//                    //gerando as queries e adicionando as mesmas à lista
-//                    queryList.add(DAOManager.enderecoDAO().gerarQueryCadastrarEndereco(endereco));
-//                    queryList.add(DAOManager.telefoneDAO().gerarQueryCadastrarTelefone(telefone));
-//                    queryList.add(DAOManager.emailDAO().gerarQueryCadastrarEmail(email));
-//                    queryList.add(DAOManager.pacienteDAO().gerarQuerycadastrarPaciente(paciente));
-//
-//                    //executando as varias queries em um bloco
-//                    boolean excuteTransaction = DAOManager.pacienteDAO().excuteTransaction(queryList);
-//
-//                    //exibindo as mensagens de sucesso ou erro da execução do bloco de queries SQL
-//                    if (excuteTransaction) {
-//                        JOptionPane.showMessageDialog(this, "Paciente cadastrado com sucesso!!");
-//                        //fecha a janela
-//                        this.dispose();
-//                    } else {
-//                        JOptionPane.showMessageDialog(this, "Falha no cadastro! Favor "
-//                                + "entrar em contato com o suporte.\nInformações sobre o erro: Desconhecidas");
-//                        //caso o bloco de queries nao tenha sido executado, removemos a pessoa previamente cadastrada
-//                        DAOManager.pessoaDAO().apagarPessoa(pessoa.getIdPessoa());
-//                        //fecha a janela
-//                        this.dispose();
-//                    }
-//                }
-//            }
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(this, e.getMessage());
-//            //fecha a janela
-//            //this.dispose();
-//        }
 
     }//GEN-LAST:event_jbCadastrarPacienteActionPerformed
 

@@ -123,14 +123,14 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jtfDataNascimentoPessoa = new javax.swing.JTextField();
-        jcbSexoPessoa = new javax.swing.JComboBox<>();
+        jcbSexoPaciente = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jtfRgPessoa = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jcbEstadoCivilPessoa = new javax.swing.JComboBox<>();
+        jcbEstadoCivilPaciente = new javax.swing.JComboBox<>();
         jLabel19 = new javax.swing.JLabel();
         jtfProfissaoPaciente = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
@@ -165,7 +165,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jPanel12 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
         jtfDataNascimentoMedico = new javax.swing.JTextField();
-        jcbSexoPessoa1 = new javax.swing.JComboBox<>();
+        jcbSexoMedico = new javax.swing.JComboBox<>();
         jLabel30 = new javax.swing.JLabel();
         jtfRgMedico = new javax.swing.JTextField();
         jLabel31 = new javax.swing.JLabel();
@@ -471,6 +471,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         jcbEstadoEndereco.setBackground(new java.awt.Color(51, 153, 255));
         jcbEstadoEndereco.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+        jcbEstadoEndereco.setEnabled(false);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -634,8 +635,9 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jtfDataNascimentoPessoa.setEditable(false);
         jtfDataNascimentoPessoa.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
-        jcbSexoPessoa.setBackground(new java.awt.Color(51, 153, 255));
-        jcbSexoPessoa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino" }));
+        jcbSexoPaciente.setBackground(new java.awt.Color(51, 153, 255));
+        jcbSexoPaciente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino" }));
+        jcbSexoPaciente.setEnabled(false);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("Sexo:");
@@ -656,8 +658,9 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel17.setText("Estado Civil:");
 
-        jcbEstadoCivilPessoa.setBackground(new java.awt.Color(51, 153, 255));
-        jcbEstadoCivilPessoa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solteiro(a)", "Casado(a)", "Divorciado(a)", "Disquitado(a)", "Viúvo(a)", "Outros" }));
+        jcbEstadoCivilPaciente.setBackground(new java.awt.Color(51, 153, 255));
+        jcbEstadoCivilPaciente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solteiro(a)", "Casado(a)", "Divorciado(a)", "Disquitado(a)", "Viúvo(a)", "Outros" }));
+        jcbEstadoCivilPaciente.setEnabled(false);
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel19.setText("Profissão:");
@@ -669,6 +672,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         jcbEscolaridadePaciente.setBackground(new java.awt.Color(51, 153, 255));
         jcbEscolaridadePaciente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sem Formação", "Fundamental", "Médio", "Superior" }));
+        jcbEscolaridadePaciente.setEnabled(false);
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel21.setText("Email:");
@@ -696,7 +700,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jcbSexoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jcbSexoPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -704,7 +708,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(jLabel17)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jcbEstadoCivilPessoa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jcbEstadoCivilPaciente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(jLabel19)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -742,7 +746,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                         .addComponent(jtfRgPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3)
-                        .addComponent(jcbSexoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jcbSexoPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
@@ -754,7 +758,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
-                    .addComponent(jcbEstadoCivilPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbEstadoCivilPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -931,6 +935,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         jcbEstadoEnderecoMedico.setBackground(new java.awt.Color(51, 153, 255));
         jcbEstadoEnderecoMedico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+        jcbEstadoEnderecoMedico.setEnabled(false);
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -1022,8 +1027,9 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jtfDataNascimentoMedico.setEditable(false);
         jtfDataNascimentoMedico.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
-        jcbSexoPessoa1.setBackground(new java.awt.Color(51, 153, 255));
-        jcbSexoPessoa1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino" }));
+        jcbSexoMedico.setBackground(new java.awt.Color(51, 153, 255));
+        jcbSexoMedico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino" }));
+        jcbSexoMedico.setEnabled(false);
 
         jLabel30.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel30.setText("Sexo:");
@@ -1073,7 +1079,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel12Layout.createSequentialGroup()
                         .addComponent(jLabel30)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jcbSexoPessoa1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jcbSexoMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel31)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1111,7 +1117,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                         .addComponent(jtfRgMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel30)
-                        .addComponent(jcbSexoPessoa1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jcbSexoMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel32)
@@ -1362,10 +1368,23 @@ public class JFramePrincipal extends javax.swing.JFrame {
             this.jtfRgPessoa.setText(pessoa.getRgPessoa());
             this.jtfEmissorRgPessoa.setText(pessoa.getOrgaoEmissorRGPessoa());
             this.jtfCpfPessoa.setText(pessoa.getCpfPessoa());
-            this.jcbEstadoCivilPessoa.setSelectedItem(paciente.getEstadoCivilPaciente());
+            this.jcbEstadoCivilPaciente.setSelectedItem(paciente.getEstadoCivilPaciente());
             this.jtfProfissaoPaciente.setText(paciente.getProfissaoPaciente());
             this.jcbEscolaridadePaciente.setSelectedItem(paciente.getEscolaridadePaciente());
             this.jtfEmailPessoa.setText(pessoa.getEmailPessoa().getEnderecoEmail());
+
+            char sexoPaciente = pessoa.getSexoPessoa();
+
+            if (sexoPaciente == 'M') {
+
+                this.jcbSexoPaciente.setSelectedIndex(0);
+                        
+
+            } else {
+
+                this.jcbSexoPaciente.setSelectedIndex(1);
+
+            }
 
             //passando por referência o objeto endereco contido no objeto paciente
             Endereco endereco = pessoa.getEnderecoPessoa();
@@ -1488,6 +1507,19 @@ public class JFramePrincipal extends javax.swing.JFrame {
             this.jtfCpfMedico.setText(pessoa.getCpfPessoa());
             this.jtfEspecialidadeMedico.setText(medico.getEspecialidadeMedico());
             this.jtfEmailMedico.setText(pessoa.getEmailPessoa().getEnderecoEmail());
+            
+            char sexoMedico = pessoa.getSexoPessoa();
+
+            if (sexoMedico == 'M') {
+
+                this.jcbSexoMedico.setSelectedIndex(0);
+                        
+
+            } else {
+
+                this.jcbSexoMedico.setSelectedIndex(1);
+
+            }
 
             //passando por referência o objeto endereco contido no objeto paciente
             Endereco endereco = pessoa.getEnderecoPessoa();
@@ -1649,8 +1681,6 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
                 String aux = this.jTableConsulta.getValueAt(selectedRow, 0).toString();
 
-                System.out.println(aux);
-
                 String[] split = aux.split(":");
 
                 int hour = Integer.parseInt(split[0]);
@@ -1659,7 +1689,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
                 Time horarioConsulta = new Time(hour, minute, second);
 
-                Consulta consulta = null;
+                Consulta consulta;
 
                 String nomePaciente = this.jTableConsulta.getValueAt(selectedRow, 1).toString();
 
@@ -1672,10 +1702,15 @@ public class JFramePrincipal extends javax.swing.JFrame {
                         consulta = DAOManager.consultaDAO().buscarConsulta(
                                 new Date(this.dataConsulta.getTimeInMillis()), horarioConsulta, nomeMedico);
 
+                        JDAtualizarConsulta jDAtualizarConsulta = new JDAtualizarConsulta(this, true, consulta);
+
+                        jDAtualizarConsulta.setVisible(true);
+
                     } catch (SQLException ex) {
 
                         JOptionPane.showMessageDialog(this, "Erro de leitura dos dados. Favor entrar em"
                                 + "contato com o suporte.\nInformação sobre o erro:" + ex.getMessage());
+
                     }
 
                 } else {
@@ -1703,11 +1738,11 @@ public class JFramePrincipal extends javax.swing.JFrame {
                             .medico(medico)
                             .construir();
 
+                    JDAgendarConsulta jDAgendarConsulta = new JDAgendarConsulta(this, true, consulta);
+
+                    jDAgendarConsulta.setVisible(true);
+
                 }
-
-                JDAgendarConsulta jDAgendarConsulta = new JDAgendarConsulta(this, true, consulta);
-
-                jDAgendarConsulta.setVisible(true);
 
                 //pegar todas as conultas marcadas para determinado médico da data escolhida no jdatachooser
                 List<Consulta> listaConsulta = null;
@@ -1876,12 +1911,12 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jbEditarMedico;
     private javax.swing.JButton jbEditarPaciente;
     private javax.swing.JComboBox<String> jcbEscolaridadePaciente;
-    private javax.swing.JComboBox<String> jcbEstadoCivilPessoa;
+    private javax.swing.JComboBox<String> jcbEstadoCivilPaciente;
     private javax.swing.JComboBox<String> jcbEstadoEndereco;
     private javax.swing.JComboBox<String> jcbEstadoEnderecoMedico;
     private javax.swing.JComboBox<String> jcbListaMedico;
-    private javax.swing.JComboBox<String> jcbSexoPessoa;
-    private javax.swing.JComboBox<String> jcbSexoPessoa1;
+    private javax.swing.JComboBox<String> jcbSexoMedico;
+    private javax.swing.JComboBox<String> jcbSexoPaciente;
     private javax.swing.JMenuItem jmiCadastrarMedico;
     private javax.swing.JMenuItem jmiCadastrarPaciente;
     private javax.swing.JMenuItem jmiHistoricoConsulta;

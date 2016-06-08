@@ -537,6 +537,8 @@ public class JDCadastrarMedico extends javax.swing.JDialog {
 
         //lendo a data do jformattedTextField e guardando em uma string        
         String data = this.jFormattedTextField1.getText();
+        
+        System.out.println(data);
 
         boolean dataValida;
 
@@ -545,7 +547,7 @@ public class JDCadastrarMedico extends javax.swing.JDialog {
             dataValida = ControllerManager.dataController().isDataValid(data);
 
             if (dataValida) {
-
+                
                 //dividindo a string, removendo o símbolo "/" da formatação da data
                 String[] split = data.split("/");
 

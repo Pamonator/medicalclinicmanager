@@ -67,7 +67,7 @@ public class JDAtualizarMedico extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jtfNomePessoa = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jcbSexoPessoa = new javax.swing.JComboBox<>();
+        jcbSexoMedico = new javax.swing.JComboBox<>();
         jtfRgPessoa = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
@@ -134,7 +134,7 @@ public class JDAtualizarMedico extends javax.swing.JDialog {
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel13.setText("Data Nascimento:");
 
-        jcbSexoPessoa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "F" }));
+        jcbSexoMedico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "F" }));
 
         jtfRgPessoa.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
@@ -195,7 +195,7 @@ public class JDAtualizarMedico extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jcbSexoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jcbSexoMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -246,7 +246,7 @@ public class JDAtualizarMedico extends javax.swing.JDialog {
                             .addComponent(jtfNomePessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel23)
                             .addComponent(jtfCrmMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jcbSexoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcbSexoMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -586,7 +586,7 @@ public class JDAtualizarMedico extends javax.swing.JDialog {
         Pessoa pessoa = new Pessoa.Builder()
                 .idPessoa(this.medico.getPessoa().getIdPessoa())
                 .nomePessoa(this.jtfNomePessoa.getText())
-                .sexoPessoa(this.jcbSexoPessoa.getSelectedItem().toString().charAt(0))
+                .sexoPessoa(this.jcbSexoMedico.getSelectedItem().toString().charAt(0))
                 .rgPessoa(this.jtfRgPessoa.getText())
                 .orgaoEmissorRGPessoa(this.jtfEmissorRgPessoa.getText())
                 .cpfPessoa(this.jtfCpfPessoa.getText())
@@ -753,7 +753,7 @@ public class JDAtualizarMedico extends javax.swing.JDialog {
     private javax.swing.JButton jbLimparCampos;
     private javax.swing.JButton jbSair;
     private javax.swing.JComboBox<String> jcbEstadoEndereco;
-    private javax.swing.JComboBox<String> jcbSexoPessoa;
+    private javax.swing.JComboBox<String> jcbSexoMedico;
     private javax.swing.JComboBox<String> jcbStatusMedico;
     private javax.swing.JTextField jtfBairroEndereco;
     private javax.swing.JTextField jtfCepEndereco;
@@ -795,7 +795,7 @@ public class JDAtualizarMedico extends javax.swing.JDialog {
         this.jtfTelefoneCelular.setText("");
 
         this.jcbEstadoEndereco.setSelectedIndex(0);
-        this.jcbSexoPessoa.setSelectedIndex(0);
+        this.jcbSexoMedico.setSelectedIndex(0);
 
         this.jFormattedTextField1.setText("");
     }
@@ -824,7 +824,18 @@ public class JDAtualizarMedico extends javax.swing.JDialog {
         this.jtfTelefoneCelular.setText(telefone.getTelefoneCelular());
 
         this.jcbEstadoEndereco.setSelectedItem(endereco.getEstadoEndereco());
-        this.jcbSexoPessoa.setSelectedItem(pessoa.getSexoPessoa());
+
+        char sexoPaciente = pessoa.getSexoPessoa();
+
+        if (sexoPaciente == 'M') {
+
+            this.jcbSexoMedico.setSelectedIndex(0);
+
+        } else {
+
+            this.jcbSexoMedico.setSelectedIndex(1);
+
+        }
 
         Date dataAux = (Date) pessoa.getDataNacimentoPessoa();
         Calendar calendar = new GregorianCalendar();
