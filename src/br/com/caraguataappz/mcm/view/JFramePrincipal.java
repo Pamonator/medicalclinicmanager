@@ -18,6 +18,7 @@ import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -1364,7 +1365,12 @@ public class JFramePrincipal extends javax.swing.JFrame {
             Pessoa pessoa = paciente.getPessoa();
 
             ////preenchendo os campos da pessoa
-            this.jtfDataNascimentoPessoa.setText(pessoa.getDataNacimentoPessoa().toString());
+            
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            
+            //String format = dateFormat.format(pessoa.getDataCadastroPessoa());
+            
+            this.jtfDataNascimentoPessoa.setText(dateFormat.format(pessoa.getDataNacimentoPessoa()));
             this.jtfRgPessoa.setText(pessoa.getRgPessoa());
             this.jtfEmissorRgPessoa.setText(pessoa.getOrgaoEmissorRGPessoa());
             this.jtfCpfPessoa.setText(pessoa.getCpfPessoa());
@@ -1500,8 +1506,10 @@ public class JFramePrincipal extends javax.swing.JFrame {
             ////passando por referência o objeto pessoa contido no objeto paciente
             Pessoa pessoa = medico.getPessoa();
 
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");           
+            
             ////preenchendo os campos da pessoa
-            this.jtfDataNascimentoMedico.setText(pessoa.getDataNacimentoPessoa().toString());
+            this.jtfDataNascimentoMedico.setText(dateFormat.format(pessoa.getDataNacimentoPessoa()));
             this.jtfRgMedico.setText(pessoa.getRgPessoa());
             this.jtfEmissorRgMedico.setText(pessoa.getOrgaoEmissorRGPessoa());
             this.jtfCpfMedico.setText(pessoa.getCpfPessoa());
@@ -1967,7 +1975,9 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
             tabelaPaciente.setNumRows(0);
 
-            String dataAux;
+            //String dataAux;
+            
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
             for (int i = 0; i < listaPaciente.size(); i++) {
 
@@ -1975,14 +1985,16 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
                 calendar.setTime(listaPaciente.get(i).getPessoa().getDataCadastroPessoa());
 
-                dataAux = calendar.get(Calendar.DAY_OF_MONTH) + "/"
-                        + (calendar.get(Calendar.MONTH) + 1) + "/"
-                        + calendar.get(Calendar.YEAR);
+//                dataAux = calendar.get(Calendar.DAY_OF_MONTH) + "/"
+//                        + (calendar.get(Calendar.MONTH) + 1) + "/"
+//                        + calendar.get(Calendar.YEAR);
 
+                Date dataAux = new Date(calendar.getTimeInMillis());
+                
                 tabelaPaciente.addRow(new Object[]{
                     listaPaciente.get(i).getProntuarioPaciente(),
                     listaPaciente.get(i).getPessoa().getNomePessoa(),
-                    dataAux,
+                    dateFormat.format(dataAux),
                     listaPaciente.get(i)
                 });
 
