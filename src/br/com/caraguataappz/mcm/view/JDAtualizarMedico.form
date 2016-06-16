@@ -652,7 +652,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jbLimparCampos" min="-2" pref="100" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jbCadastrarMedico" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="jbAtualizarMedico" min="-2" pref="100" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -663,7 +663,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jbLimparCampos" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jbCadastrarMedico" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jbAtualizarMedico" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jbSair" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -680,12 +680,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbLimparCamposActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jbCadastrarMedico">
+            <Component class="javax.swing.JButton" name="jbAtualizarMedico">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Salvar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbCadastrarMedicoActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbAtualizarMedicoActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbSair">

@@ -108,7 +108,7 @@ public class JDAtualizarMedico extends javax.swing.JDialog {
         jtfTelefoneCelular = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
         jbLimparCampos = new javax.swing.JButton();
-        jbCadastrarMedico = new javax.swing.JButton();
+        jbAtualizarMedico = new javax.swing.JButton();
         jbSair = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -423,10 +423,10 @@ public class JDAtualizarMedico extends javax.swing.JDialog {
             }
         });
 
-        jbCadastrarMedico.setText("Salvar");
-        jbCadastrarMedico.addActionListener(new java.awt.event.ActionListener() {
+        jbAtualizarMedico.setText("Salvar");
+        jbAtualizarMedico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbCadastrarMedicoActionPerformed(evt);
+                jbAtualizarMedicoActionPerformed(evt);
             }
         });
 
@@ -447,7 +447,7 @@ public class JDAtualizarMedico extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(jbLimparCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jbCadastrarMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbAtualizarMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -456,7 +456,7 @@ public class JDAtualizarMedico extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbLimparCampos)
-                    .addComponent(jbCadastrarMedico)
+                    .addComponent(jbAtualizarMedico)
                     .addComponent(jbSair))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -565,7 +565,7 @@ public class JDAtualizarMedico extends javax.swing.JDialog {
         obs - é preciso implementar a verificação de preenchimento dos campos!!!!
     
      */
-    private void jbCadastrarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarMedicoActionPerformed
+    private void jbAtualizarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtualizarMedicoActionPerformed
         //lendo a data do jformattedTextField e guardando em uma string        
         String aux = this.jFormattedTextField1.getText();
 
@@ -600,12 +600,7 @@ public class JDAtualizarMedico extends javax.swing.JDialog {
 
             //caso o cadastro tenha sido realizado com sucesso, damos continuidade à gravação dos demais dados
             //(endereco, telefone, email, paciente)
-            if (cadastrarPessoa) {
-                //recuperando do banco o idPessoa (primaryKey auto_increment) que foi gravada no banco
-                pessoa.setIdPessoa(DAOManager
-                        .pessoaDAO()
-                        .getUltimoIdCadastrado("pessoa", "idPessoa")
-                );
+            if (cadastrarPessoa) {                
 
                 //instanciando o objeto Endereco a partir dos dados digitados pelo usuário
                 Endereco endereco = new Endereco.Builder()
@@ -670,7 +665,7 @@ public class JDAtualizarMedico extends javax.swing.JDialog {
             //fecha a janela
             this.dispose();
         }
-    }//GEN-LAST:event_jbCadastrarMedicoActionPerformed
+    }//GEN-LAST:event_jbAtualizarMedicoActionPerformed
 
     private void jbLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimparCamposActionPerformed
         this.limparCampos();
@@ -749,7 +744,7 @@ public class JDAtualizarMedico extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JButton jbCadastrarMedico;
+    private javax.swing.JButton jbAtualizarMedico;
     private javax.swing.JButton jbLimparCampos;
     private javax.swing.JButton jbSair;
     private javax.swing.JComboBox<String> jcbEstadoEndereco;
